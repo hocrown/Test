@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mpc.board.dao.IBoardRepository">
+
+	<select id="selectBoardListByMenu" parameterType="map" resultType="com.mpc.board.model.BoardModel">
+		<![CDATA[
+			SELECT
+				board_id AS "boardId",
+				menu_id AS "menuId",
+				user_id AS "userId",
+				board_title AS "boardTitle",
+				board_date AS "boardDate",
+				master_id AS "masterId",
+				reply_num AS "replyNum",
+				read_count AS "readCount"
+			FROM (
+				SELECT
+					board_id, menu_id, user_id, board_title, board_date,
+					master_id, reply_num, read_count, 
+					rownum AS rnum
+				FROM (
+					SELECT * FROM board
+					WHERE menu_id = #{menuId}
+					ORDER BY master_id DESC, reply_num
+				)
+			)
+			WHERE rnum BETWEEN #{start} AND #{end}
+		]]>
+	</select>
+
+	<select id="selectBoard" parameterType="int" resultType="com.mpc.board.model.BoardModel">
+		<![CDATA[
+			SELECT
+				board_id AS "boardId",
+				menu_id AS "menuId",
+				user_id AS "userId",
+				board_title AS "boardTitle",
+				board_date AS "boardDate",
+				master_id AS "masterId",
+				reply_num AS "replyNum",
+				~~~수정중임~~~
+			FROM (
+				SELECT
+					board_id, menu_id, user_id, board_title, board_date,
+					master_id, reply_num, read_count, 
+					rownum AS rnum
+				FROM (
+					SELECT * FROM board
+					WHERE menu_id = #{menuId}
+					ORDER BY master_id DESC, reply_num
+				)
+			)
+			WHERE rnum BETWEEN #{start} AND #{end}
+		]]>
+	</select>
+
+</mapper>
