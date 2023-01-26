@@ -1,0 +1,6 @@
+--계정 생성
+create user mpc identified by mpc;
+--권한 부여
+grant connect, resource to mpc;
+--커밋
+commit;
