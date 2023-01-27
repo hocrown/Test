@@ -6,28 +6,36 @@
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 			<style>		
-			header {
-		 height: 75px;
-		 padding: 20px;
-		 background: teal;
-		}
+		
 				.logo {	
-				  height : 75px;
-				  float: center;
+				  height : 120px;
+				  background: teal;
+				  left: 50%; top: 10%;
 				  text-align : center;
+				  font-size : 60px;
 				}
 				.log {	
 				  float: right;
 		
 				}
+				
+				
+		table {
+    margin-left:auto; 
+    margin-right:auto;
+    
+}
+	
+				
 			</style>	
-		
-		
-		<div class = 'logo'> my pet care </div>
-		<div class = 'log'> <a>로그인</a>/<a>회원가입</a> </div>
-		
-		
-	</header>
+		</header>
+		<body>
+			<div>
+				<div class = 'logo'  ><a href="/index">  MyPetCare </a></div>
+				<div class = 'log' > <a href="login.jsp">Login</a>  <a href="Signin.jsp">Signin</a> </div><br><br>
+			</div>
+				
+	
 	
 
 

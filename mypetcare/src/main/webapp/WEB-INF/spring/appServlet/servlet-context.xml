@@ -25,7 +25,9 @@
 	<context:component-scan base-package="com.mpc.boardcontroller" />
 	<context:component-scan base-package="com.mpc.admincontroller" />
 	
+	<context:component-scan base-package="com.mpc.home.controller" />
+	
 	<view-controller path="/" view-name="index" />
-
+	
 	
 </beans:beans>
