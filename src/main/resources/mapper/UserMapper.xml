@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mpc.user.dao.IUserRepository">
+<mapper namespace="com.mpc.user.dao.UserRepository">
 
+	<insert id="signup" parameterType="com.mpc.user.model.UserModel">
+	<![CDATA[
+	INSERT INTO 
+		userid (userid,userpw,username,useraddress,useremail,
+		usernickname,userphone,userauth)
+		VALUES
+		(#{userid},#{userpw},#{username},#{useraddress},#{useremail,
+		#{usernickname},#{userphone},#{userauth})
+		 ]]>
+	</insert>
+
+	<select id="idCheck" parameterType="String" resultType="int">
+	<![CDATA[
+		select * from mpc_user where id=#{userid}
+	]]>
+	</select>
+	
+	
+	
 </mapper>
+
+
+
+
+
