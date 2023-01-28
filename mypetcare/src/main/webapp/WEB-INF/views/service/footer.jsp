@@ -8,7 +8,7 @@
 			YOONMOONYOONSOON<br>
 			All contents Copyright 2023 <br>			
 			Inc. all rights reserved<br>	<br>
-			<button onClick="location.href='./service/main'">고객센터</button>
+			<button onClick="location.href='main'">고객센터</button>
 			<br><br><br><br>			
 			</div>
 		</footer>

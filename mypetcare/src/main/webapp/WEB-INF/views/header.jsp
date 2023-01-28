@@ -31,8 +31,8 @@
 		</header>
 		<body>
 			<div>
-				<div class = 'logo'  ><a href="/index">  MyPetCare </a></div>
-				<div class = 'log' > <a href="login.jsp">Login</a>  <a href="Signin.jsp">Signin</a> </div><br><br>
+				<div class = 'logo' ><a href="/index" style = "text-decoration: none;" >  MyPetCare </a></div>
+				<div class = 'log' > <a href="login.jsp" style = "text-decoration: none;" >Login</a>  <a href="Signin.jsp" style = "text-decoration: none;" >Signin</a> </div><br><br>
 			</div>
 				
 	
