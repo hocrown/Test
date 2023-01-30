@@ -4,3 +4,46 @@
 <mapper namespace="com.mpc.user.dao.IUserRepository">
 
 </mapper>
+<mapper namespace="com.mpc.user.dao.UserRepository">
+
+	<insert id="signup" parameterType="com.mpc.user.model.UserModel">
+	<![CDATA[
+	INSERT INTO 
+		mpc_user (userid
+				,userpw
+				,username
+				,userregdate
+				,usernickname
+				,userphone
+				,userpostnum
+				,useraddress
+				,userdetailaddress)
+				
+		VALUES(#{userid}
+			  ,#{userpw}
+			  ,#{username}
+			  ,#{userregdate}
+			  ,#{usernickname}
+			  ,#{userpostnum}
+			  ,#{userphone}
+			  ,#{useraddress})
+			  ,#{userdetailaddress})
+		 ]]>
+	</insert>	
+
+	<select id="idCheck" parameterType="String" resultType="int">
+	<![CDATA[
+		select * from mpc_user where id=#{userid}
+	]]>
+	</select>
+	
+	
+	
+	
+	
+</mapper>
+
+
+
+
+

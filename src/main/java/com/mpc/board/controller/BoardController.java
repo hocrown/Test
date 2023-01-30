@@ -242,5 +242,4 @@ public class BoardController {
 			e.printStackTrace();
 		}
 		return "board/search";
-	}
 }

@@ -20,6 +20,8 @@
 
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource"></property>
+		<property name="username" value="mpc" />
+		<property name="password" value="mpc" />
 	</bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -53,7 +55,6 @@
 	<context:component-scan base-package="com.mpc" />
 	
 	<mybatis-spring:scan base-package="com.mpc.user.dao" />
-	
 	<!-- 게시판 -->
 	<mybatis-spring:scan base-package="com.mpc.board.dao" />
 	<context:component-scan base-package="com.mpc.board.service" />
