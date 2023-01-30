@@ -119,12 +119,14 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>
+		</dependency>   
+		
+		 <!-- File upload -->
 		<dependency>
-			<groupId>com.example</groupId>
-			<artifactId>myapp</artifactId>
-			<version>1.0.0-BUILD-SNAPSHOT</version>
-		</dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.4</version>
+		</dependency>       
 	</dependencies>
 	
 	

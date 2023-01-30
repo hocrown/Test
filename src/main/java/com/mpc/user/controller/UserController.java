@@ -1,5 +1,7 @@
 package com.mpc.user.controller;
 
+public class UserController {
+
 import java.lang.reflect.Member;
 
 import javax.servlet.http.HttpSession;
@@ -22,12 +24,4 @@ public class UserController {
 	public String joinForm() {
 		
 	}
-	
-
-	
-	
-	
-	
-	
-	
 }

@@ -1,5 +1,6 @@
 package com.mpc.user.service;
 
+public class UserService implements IUserService {
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.mpc.user.dao.UserRepository;
