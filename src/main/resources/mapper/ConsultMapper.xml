@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.mpc.consult.dao.IConsultRepository">
+	<select id="selectConsultListByMenu" parameterType="map"
+	resultType="com.mpc.consult.model.ConsultModel">
+		SELECT * FROM CONSULT WHERE menuId=#{menuId}
+		ORDER BY consultRegDate
+	</select>
+	
+	<select id="selectConsult" parameterType="int"
+	resultType="com.mpc.consult.model.ConsultModel">
+		SELECT 
+		c.consultingId,
+		c.user_No,
+		c.pet_No,
+		c.menuId,
+		c.consultRegDate,
+		c.consultTitle,
+		c.consultContent,
+		c.consultClass,
+		c.consultReport
+		r.commentid,
+		r.consultingid,
+		r.user_No,
+		r.commentcontent,
+		r.commentdate,
+		r.commentlike,
+		r.commentreport
+		FROM consult c
+		LEFT OUTER JOIN CONSULTANSWER r
+			ON c.consultingId=r.consultingId
+			WHERE consultingId=${consultingId}
+	</select>
+	
+</mapper>

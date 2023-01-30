@@ -17,7 +17,7 @@
 		<td>
 		
 				<div style="float: top;  text-align: center" >
-					<img src="./img/maintest.png">
+					<img src="../img/maintest.png">
 				</div>
 			
 		</td>
