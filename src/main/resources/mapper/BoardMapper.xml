@@ -33,7 +33,7 @@
 	<select id="selectBoard" parameterType="int" resultType="com.mpc.board.model.BoardModel">
 		<![CDATA[
 			SELECT
-				boardId,
+				board.boardId,
 				menuId,
 				userId,
 				boardTitle,
@@ -77,12 +77,12 @@
 		]]>
 	</select>
 	
-	<insert id="insertBoard" parameterType="com.mpc.board.model.BaordModel">
+	<insert id="insertBoard" parameterType="com.mpc.board.model.BoardModel">
 		<![CDATA[
 			INSERT INTO board
 				(boardId, menuId, userId, boardTitle, boardContent, boardDate, masterId, replyNum)
 			VALUES
-				(#{boardId}, #{menuId}, #{uesrId}, #{boardTitle}, #{boardContent}, SYSDATE, #{boardId}, 0)
+				(#{boardId}, #{menuId}, #{userId}, #{boardTitle}, #{boardContent}, SYSDATE, #{boardId}, 0)
 		]]>
 	</insert>
 	
@@ -104,7 +104,7 @@
 				fileSize,
 				fileType,
 				fileData
-			FORM boardfile
+			FROM boardfile
 			WHERE fileId = #{fileId}
 		]]>
 	</select>
@@ -130,7 +130,7 @@
 	<select id="getPassword" parameterType="int" resultType="string">
 		<![CDATA[
 			SELECT user_password
-			FORM board
+			FROM board
 			WHERE boardId = #{boardId}
 		]]>
 	</select>
@@ -162,7 +162,7 @@
 				menuId,
 				masterId,
 				replyNum
-			FORM board
+			FROM board
 			WHERE boardId = #{boardId}
 		]]>
 	</select>
@@ -202,14 +202,14 @@
 	<select id="selectTotalBoardCount" resultType="int">
 		<![CDATA[
 			SELECT COUNT(boardId) AS "count"
-			FORM board
+			FROM board
 		]]>
 	</select>
 	
 	<select id="selectTotalBoardCountByMenuId" parameterType="int" resultType="int">
 		<![CDATA[
 			SELECT COUNT(boardId) AS "count"
-			FORM board
+			FROM board
 			WHERE menuId = #{menuId}
 		]]>
 	</select>
@@ -217,7 +217,7 @@
 	<select id="selectTotalBoardCountByKeyword" parameterType="string" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*)
-			FORM board
+			FROM board
 			WHERE boardTitle LIKE #{keyword} OR boardContent LIKE #{keyword}
 		]]>
 	</select>
@@ -233,7 +233,7 @@
 				masterId,
 				replyNum,
 				readCount
-			FORM (
+			FROM (
 				SELECT
 					boardId, menuId, userId, boardTitle, boardDate,
 					masterId, replyNum, readCount, rownum AS rnum

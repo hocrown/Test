@@ -17,25 +17,27 @@ public interface IBoardRepository {
 	
 	List<BoardModel> selectBoardListByMenu(@Param("menuId") int menuId, @Param("start") int start, @Param("end") int end);
 	
-	BoardModel selectBoard(String boardId);
-	BoardUploadFileModel getFile(String fileId);
+	BoardModel selectBoard(int boardId);
+	BoardUploadFileModel getFile(int fileId);
+	
+	void updateReadCount(int boardId);
 	
 	void updateReplyNum(@Param("masterId") int masterId, @Param("replyNum") int replyNum);
 	void replyBoard(BoardModel boardId);
 	
-	String getPassword(String boardId);
+	String getPassword(int boardId); // 필요한가?
 	
 	void updateBoard(BoardModel board);
-	void updateFiledata(BoardUploadFileModel file);
+	void updateFileData(BoardUploadFileModel file);
 	
-	void deleteFileData(String boardId);
-	void deleteReplyFileData(String boardId);
-	BoardModel selectDeleteBoard(String boardId);
-	void deleteBoardByBoardId(String boardId);
-	void deleteBoardByMasterId(String boardId);
+	void deleteFileData(int boardId);
+	void deleteReplyFileData(int boardId);
+	BoardModel selectDeleteBoard(int boardId);
+	void deleteBoardByBoardId(int boardId);
+	void deleteBoardByMasterId(int boardId);
 	
-	int selectTotalArticleCount();
-	int selectTotalArticleCountByCategoryId(int menuId);
+	int selectTotalBoardCount();
+	int selectTotalBoardCountByMenuId(int menuId);
 	
 	List<BoardModel> searchListByContentKeyword(@Param("keyword") String keyword, @Param("start") int start, @Param("end") int end);
 	int selectTotalBoardCountByKeyword(String keyword);

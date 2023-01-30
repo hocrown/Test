@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class BoardModel {
 
-	private String boardId;
+	private int boardId;
 	private int menuId;
 	private String userId;
 	private int masterId;
@@ -25,7 +25,7 @@ public class BoardModel {
 	
 	private int boardReport;
 	
-	private String fileId; // 파일 아이디
+	private int fileId; // 파일 아이디
 	private String fileName; // 파일 이름
 	private long fileSize; // 파일 크기
 	private String fileType; // 파일 타입(MIME Type)
