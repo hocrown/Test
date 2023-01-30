@@ -18,6 +18,11 @@ public class UserController {
 	@Autowired
 	UserServiceImpl userServiceImpl;
 	
+	@RequestMapping(value="/user/insert", method=RequestMethod.GET)
+	public String joinForm() {
+		
+	}
+	
 
 	
 	

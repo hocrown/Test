@@ -1,8 +1,10 @@
 package com.mpc.user.dao;
 
+import com.mpc.user.model.UserModel;
+
 public interface UserRepository {
 
-	public void signup(); //회원정보 입력 insert
+	public void signup(UserModel user); //회원정보 입력 insert
 	public int idChk(String userId); 
 	public int nickChk();
 	public int emailChk();

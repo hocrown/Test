@@ -3,6 +3,7 @@ package com.mpc.user.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.mpc.user.dao.UserRepository;
+import com.mpc.user.model.UserModel;
 
 @Service
 public class UserService implements UserServiceImpl {
@@ -11,8 +12,10 @@ public class UserService implements UserServiceImpl {
 	UserRepository repositoryDao;
 
 	@Override
-	public void signup() {
-		repositoryDao.signup();
+	public void signup(UserModel user) {
+		
+		repositoryDao.signup(user);
+		
 	}
 
 	@Override
@@ -95,4 +98,5 @@ public class UserService implements UserServiceImpl {
 		// TODO Auto-generated method stub
 		repositoryDao.myPageSearch();
 	}
+
 }

@@ -1,8 +1,10 @@
 package com.mpc.user.service;
 
+import com.mpc.user.model.UserModel;
+
 public interface UserServiceImpl {
 
-	public void signup();
+	public void signup(UserModel user);
 	public int idChk(String userId);
 	public int nickChk();
 	public int emailChk();
@@ -16,5 +18,6 @@ public interface UserServiceImpl {
 	public void logout();
 	public void myPageSearch();
 	public void myPageUpdate();
+	
 	
 }

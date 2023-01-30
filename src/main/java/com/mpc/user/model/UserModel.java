@@ -1,16 +1,26 @@
 package com.mpc.user.model;
 
+import java.sql.Date;
+
 public class UserModel { 
 
-	private String userId; //회원 아이디
-	private String userPw; //회원 비밀번호
-	private String userName; //회원 이름
-	private String userAddress; //회원주소
-	private String userEmail; //회원 이메일
-	private String userNickname; //회원 닉네임
-	private String userPhone; //회원 전화번호
-	private int userAuth; //회원 권한번호
+	private int user_no;
+	private String userId;
+	private String userPw;
+	private String userName;
+	private Date userRegDate;
+	private String userNickname;
+	private int userPhone;
+	private String userPostNum;
+	private String userAddress;
+	private String userDetailAddress;
 	
+	public int getUser_no() {
+		return user_no;
+	}
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -29,17 +39,11 @@ public class UserModel {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getUserAddress() {
-		return userAddress;
+	public Date getUserRegDate() {
+		return userRegDate;
 	}
-	public void setUserAddress(String userAddress) {
-		this.userAddress = userAddress;
-	}
-	public String getUserEmail() {
-		return userEmail;
-	}
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
+	public void setUserRegDate(Date userRegDate) {
+		this.userRegDate = userRegDate;
 	}
 	public String getUserNickname() {
 		return userNickname;
@@ -47,16 +51,30 @@ public class UserModel {
 	public void setUserNickname(String userNickname) {
 		this.userNickname = userNickname;
 	}
-	public String getUserPhone() {
+	public int getUserPhone() {
 		return userPhone;
 	}
-	public void setUserPhone(String userPhone) {
+	public void setUserPhone(int userPhone) {
 		this.userPhone = userPhone;
 	}
-	public int getUserAuth() {
-		return userAuth;
+	public String getUserPostNum() {
+		return userPostNum;
 	}
-	public void setUserAuth(int userAuth) {
-		this.userAuth = userAuth;
-	}	
+	public void setUserPostNum(String userPostNum) {
+		this.userPostNum = userPostNum;
+	}
+	public String getUserAddress() {
+		return userAddress;
+	}
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
+	}
+	public String getUserDetailAddress() {
+		return userDetailAddress;
+	}
+	public void setUserDetailAddress(String userDetailAddress) {
+		this.userDetailAddress = userDetailAddress;
+	}
+
+	
 }

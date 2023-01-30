@@ -6,19 +6,35 @@
 	<insert id="signup" parameterType="com.mpc.user.model.UserModel">
 	<![CDATA[
 	INSERT INTO 
-		userid (userid,userpw,username,useraddress,useremail,
-		usernickname,userphone,userauth)
-		VALUES
-		(#{userid},#{userpw},#{username},#{useraddress},#{useremail,
-		#{usernickname},#{userphone},#{userauth})
+		mpc_user (userid
+				,userpw
+				,username
+				,userregdate
+				,usernickname
+				,userphone
+				,userpostnum
+				,useraddress
+				,userdetailaddress)
+				
+		VALUES(#{userid}
+			  ,#{userpw}
+			  ,#{username}
+			  ,#{userregdate}
+			  ,#{usernickname}
+			  ,#{userpostnum}
+			  ,#{userphone}
+			  ,#{useraddress})
+			  ,#{userdetailaddress})
 		 ]]>
-	</insert>
+	</insert>	
 
 	<select id="idCheck" parameterType="String" resultType="int">
 	<![CDATA[
 		select * from mpc_user where id=#{userid}
 	]]>
 	</select>
+	
+	
 	
 	
 	
