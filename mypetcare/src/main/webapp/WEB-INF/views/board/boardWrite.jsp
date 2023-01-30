@@ -12,12 +12,16 @@
 		    	<div><input type="text"  placeholder="글 제목"  name="title" maxlength="50" style= "width:700px " /></div>
 		    		<div>내용</div>
 	    		<div><textarea type="text" placeholder="글 내용"  name="content" maxlength="500" style= "height:350px; width:700px" ></textarea></div>
-    		<div><input  type="file" class="file" value="파일업로드" ></div><br>
+    		<div><input  type="file" class="form-control" value="파일업로드" ></div><br>
     	<div><input type="submit" class="boardwrite" value="등록하기" ></div><br>
     	<div><input type="button" onClick="location.href='../index'" value="홈으로" ></div>
    </div> 	
     	
-    
+    <div class="mb-3">
+  <label for="formFile" class="form-label">Default file input example</label>
+  <input class="form-control" type="file" id="formFile">
+</div>
+
 </body>
 <br><br><br><br>
 

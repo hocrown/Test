@@ -34,4 +34,39 @@ public class HomeController {
 		return "service/Q&A";
 	}
 	
+	@RequestMapping(value="/admin/main")
+	public String gosadmin() {
+		
+		return "admin/main";
+	}
+	@RequestMapping(value="/admin/userInfo")
+	public String gosuserInfo() {
+		
+		return "admin/userInfo";
+	}
+	@RequestMapping(value="/admin/hospitalInfo")
+	public String goshospitalInfo() {
+		
+		return "admin/hospitalInfo";
+	}
+	@RequestMapping(value="/admin/noticeInfo")
+	public String gosnoticeInfo() {
+		
+		return "admin/noticeInfo";
+	}
+	@RequestMapping(value="/admin/Q&AInfo")
+	public String goQAInfo() {
+		
+		return "admin/Q&AInfo";
+	}
+	@RequestMapping(value="/admin/report")
+	public String goreport() {
+		
+		return "admin/report";
+	}
+	@RequestMapping(value="/login/main")
+	public String gologin() {
+		
+		return "login/main";
+	}
 }
