@@ -22,9 +22,9 @@
 .bg-light{
 
  padding-left:40%;
-
-   text-align: center!important;
+	padding-top:10%;
   
+  width:70%;
    
     padding-bottom: 40px;
     background-color: #f5f5f5;
@@ -43,17 +43,18 @@
     
 <div class="container">
   <main>
+   <!--  
     <div class="py-5 text-center">
-      <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+      <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt=""  height="57">
       <h2>SignUp</h2>
       
     </div>
       </div>
-    
+    -->
     
       
-      <div  padding-left="-40%">
-        <h4 class="mb-3">Billing address</h4>
+      <div  >
+        <h4 class="mb-3">회원가입</h4>
         <form class="needs-validation" novalidate>
           <div class="row g-3">
             <div class="col-sm-8">
@@ -184,7 +185,8 @@
 
 
 
-          <button class="btn btn-primary btn-lg" type="submit"  width=70% >Continue to SignUp</button>
+          <button class="btn btn-primary btn-lg" type="submit"  style="margin: 2 0 2 0;" width=70% >Continue to SignUp</button>
+          <button class="btn btn-lg btn-primary" type="button" style="margin: 2 0 2 0;" onClick="location.href='../index'">Home</button>
         </form>
       </div>
     </div>
