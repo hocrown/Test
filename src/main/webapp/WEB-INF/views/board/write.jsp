@@ -37,7 +37,7 @@
 					</div>
 				</c:if>
 				<div class="form-group">
-					<label class="control-label col-sm-2" for="name"><fmt:message key="USERID"/></label>
+					<label class="control-label col-sm-2" for="userId"><fmt:message key="USERID"/></label>
 					<div class="col-sm-2">
 						<input type="text" name="userId" id="userId" value="${sessionScope.userId}" ${!empty sessionScope.userId ? "readonly" : ""} class="form-control">
 					</div>
@@ -72,7 +72,7 @@
 						<input type="hidden" name="masterId" value="${board.masterId}">
 						<input type="hidden" name="replyNum" value="${board.replyNum}">
 						<input type="submit" id="submit" class="btn btn-info" value="<fmt:message key="SAVE"/>">
-						<input type="reset" class="btn btn-info" value="<fmt:message key="CANCLE"/>">						
+						<input type="reset" class="btn btn-info" value="<fmt:message key="CANCEL"/>">						
 					</div>
 				</div>
 			</form>
