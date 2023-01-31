@@ -20,8 +20,8 @@ public class UserService implements UserServiceImpl {
 	}
 
 	@Override
-	public int idChk(UserModel model) {
-		int result = repositoryDao.idChk(model);
+	public int idChk(String userid) {
+		int result = repositoryDao.idChk(userid);
 		return result;
 	}
 

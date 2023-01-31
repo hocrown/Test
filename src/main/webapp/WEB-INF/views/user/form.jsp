@@ -42,7 +42,7 @@
 		placeholder="사용자 아이디 " required>
 		
 		</div>
-		<button type="button" >중복확인</button>
+		<input type="submit" class="btn btn-info-lg" value="중복확인">
 	</div>
 	
 	<div class="form-group">

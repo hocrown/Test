@@ -38,7 +38,13 @@ public class UserController {
 		session.invalidate();
 		return "index";
 	}
-//	@RequestMapping(value ="/" )
+// id 중복확인 컨트롤러
+	@RequestMapping(value ="/signup", method=RequestMethod.POST )
+	public int idchk(String userid) {
+		int result = userService.idChk(userid);
+		return result;
+	}
+	
 
 }
 

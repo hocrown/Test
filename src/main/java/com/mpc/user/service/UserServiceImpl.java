@@ -5,7 +5,7 @@ import com.mpc.user.model.UserModel;
 public interface UserServiceImpl {
 
 	public void signup(UserModel user);
-	public int idChk(UserModel model);
+	public int idChk(String userid);
 	public int nickChk();
 	public int emailChk();
 	public int pwValChk();
