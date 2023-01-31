@@ -104,6 +104,22 @@
 			<version>1.2</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+		<dependency>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-classic</artifactId>
+		    <version>1.2.3</version>
+
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.logback-extensions/logback-ext-spring -->
+		<dependency>
+		    <groupId>org.logback-extensions</groupId>
+		    <artifactId>logback-ext-spring</artifactId>
+		    <version>0.1.5</version>
+		</dependency>
+		
+		
 		<!-- lombok -->
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
