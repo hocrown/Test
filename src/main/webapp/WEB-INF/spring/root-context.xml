@@ -18,9 +18,10 @@
 		<property name="password" value="mpc" />
 	</bean>
 
+
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath:mapper/*.xml"/>
+		<property name="mapperLocations" value="classpath:mapper/**/*.xml"/><!--value="classpath:com/mpc/**/*.xml"/> -->
 		<!-- camelCase 자동완성 -->
 		<property name="configuration">
 			<bean class="org.apache.ibatis.session.Configuration">
@@ -29,14 +30,26 @@
 		</property>
 	</bean>
 	
-	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
 	<tx:annotation-driven/>
-
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.RuntimeException">
+					error/runtime
+				</prop>
+			</props>
+		</property>
+		<property name="defaultErrorView" value="error/default"/>
+	</bean>
+  
 	<context:component-scan base-package="com.mpc" />
-	
-	<mybatis-spring:scan base-package="com.mpc.user.dao" />
 
+  <mybatis-spring:scan base-package="com.mpc.user.dao" />
+ 	<!-- 게시판 -->
+	<mybatis-spring:scan base-package="com.mpc.board.dao" />	
+	<mybatis-spring:scan base-package="com.mpc.consult.dao" />
 </beans>
