@@ -21,7 +21,7 @@
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath:mapper/**/*.xml"/><!--value="classpath:com/mpc/**/*.xml"/> -->
+		<property name="mapperLocations" value="classpath:mapper/**/*.xml"/>
 		<!-- camelCase 자동완성 -->
 		<property name="configuration">
 			<bean class="org.apache.ibatis.session.Configuration">

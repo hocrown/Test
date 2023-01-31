@@ -69,4 +69,21 @@ public class HomeController {
 		
 		return "login/main";
 	}
+	@RequestMapping(value="/signUp/main")
+	public String gosignUp() {
+		
+		return "signUp/main";
+	}
+	@RequestMapping(value="/img/maintest.png")
+	public String getimg() {
+		
+		return "../../img/maintest.png";
+	}
+	
+	@RequestMapping(value="/mypage/main")
+	public String gomypage() {
+		
+		return "mypage/main";
+	}
+	
 }
