@@ -1,44 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mpc.user.dao.IUserRepository">
-
-</mapper>
 <mapper namespace="com.mpc.user.dao.UserRepository">
-
+<!-- 회원정보 입력 insert  -->
 	<insert id="signup" parameterType="com.mpc.user.model.UserModel">
-	<![CDATA[
+	<![CDATA[      
 	INSERT INTO 
-		mpc_user (userid
-				,userpw
-				,username
-				,userregdate
-				,usernickname
-				,userphone
-				,userpostnum
-				,useraddress
-				,userdetailaddress)
+		mpc_user (userId
+				,userPw
+				,userName
+				,userRegDate 
+				,userNickname
+				,userPhone
+				,userPostNum
+				,userAddress
+				,userDetailAddress
+				,user_No)
 				
-		VALUES(#{userid}
-			  ,#{userpw}
-			  ,#{username}
-			  ,#{userregdate}
-			  ,#{usernickname}
-			  ,#{userpostnum}
-			  ,#{userphone}
-			  ,#{useraddress})
-			  ,#{userdetailaddress})
+		VALUES(#{userId}
+			  ,#{userPw}
+			  ,#{userName}
+			  ,SYSDATE
+			  ,#{userPhone}
+			  ,#{userPhone}
+			  ,#{userPostNum}
+			  ,#{userAddress}
+			  ,#{userDetailAddress}
+			  ,mpc_user_seq.NEXTVAL)
 		 ]]>
-	</insert>	
+	</insert>
 
-	<select id="idCheck" parameterType="String" resultType="int">
+	<!-- <select id="login" parameterType="string" resultType="com.mpc.user.model.UserModel"> 
+		<![CDATA[ SELECT * FROM mpc_user WHERE userId = #{userId} ]]> </select> -->
+
+	<select id="idCheck" parameterType="com.mpc.user.model.UserModel" resultType="int">
 	<![CDATA[
-		select * from mpc_user where id=#{userid}
+		select count(*) from mpc_user where  USERID = #{userId}
 	]]>
 	</select>
-	
-	
-	
+
+	<select id="login" parameterType="com.mpc.user.model.UserModel" resultType="Int">
+		<![CDATA[
+        SELECT COUNT(*)
+         FROM mpc_user
+         WHERE userid = #{userid}
+         AND userpw = #{userpw}
+         ]]>
+	</select>
 	
 	
 </mapper>
