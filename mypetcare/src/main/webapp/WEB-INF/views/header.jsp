@@ -54,7 +54,7 @@
 
       <div class="col-md-3 text-end">
         <button type="button" class="btn btn-outline-primary me-2" onClick="location.href='./login/main'">Login</button>
-        <button type="button" class="btn btn-primary">Sign-up</button>
+        <button type="button" class="btn btn-primary" onClick="location.href='./signUp/main'">Sign-up</button>
       </div>
     </header>
   </div>

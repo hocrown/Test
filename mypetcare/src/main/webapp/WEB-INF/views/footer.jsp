@@ -20,6 +20,8 @@
 			Inc. all rights reserved<br>	<br></p>
 			<div align="center">
 			<button align="center" onClick="location.href='./admin/main'">관리자페이지 test</button>
+			
+
 			</div>
   </footer>
 </div>
