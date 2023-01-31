@@ -24,7 +24,7 @@
 		
 		
 		<div class = 'logo'> my pet care </div>
-		<div class = 'log'> <a>로그인</a>/<a>회원가입</a> </div>
+		<div class = 'log'> <a href="user/login">로그인</a>/<a href="user/signup">회원가입</a> </div>
 		
 		
 	</header>

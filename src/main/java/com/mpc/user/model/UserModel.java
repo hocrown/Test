@@ -75,6 +75,5 @@ public class UserModel {
 	public void setUserDetailAddress(String userDetailAddress) {
 		this.userDetailAddress = userDetailAddress;
 	}
-
 	
 }

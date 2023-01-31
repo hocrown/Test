@@ -4,8 +4,8 @@ import com.mpc.user.model.UserModel;
 
 public interface UserRepository {
 
-	public void signup(UserModel user); //회원정보 입력 insert
-	public int idChk(String userId); 
+	public void signup(UserModel user);
+	public int idChk(UserModel model); 
 	public int nickChk();
 	public int emailChk();
 	public int pwValChk();
@@ -14,7 +14,7 @@ public interface UserRepository {
 	public void likeList();
 	public void scrapList();
 	public void followList();
-	public void login();
+	public UserModel login(String userId);
 	public void logout();
 	public void myPageSearch();
 	public void myPageUpdate();

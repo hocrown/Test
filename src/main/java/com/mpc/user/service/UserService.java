@@ -1,6 +1,6 @@
 package com.mpc.user.service;
 
-public class UserService implements IUserService {
+/*public class UserService implements IUserService {*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.mpc.user.dao.UserRepository;
@@ -20,9 +20,9 @@ public class UserService implements UserServiceImpl {
 	}
 
 	@Override
-	public int idChk(String userId) {
-		repositoryDao.idChk(userId);
-		return 0;
+	public int idChk(UserModel model) {
+		int result = repositoryDao.idChk(model);
+		return result;
 	}
 
 	@Override
@@ -77,10 +77,15 @@ public class UserService implements UserServiceImpl {
 	}
 
 	@Override
-	public void login() {
-		// TODO Auto-generated method stub
-		repositoryDao.login();
+	public UserModel login(String userId) {
+		return repositoryDao.login(userId);
 	}
+	
+	/*
+	 * @Override public ManagerVO selectManagerInfo(String managerId) { return
+	 * managerDAO.selectManagerInfo(managerId); }
+	 */
+
 
 	@Override
 	public void logout() {
