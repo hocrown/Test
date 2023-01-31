@@ -25,8 +25,6 @@ public interface IBoardRepository {
 	void updateReplyNum(@Param("masterId") int masterId, @Param("replyNum") int replyNum);
 	void replyBoard(BoardModel boardId);
 	
-	String getPassword(int boardId); // 필요한가?
-	
 	void updateBoard(BoardModel board);
 	void updateFileData(BoardUploadFileModel file);
 	

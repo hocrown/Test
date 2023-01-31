@@ -43,7 +43,7 @@
 					<td><fmt:message key="BOARD_ID"/></td>
 					<td class="pc"><fmt:message key="WRITER"/></td>
 					<td><fmt:message key="SUBJECT"/></td>
-					<td class="pc"><fmt:message key="WRITER_DATE"/></td>
+					<td class="pc"><fmt:message key="WRITE_DATE"/></td>
 					<td class="pc"><fmt:message key="READ_COUNT"/></td>
 				</tr>
 				</thead>

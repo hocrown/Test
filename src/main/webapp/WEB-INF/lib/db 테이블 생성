@@ -1,0 +1,173 @@
+--사용자 User
+CREATE TABLE mpc_user(
+userId  VARCHAR2(15),
+userPw   VARCHAR2(20) not null,
+userName VARCHAR2(20) not null,
+userRegDate DATE,
+userNickname  VARCHAR2(16),
+userPhone  NUMBER(15),
+userPostNum VARCHAR2(30),
+userAddress VARCHAR2(300),
+userDetailAddress VARCHAR2(300),
+user_no NUMBER(10) primary key
+)
+
+--반려동물 pet
+CREATE TABLE PET (
+pet_No NUMBER(10) primary key,
+user_no NUMBER(10),
+petName VARCHAR2(30),
+petFamilyDate DATE,
+petSpecies VARCHAR2(10),
+petSex VARCHAR2(10),
+petNEUT VARCHAR2(10),
+petCharacter VARCHAR2(500),
+CONSTRAINT fk_user_no FOREIGN KEY(user_no) REFERENCES mpc_user(user_no) ON DELETE CASCADE
+)
+
+
+
+--팔로우 follow
+CREATE TABLE follow(
+follow_No NUMBER(10) primary key,
+followerId NUMBER(10),
+followeeId NUMBER(10),
+CONSTRAINT fk_followId FOREIGN KEY(followerId) REFERENCES mpc_user(user_no),
+CONSTRAINT fk_followeeId FOREIGN KEY(followeeId) REFERENCES mpc_user(user_no)
+)
+
+--병원 HOSPITAL
+CREATE TABLE hospital(
+hospitalId VARCHAR2(20) primary key,
+hPostNum VARCHAR2(30),
+hAddress VARCHAR2(300),
+hDetailAddress VARCHAR2(300),
+hospitalName VARCHAR2(40),
+hospitalPhone NUMBER(15)
+)
+
+--자격정보 CERTIFICATE
+CREATE TABLE certificate(
+hospitalId VARCHAR2(20),
+user_no NUMBER(10),
+vetCareer VARCHAR2(300),
+vetDetail VARCHAR2(500),
+vetField VARCHAR2(50),
+CONSTRAINT fk_hospitalId FOREIGN KEY(hospitalId) REFERENCES hospital(hospitalId),
+CONSTRAINT fk_vetId FOREIGN KEY(user_no) REFERENCES mpc_user(user_no)
+)
+
+--권한 Authority
+CREATE TABLE authority(
+atid CHAR(10) primary key,
+authName VARCHAR2(10),
+authRegDate DATE,
+authModDate DATE,
+authDelete VARCHAR2(10)
+)
+
+--메뉴 Menu
+CREATE TABLE menu(
+menuId NUMBER(10) primary key,
+menuName VARCHAR2(10),
+menuURL VARCHAR2(100),
+parentMenu NUMBER(10),
+menuDescript VARCHAR2(20)
+)
+
+--권한-사용자 Auth_User
+CREATE TABLE auth_user(
+user_no NUMBER(10),
+atid char(10),
+CONSTRAINT fk_user_auth FOREIGN KEY(user_no) REFERENCES mpc_user(user_no),
+CONSTRAINT fk_auth_user FOREIGN KEY(atid) REFERENCES authority(atid)
+)
+
+
+
+--권한-메뉴 Auth_Menu
+CREATE TABLE auth_menu(
+atid char(10),
+menuId NUMBER(10),
+select_yn CHAR(2),
+insert_yn CHAR(2),
+update_yn CHAR(2),
+delete_yn CHAR(2),
+use_yn CHAR(2),
+CONSTRAINT fk_auth_menu FOREIGN KEY(atid) REFERENCES authority(atid),
+CONSTRAINT fk_menu_auth FOREIGN KEY(menuId) REFERENCES menu(menuId)
+)
+
+--게시판 board
+CREATE TABLE board(
+boardId NUMBER(10) primary key,
+menuId NUMBER(10),
+boardTitle VARCHAR2(300),
+boardContent CLOB,
+boardDate Timestamp,
+replyNum NUMBER(10),
+boardreport NUMBER(10),
+CONSTRAINT fk_board_menu FOREIGN KEY(menuId) REFERENCES menu(menuId)
+)
+
+--게시글 파일 boardfile
+CREATE TABLE boardfile(
+fileId NUMBER(10) primary key,
+boardId NUMBER(10),
+fileName VARCHAR2(300),
+fileSize long,
+fileType VARCHAR2(20),
+uploadPath VARCHAR2(200),
+CONSTRAINT fk_board_attach foreign key(fileId) REFERENCES board(boardId)
+)
+
+--원격 상담 Consult
+CREATE TABLE consult(
+consultingId NUMBER(10) primary key,
+user_no NUMBER(10),
+pet_No NUMBER(10),
+menuId NUMBER(10),
+consultRegDate Timestamp,
+consultTitle VARCHAR2(300),
+consultContent CLOB,
+consultClass VARCHAR2(20),
+consultReport NUMBER(10),
+CONSTRAINT fk_consult_writer foreign key(user_no) REFERENCES mpc_user(user_no),
+CONSTRAINT fk_consult_pet foreign key(pet_No) REFERENCES pet(pet_No),
+CONSTRAINT fk_consult_menu foreign key(menuId) REFERENCES menu(menuId)
+)
+
+--원격 상담 답변 ConsultAnswer
+CREATE TABLE consultanswer(
+commentId NUMBER(10) primary key,
+consultingId NUMBER(10),
+user_no NUMBER(10),
+commentContent CLOB,
+commentDate Timestamp,
+commentLike NUMBER(10),
+commentReport NUMBER(10),
+CONSTRAINT fk_consultanswer foreign key(consultingId) REFERENCES consult(consultingId),
+CONSTRAINT fk_comment_vet foreign key(user_no) REFERENCES mpc_user(user_no)
+)
+
+--좋아요 Liked
+CREATE TABLE liked(
+lId NUMBER(10) primary key,
+user_no NUMBER(10),
+commentId NUMBER(10),
+CONSTRAINT fk_like_user foreign key(user_no) REFERENCES mpc_user(user_no),
+CONSTRAINT fk_like_comment foreign key(commentId) REFERENCES consultanswer(commentId)
+)
+
+--스크랩 Scrap
+CREATE TABLE scrap(
+scrapId NUMBER(10) primary key,
+commentId NUMBER(10),
+consultingId NUMBER(10),
+user_no NUMBER(10),
+scrapDate Timestamp,
+CONSTRAINT fk_scrap_user foreign key(user_no) REFERENCES mpc_user(user_no),
+CONSTRAINT fk_scrap_comment foreign key(commentId) REFERENCES consultanswer(commentId)
+)
+
+commit;

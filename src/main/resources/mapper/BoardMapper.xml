@@ -139,10 +139,10 @@
 		<![CDATA[
 			UPDATE board
 			SET
-				menuId = #{menuId}, userId = #{user_id},
+				menuId = #{menuId}, userId = #{userId},
 				boardTitle = #{boardTitle}, boardContent = #{boardContent},
 				boardDate = SYSDATE
-			WHERE board_id = #{boardId}
+			WHERE boardId = #{boardId}
 		]]>
 	</update>
 	
