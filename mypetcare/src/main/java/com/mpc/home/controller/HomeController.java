@@ -79,4 +79,11 @@ public class HomeController {
 		
 		return "../../img/maintest.png";
 	}
+	
+	@RequestMapping(value="/mypage/main")
+	public String gomypage() {
+		
+		return "mypage/main";
+	}
+	
 }
