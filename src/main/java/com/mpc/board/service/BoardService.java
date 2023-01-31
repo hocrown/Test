@@ -135,5 +135,4 @@ public class BoardService implements IBoardService {
 	public int selectTotalBoardCountByKeyword(String keyword) {
 		return boardRepository.selectTotalBoardCountByKeyword("%"+keyword+"%");
 	}
-
 }
