@@ -34,4 +34,11 @@
 			WHERE consultingId=${consultingId}
 	</select>
 	
+	<insert id="insertConsult"
+	parameterType="com.mpc.consult.model.ConsultModel">
+	INSERT INTO CONSULT
+		(consultingId, user_no, pet_no, menuId, consultRegDate, consultTitle, consultContent, consultClass, consultReport)
+		VALUES
+	</insert>
+	
 </mapper>

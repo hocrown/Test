@@ -39,7 +39,9 @@
 	<context:component-scan base-package="com.mpc.board.controller" />
 	<context:component-scan base-package="com.mpc.admin.controller" />
 	
+	<context:component-scan base-package="com.mpc.home.controller" />
+	
 	<view-controller path="/" view-name="index" />
-
+	
 	
 </beans:beans>
