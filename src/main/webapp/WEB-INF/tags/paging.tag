@@ -37,7 +37,7 @@ for(int i=startPage; i<=endPage; i++) {
 	} else {
 		out.print("<li>");
 	}
-	out.print("<a href=\""+contextPath+"/board/menu"+menuId+"/"+(i)+"\">");
+	out.print("<a href=\""+contextPath+"/board/menu/"+menuId+"/"+(i)+"\">");
 	out.print(i);
 	out.print("</a>");
 	out.print("</li>");

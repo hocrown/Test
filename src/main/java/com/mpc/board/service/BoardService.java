@@ -79,11 +79,6 @@ public class BoardService implements IBoardService {
 	}
 
 	@Override
-	public String getPassword(int boardId) { //?????
-		return boardRepository.getPassword(boardId);
-	}
-
-	@Override
 	public void updateBoard(BoardModel board) {
 		boardRepository.updateBoard(board);
 	}

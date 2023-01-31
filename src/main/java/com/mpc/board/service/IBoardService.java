@@ -19,8 +19,6 @@ public interface IBoardService {
 	void replyBoard(BoardModel board);
 	void replyBoard(BoardModel board, BoardUploadFileModel file);
 	
-	String getPassword(int boardId); //?
-	
 	void updateBoard(BoardModel board);
 	void updateBoard(BoardModel board, BoardUploadFileModel file);
 	

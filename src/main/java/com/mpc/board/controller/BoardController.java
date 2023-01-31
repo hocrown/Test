@@ -34,7 +34,7 @@ public class BoardController {
 	@Autowired
 	IBoardMenuService menuService;
 	
-	@RequestMapping("/board/menu/{meuId}/{page}")
+	@RequestMapping("/board/menu/{menuId}/{page}")
 	public String getListByMenu(@PathVariable int menuId, @PathVariable int page, HttpSession session, Model model) {
 		session.setAttribute("page", page);
 		model.addAttribute("menuId", menuId);
@@ -170,10 +170,6 @@ public class BoardController {
 	
 	@RequestMapping(value="/board/update", method=RequestMethod.POST)
 	public String updateBoard(BoardModel board, BindingResult result, RedirectAttributes redirectAttrs) {
-//		String dbPassword = boardService.getPassword(board.getBoardId());
-//		if(!board.getPassword().equals(dbPassword)) {
-//			
-//		}
 		try {
 			board.setBoardTitle(board.getBoardTitle());
 			board.setBoardContent(board.getBoardContent());
@@ -205,14 +201,9 @@ public class BoardController {
 		return "board/delete";
 	}
 	
-	@RequestMapping(value="/board/delte", method=RequestMethod.POST)
+	@RequestMapping(value="/board/delete", method=RequestMethod.POST)
 	public String deleteBoard(BoardModel board, BindingResult result, HttpSession session, Model model) {
 		try {
-//			String dppw = boardService.getPassword(board.getBoardId());
-//			
-//			if(dppw.equals(board.getPassword())) {
-//				
-//			}
 			boardService.deleteBoard(board.getBoardId(), board.getReplyNum());
 			return "redirect:/board/menu/"+board.getMenuId()+"/"+(Integer)session.getAttribute("page");
 		} catch(Exception e) {
