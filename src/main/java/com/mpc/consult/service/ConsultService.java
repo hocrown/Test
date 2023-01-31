@@ -59,6 +59,7 @@ public class ConsultService implements IConsultService {
 
 	@Override
 	public ConsultModel selectConsult(int consultingId) {
+		return null;
 		
 	}
 
