@@ -5,7 +5,7 @@ import com.mpc.user.model.UserModel;
 public interface UserRepository {
 
 	public void signup(UserModel user);
-	public int idChk(UserModel model); 
+	public int idChk(UserModel userid); 
 	public int nickChk();
 	public int emailChk();
 	public int pwValChk();

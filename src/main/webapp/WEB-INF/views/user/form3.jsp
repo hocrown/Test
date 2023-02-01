@@ -34,8 +34,6 @@
 </style>
 
 
-
-
 </head>
 
 
@@ -53,13 +51,17 @@
     -->
     
       
-      <div  >
+      <div>
         <h4 class="mb-3">회원가입</h4>
-        <form class="needs-validation" novalidate>
+        <form action="<c:url value='/user/insert'/>" method="post"
+		id="joinForm" name="joinForm" class="form-horizontal">
           <div class="row g-3">
             <div class="col-sm-8">
               <label for="firstName" class="form-label">UserId</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+               <input type="text" name="userId" id="userId"
+				value="${usermodel['userId']}" ${empty usermodel.userId ? "" : "readonly"}
+				title="사용자 아이디" pattern="\w+" class="form-control"
+				placeholder="아이디 입력 " required>
               <div class="invalid-feedback">
                 Valid first UserId is required.
               </div>
@@ -69,7 +71,10 @@
             <div class="row g-3">
             <div class="col-sm-8">
               <label for="firstName" class="form-label">Password</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <input type="password" name="userPw" id="userPw"
+				value="${usermodel.userPw}" class="form-control" title="<fmt:message
+				key='PASSWOED_TITLE'/>" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+				placeholder="사용자 비밀번호" required>
               <div class="invalid-feedback">
                 Valid first Password is required.
               </div>
@@ -79,7 +84,9 @@
             <div class="row g-3">
             <div class="col-sm-8">
               <label for="firstName" class="form-label">Password Check</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+             <input type="password" name="password_re" id="password_re"
+				class="form-control" title="<fmt:message key='PASSWORD_RE_TITLE'/>"
+				pattern="(?=.*\d)(?=.*[a-z])(?=*[A-Z]).{6,}" placeholder="비밀번호 재확인" required>
               <div class="invalid-feedback">
                 Valid first Password is required.
               </div>
@@ -88,12 +95,13 @@
 
 			<div class="row g-3">
             <div class="col-sm-8">
-              <label for="username" class="form-label">Username</label>
+              <label for="username" class="form-label">UserName</label>
               <div class="input-group has-validation">
-                <span class="input-group-text">@</span>
-                <input type="text" class="form-control" id="username" placeholder="Username" required>
+                <span class="input-group-text">#</span>
+                <input type="text" name="userName" id="userName" value="${usermodel.userName}"
+				class="form-control" placeholder="사용자 이름" required>
               <div class="invalid-feedback">
-                  Your Username is required.
+                  Your UserName is required.
                 </div>
               </div>
             </div>
@@ -101,8 +109,9 @@
 			
 			<div class="row g-3">	
             <div class="col-sm-8">
-              <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com">
+              <label for="email" class="form-label">Nickname <span class="text-muted">(Optional)</span></label>
+              <input type="text" name="userNickname" id="userNickname" value="${usermodel.userName}"
+				class="form-control" placeholder="닉네임입력" required>
               <div class="invalid-feedback">
                 Please enter a valid email address for shipping updates.
               </div>
@@ -112,7 +121,8 @@
 			 <div class="row g-3">
             <div class="col-sm-8">
               <label for="firstName" class="form-label">Phone</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <input type="text" name="userPhone" id="userPhone" value="${usermodel.userPhone}"
+				class="form-control" placeholder="사용자 전화번호"  required>
               <div class="invalid-feedback">
                 Valid first Phone is required.
               </div>
@@ -121,24 +131,27 @@
 			 
 			 <div class="row g-3">	
             <div class="col-sm-8">
-              <label for="address" class="form-label">Address</label>
-              <input type="text" class="form-control" id="address" placeholder="Address" required>
+              <label for="address" class="form-label">PostNum</label>
+              <input type="text" id="userPostNum" name="userPostNum" placeholder="우편주소"
+  		 		value="${usermodel.userPostNum}" readonly onclick="findAddr()" class="form-control">
+  		 		<input id="userAddress" name="userAddress" type="text" placeholder="도로명주소"
+	  			value="${usermodel.userAddress}" readonly class="form-control"> <br>
               <div class="invalid-feedback">
                 Please enter your shipping address.
               </div>
-            </div>
-			 </div>
-			 
+             </div>
+			 </div>		 
 			 
             <div class="col-sm-8">
               <label for="address2" class="form-label">Address Detail <span class="text-muted">(Optional)</span></label>
-              <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+              <input type="text" id="userDetailAddress" name="userDetailAddress" placeholder="상세주소"
+	  			value="${usermodel.userDetailAddress}" class="form-control">
             </div>
 
             <div class="col-md-8">
               <label for="country" class="form-label">의료인여부</label>
               <select class="form-select" id="country" required>
-                <option value="">Choose...</option>
+                <option value="">해당없음</option>
                 <option>의료인</option>
               </select>
               <div class="invalid-feedback">
@@ -163,7 +176,6 @@
             </div>
           </div>
 		</div>	
-         
 
           <hr class="my-4" width=70%>
 
@@ -179,29 +191,57 @@
 
           <hr class="my-4"  width=70%>
 
-          
 
-         
+ 	<input class="btn btn-primary" type="submit"  style="margin: 2 0 2 0;" width=70%  value="가입">
+<!--           <button class="btn btn-primary btn-lg" type="submit"  style="margin: 2 0 2 0;" width=70% >Continue to SignUp</button> -->
+          <button class="btn btn-primary btn-lg" type="button" style="margin: 2 0 2 0;" onClick="location.href='../index'">Home</button>
 
 
 
-          <button class="btn btn-primary btn-lg" type="submit"  style="margin: 2 0 2 0;" width=70% >Continue to SignUp</button>
-          <button class="btn btn-lg btn-primary" type="button" style="margin: 2 0 2 0;" onClick="location.href='../index'">Home</button>
+<!--           <button class="btn btn-primary btn-lg" type="submit"  style="margin: 2 0 2 0;"  >SignUp</button> -->
+<!--           <button class="btn btn-lg btn-primary" type="button" style="margin: 2 0 2 0;" onClick="location.href='../index'">Home</button> -->
         </form>
       </div>
-    </div>
-  </main>
+  	</main>
+   </div>
+
 
   <footer class="my-5 pt-5 text-muted text-center text-small">
-    <p class="mb-1">&copy; MyPetCare2023</p>
-   
+    <p class="mb-1">&copy; MyPetCare2023</p>   
   </footer>
-</div>
 
+<!-- </div> -->
 
     <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+	 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
       <script src="form-validation.js"></script>
+      
+  
+   <script>
+	function findAddr(){
+	new daum.Postcode({
+        oncomplete: function(data) {
+        	
+        	console.log(data);
+        	
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var roadAddr = data.roadAddress; // 도로명 주소 변수
+            var jibunAddr = data.jibunAddress; // 지번 주소 변수
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('userPostNum').value = data.zonecode;
+            if(roadAddr !== ''){
+                document.getElementById("userAddress").value = roadAddr;
+            } 
+            else if(jibunAddr !== ''){
+                document.getElementById("userAddress").value = jibunAddr;
+            }
+        }
+    }).open();
+}
+</script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>  
   </body>
 
 

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="form.js"></script>
+
 <link rel="apple-touch-icon" href="/docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
 <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
@@ -20,17 +20,6 @@
 
 
 <style>
-
-.id_ok{
-color:#008000;
-display: none;
-}
-
-.id_already{
-color:#6A82FB; 
-display: none;
-}
-
 .bg-light{
 
  padding-left:40%;
@@ -43,64 +32,17 @@ display: none;
         height: 100%;
 }
 
+#overlappedID {background-color: GhostWhite; width: 15%; height: 40px;}
+.olmessagef {color: red; }
+.olmessaget {color: blue; }
+
 </style>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-<script src="form-validation.js"></script>
-<script>
-	function findAddr(){
-	new daum.Postcode({
-        oncomplete: function(data) {
-        	
-        	console.log(data);
-        	
-            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-            var roadAddr = data.roadAddress; // 도로명 주소 변수
-            var jibunAddr = data.jibunAddress; // 지번 주소 변수
-            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById('userPostNum').value = data.zonecode;
-            if(roadAddr !== ''){
-                document.getElementById("userAddress").value = roadAddr;
-            } 
-            else if(jibunAddr !== ''){
-                document.getElementById("userAddress").value = jibunAddr;
-            }
-        }
-    }).open();
-}
-</script>
-<script>
 
-function checkId(){
-        var id = $('#userid').val(); //id값이 "id"인 입력란의 값을 저장
-        $.ajax({
-            url:'./idCheck', //Controller에서 요청 받을 주소
-            type:'post', //POST 방식으로 전달
-            data:{"userid":id},
-            success:function(result){ //컨트롤러에서 넘어온 cnt값을 받는다 
-                if(result == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
-                    $('.id_ok').css("display","inline-block"); 
-                    $('.id_already').css("display", "none");
-                } else { // result가 1일 경우 -> 이미 존재하는 아이디
-                    $('.id_already').css("display","inline-block");
-                    $('.id_ok').css("display", "none");
-             
-                }
-            },
-            error:function(){
-                alert("에러입니다");
-            }
-        });
-        };
 
-</script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 </head>
+
 
 	 <body class="bg-light">
     
@@ -118,36 +60,34 @@ function checkId(){
       
       <div>
         <h4 class="mb-3">회원가입</h4>
-        <form action="<c:url value='/user/insert'/>" method="post"
-		id="joinForm" name="joinForm" class="form-horizontal">
-		
-	<label for="address2">아이디</label> 
-	<input type="text" id="userid" name="userid" oninput = "checkId()" >
-							
-	<!-- id ajax 중복체크 -->
-	<span class="id_ok">사용 가능한 아이디입니다.</span>
-	<span class="id_already">누군가 이 아이디를 사용하고 있어요.</span>
-		
-          <%--  <div class="row g-3">
+        <form action="<c:url value='/user/insert.do'/>" method="post"
+		id="joinForm" class="form-horizontal">
+
+<!-- 	private int	pet_No;
+	private int	user_no;
+	private String petName;
+	private Date petFamilyDate;
+	private String petSpecies;
+	private String petSex;
+	private String petNEUT;
+	private String petCharacter; -->
+		 
+		    <div class="row g-3">
             <div class="col-sm-8">
-              <label for="userId" class="form-label">UserId</label>
-              <span class="text-muted">(Optional)</span></label>
-              <input type="text" name="userId" id="userId"
-		value="${usermodel['userId']}" ${empty usermodel.userId ? "" : "readonly"}
+              <label for="petName" class="form-label">petName</label>
+              <input type="text" name="petName" id="petName"
+		value="${usermodel['petName']}"
 		title="사용자 아이디" pattern="\w+" class="form-control"
 		placeholder="아이디 입력 " required>
-                <div class="invalid-feedback">
-                Valid first UserId is required.
-              </div>
             </div>
-            </div>  --%>
+            </div> 
             
             <div class="row g-3">
             <div class="col-sm-8">
-              <label for="userPw" class="form-label">Password</label>
-              <input type="password" name="userPw" id="userPw"
+              <label for="petFamilyDate" class="form-label">petFamilyDate</label>
+              <input type="password" name="petFamilyDate" id="petFamilyDate"
 		value="${usermodel.userPw}" class="form-control" title="<fmt:message
-		key='PASSWORD_TITLE'/>" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+		key='PASSWOED_TITLE'/>" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
 		placeholder="사용자 비밀번호" required>
                 <div class="invalid-feedback">
                 Valid first Password is required.
@@ -168,10 +108,10 @@ function checkId(){
 
 			<div class="row g-3">
             <div class="col-sm-8">
-              <label for="username" class="form-label">UserName</label>
+              <label for="username" class="form-label">Username</label>
               <div class="input-group has-validation">
-                <span class="input-group-text">#</span>
-               <input type="text" name="username" id="username" value="${usermodel.userName}"
+                <span class="input-group-text">@</span>
+               <input type="text" name="userName" id="userName" value="${usermodel.userName}"
 		class="form-control" placeholder="사용자 이름" required>
               <div class="invalid-feedback">
                <!--    Your Username is required. -->
@@ -182,13 +122,13 @@ function checkId(){
 			
 			<div class="row g-3">	
             <div class="col-sm-8">
-              <label for="userNickname" class="form-label">Nickname 
-              <span class="text-muted">(Optional)</span></label>
+              <label for="userNickname" class="form-label">Nickname <span class="text-muted">(Optional)</span></label>
              <input type="text" name="userNickname" id="userNickname" value="${usermodel.userName}"
 		class="form-control" placeholder="닉네임입력" required>
              <!--    Please enter a valid email address for shipping updates. -->
               </div>
-            </div>			 
+            </div>
+			 
 			 
 			 <div class="row g-3">
             <div class="col-sm-8">
@@ -201,7 +141,7 @@ function checkId(){
             </div>
             </div>
             
-           <div class="form-group">
+            <div class="form-group">
 		<label class="control-label col-sm-2" for="userPostNum">PostNum</label>
 		<div class="col-sm-8">
   		<input type="text" id="userPostNum" name="userPostNum" placeholder="우편주소"
@@ -262,6 +202,7 @@ function checkId(){
           <hr class="my-4"  width=70%>
 			
           <input class="btn btn-primary" type="submit"  style="margin: 2 0 2 0;" width=70%  value="가입">
+<!--           <button class="btn btn-primary btn-lg" type="submit"  style="margin: 2 0 2 0;" width=70% >Continue to SignUp</button> -->
           <button class="btn btn-primary" type="button" style="margin: 2 0 2 0;" onClick="location.href='../index'">Home</button>
       </div>
  
@@ -274,7 +215,40 @@ function checkId(){
    
   </footer>
 </div>
+
     
+    
+    
+    <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+      <script src="form-validation.js"></script>
+      <script>
+	function findAddr(){
+	new daum.Postcode({
+        oncomplete: function(data) {
+        	
+        	console.log(data);
+        	
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var roadAddr = data.roadAddress; // 도로명 주소 변수
+            var jibunAddr = data.jibunAddress; // 지번 주소 변수
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('userPostNum').value = data.zonecode;
+            if(roadAddr !== ''){
+                document.getElementById("userAddress").value = roadAddr;
+            } 
+            else if(jibunAddr !== ''){
+                document.getElementById("userAddress").value = jibunAddr;
+            }
+        }
+    }).open();
+}
+</script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   </body>
+
+
 
 </html>

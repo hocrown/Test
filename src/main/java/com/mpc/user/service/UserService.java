@@ -11,17 +11,18 @@ public class UserService implements UserServiceImpl {
 
 	@Autowired
 	UserRepository repositoryDao;
-
+//회원정보 입력
 	@Override
 	public void signup(UserModel user) {
 		
-		repositoryDao.signup(user);
-		
+		repositoryDao.signup(user);		
 	}
-
+	
+//아이디중복체크 
 	@Override
-	public int idChk(UserModel model) {
-		int result = repositoryDao.idChk(model);
+	public int idChk(UserModel userid) {
+		int result = repositoryDao.idChk(userid);
+		System.out.println("result: " + result);
 		return result;
 	}
 
@@ -104,5 +105,6 @@ public class UserService implements UserServiceImpl {
 		// TODO Auto-generated method stub
 		repositoryDao.myPageSearch();
 	}
+
 
 }
