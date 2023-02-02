@@ -22,8 +22,8 @@
         </button>
         <div class="collapse" id="customer-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-           <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/service/notice'" onClick="location.href='/service/notice'">공지사항</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/service/Q&A'" onClick="location.href='/service/Q&A'">Q&A</a></li>
+           <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/service/notice'" >공지사항</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/service/Qna'" >Q&A</a></li>
           </ul>
         </div>
       </li>

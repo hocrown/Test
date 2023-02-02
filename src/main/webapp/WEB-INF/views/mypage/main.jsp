@@ -1,34 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
-<%@ include file="mypageMenu.jsp"%>
+
 
 <style>
-.main {
-  width: 45%;
- 
-  margin-right: auto;
-  margin-left: 20%;
-  margin-top: -20%;
-}
-.menu {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
- 
-  margin-right: -15px;
-  margin-left: -15px;
+
+.full{
+    width: 1200px;
    
 }
+.screen1{
+    width: 400px;
+    float: left;
+}
+.screen2{
+    width: 800px;
+    height:700px;
+    float: left;
+} 
+.screen3{
+    width: 100%;
+    height:100px;
+    float: left;
+}  
+
 
 </style>
 
-
 <body>
-	
-	<main class="main">
-	 <div class="menu">
-    <div class="col-md-5">
+	<div class="full">
+		<div class="screen1">
+			<%@ include file="mypageMenu.jsp"%>	
+		</div>
+		<div class="screen2"> 
+		
+		<div class="col-md-5" Style="width:30%; float:left;">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2 text-primary">예방접종 권장일</strong>
@@ -40,7 +46,7 @@
       </div>
     </div>
     
-     <div class="col-md-5">
+    <div class="col-md-5" Style="width:30%; float:left;">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2 text-success">최근 검진</strong>
@@ -52,7 +58,8 @@
         
       </div>
     </div>
-    <div class="col-md-5">
+    
+    <div class="col-md-5" Style="width:30%; float:left;">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2 text-success">예정일</strong>
@@ -65,9 +72,24 @@
       </div>
     </div>
     
-  </div>
-	</main>
+    
+	    </div>
+	    
+	    
+	    
+	</div>
+	<div class="screen3"> 
+	    <%@ include file="footer.jsp"%>
+	    </div>
+	
 </body>
 
 
-<%@ include file="footer.jsp"%>
+
+
+
+
+
+
+
+

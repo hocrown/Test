@@ -1,9 +1,12 @@
 package com.mpc.user.dao;
 
+import java.util.List;
+
+
 import com.mpc.user.model.UserModel;
 
 public interface UserRepository {
-
+/*
 	public void signup(UserModel user);
 	public int idChk(UserModel model); 
 	public int nickChk();
@@ -18,5 +21,13 @@ public interface UserRepository {
 	public void logout();
 	public void myPageSearch();
 	public void myPageUpdate();
+	*/
+	//로그인 손영석
+	void insertUserModel(UserModel userModel) ;
+	UserModel selectUserModel(String userId);
+	List<UserModel> selectAllUserModel();
+	void updateUserModel(UserModel userModel);
+	void deleteUserModel(UserModel userModel);
+	String getUserPw(String userId);
 
 }

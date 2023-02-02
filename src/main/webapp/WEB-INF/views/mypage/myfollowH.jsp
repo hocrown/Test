@@ -30,12 +30,13 @@
 <body>
 	<div class="full">
 		<div class="screen1">
-			<%@ include file="serviceMenu.jsp"%>	
+			<%@ include file="mypageMenu.jsp"%>	
 		</div>
 		<div class="screen2"> 
+		
 		<div class = "admininfo">
 	<div>
-	<div><h1>공지사항</h1></div>
+	<div><h1>팔로우한 병원</h1></div>
 	<div class="class2">
 	 <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -47,29 +48,37 @@
 	<table class="table table-sm " >
 	
     <tr>
-      <th scope="col">no.</th>
-      <th scope="col">title</th>
-      <th scope="col">writer</th>
-      <th scope="col">date</th>
-      <th scope="col">readcount</th>
+     
+      <th scope="col">병원명</th>
+      <th scope="col">주소</th>
+      <th scope="col">번호</th>
+      <th scope="col">팔로우</th>
   
     </tr>
-  </thead>
+
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td><a href="/service/noticeInfo"> title들어가는곳</a></td>     
-      <td>writer들어가는곳</td>
-      <td>date들어가는곳</td>              
-      <td>readcount들어가는곳</td>
+     
+      <td><a href="/mypage/myfollowHInfo"> 멍멍병원</a></td>     
+      <td>서울시특별시 서초구 반포2동 00건물 2층 203호</td>
+      <td>02-1234-1234 </td>              
+      <td>♥</td>
     
     </tr>
+    <tr>
+      <td> 냥냥병원</td>     
+      <td>서울시특별시 서초구 반포2동 00건물 2층 203호</td>
+      <td>02-1234-1234 </td>              
+      <td>♡</td>
     
+    </tr>
   
   </tbody>
 </table>
 	
 	</div>
+    
+    
 	    </div>
 	    
 	    
