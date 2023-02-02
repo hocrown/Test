@@ -30,12 +30,13 @@
 <body>
 	<div class="full">
 		<div class="screen1">
-			<%@ include file="serviceMenu.jsp"%>	
+			<%@ include file="mypageMenu.jsp"%>	
 		</div>
 		<div class="screen2"> 
+		
 		<div class = "admininfo">
 	<div>
-	<div><h1>공지사항</h1></div>
+	<div><h1>상담내역</h1></div>
 	<div class="class2">
 	 <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -47,29 +48,39 @@
 	<table class="table table-sm " >
 	
     <tr>
-      <th scope="col">no.</th>
-      <th scope="col">title</th>
-      <th scope="col">writer</th>
-      <th scope="col">date</th>
-      <th scope="col">readcount</th>
+      <th scope="col">제목</th>
+      <th scope="col">내용</th>
+      <th scope="col">등록일</th>
+      <th scope="col">답변여부</th>
+      
   
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td><a href="/service/noticeInfo"> title들어가는곳</a></td>     
-      <td>writer들어가는곳</td>
-      <td>date들어가는곳</td>              
-      <td>readcount들어가는곳</td>
+     
+      <td><a href="/mypage/myconsultInfo"> 제목이 들어가는 곳입니다.</a></td>     
+      <td>니용이들어가는 곳입니다.니용이들어가는 곳입니다.니용이들어가는 곳입니다.</td>
+      <td>2023-02-09 </td>  
+      <td>X</td>            
+     
     
     </tr>
+    <tr>
+      <td>제목이 들어가는 곳입니다.</td>     
+      <td>니용이들어가는 곳입니다.니용이들어가는 곳입니다.니용이들어가는 곳입니다.</td>
+      <td>2023-02-09 </td>  
+      <td>X</td>                   
     
+    
+    </tr>
   
   </tbody>
 </table>
 	
 	</div>
+    
+    
 	    </div>
 	    
 	    

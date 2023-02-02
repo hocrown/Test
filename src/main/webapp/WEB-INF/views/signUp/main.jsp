@@ -85,15 +85,25 @@
               </div>
             </div>
             </div>
+            
+            <div class="row g-3">
+            <div class="col-sm-8">
+              <label for="firstName" class="form-label">Name</label>
+              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <div class="invalid-feedback">
+                Valid first Name is required.
+              </div>
+            </div>
+            </div>
 
 			<div class="row g-3">
             <div class="col-sm-8">
-              <label for="username" class="form-label">Username</label>
+              <label for="username" class="form-label">Nickname</label>
               <div class="input-group has-validation">
                 <span class="input-group-text">@</span>
                 <input type="text" class="form-control" id="username" placeholder="Username" required>
               <div class="invalid-feedback">
-                  Your Username is required.
+                  Your Nickname is required.
                 </div>
               </div>
             </div>

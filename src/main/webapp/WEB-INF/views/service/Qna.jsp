@@ -35,19 +35,19 @@
 		<div class="screen2"> 
 		<div class = "admininfo">
 	<div>
-	<div><h1>공지사항</h1></div>
+	<div><h1>QnA</h1></div>
 	<div class="class2">
 	 <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
-          <button class="btn btn-outline-success" type="submit" style="width: 135px">등록하기</button>
+          <button class="btn btn-outline-success" type="button" style="width: 135px" onClick="location.href='/service/QnaWrite'">작성하기</button>
         </form>
         </div>
         </div>
 	<table class="table table-sm " >
 	
     <tr>
-      <th scope="col">no.</th>
+      
       <th scope="col">title</th>
       <th scope="col">writer</th>
       <th scope="col">date</th>
@@ -57,8 +57,8 @@
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td><a href="/service/noticeInfo"> title들어가는곳</a></td>     
+      
+      <td><a href="/service/QnaInfo"> title들어가는곳</a></td>     
       <td>writer들어가는곳</td>
       <td>date들어가는곳</td>              
       <td>readcount들어가는곳</td>

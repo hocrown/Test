@@ -19,12 +19,12 @@
         <div class="collapse" id="mem-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/admin/userInfo'">회원정보</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/admin/hospitalInfo'">병원정보</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/admin/adminUser'">회원정보</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/admin/adminHospital'">병원정보</a></li>
 
           </ul>
         </div>
-      </li>
+      </li>	
    
 
       <li class="border-top my-3"></li>
@@ -34,9 +34,9 @@
         </button>
         <div class="collapse" id="cus-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-             <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/admin/noticeInfo'">공지사항</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/admin/Q&AInfo'">Q&A</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/admin/report'">신고</a></li>
+             <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/admin/adminNotice'">공지사항</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/admin/adminQna'">Q&A</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/admin/adminReport'">신고</a></li>
           </ul>
         </div>
       </li>
