@@ -3,35 +3,76 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="com.mpc.consult.dao.IConsultRepository">
+	
+	
+	
 	<select id="selectConsultListByMenu" parameterType="map"
 	resultType="com.mpc.consult.model.ConsultModel">
 		SELECT * FROM CONSULT WHERE menuId=#{menuId}
 		ORDER BY consultRegDate
 	</select>
 	
-	<select id="selectConsult" parameterType="int"
+	<select id="selectConsultList" parameterType="int"
 	resultType="com.mpc.consult.model.ConsultModel">
+		SELECT * FROM CONSULT 
+		WHERE consultingId=#{consultingId}
+	</select>
+	
+	
+	<select id="consultList" parameterType="map"
+	resultType="com.mpc.consult.model.ConsultModel">
+		SELECT * FROM CONSULT 
+		ORDER BY consultRegDate
+	</select>
+	
+	<select id="selectConsult" parameterType="int" resultType="com.mpc.consult.model.ConsultModel">
+		SELECT * FROM CONSULT 
+		WHERE consultingId=#{consultingId}
+	</select>
+	
+	<select id="selectCommentList" parameterType="map"
+	resultType="com.mpc.consult.model.ConsultAnswerModel">
+		SELECT * FROM CONSULTANSWER 
+		WHERE consultingId=#{consultingId}
+	</select>
+	
+<!-- 	<select id="selectConsult" parameterType="int" -->
+<!-- 	resultType="com.mpc.consult.model.ConsultModel"> -->
+<!-- 		SELECT  -->
+<!-- 		c.consultingId, -->
+<!-- 		c.user_No, -->
+<!-- 		c.pet_No, -->
+<!-- 		c.menuId, -->
+<!-- 		c.consultRegDate, -->
+<!-- 		c.consultTitle, -->
+<!-- 		c.consultContent, -->
+<!-- 		c.consultClass, -->
+<!-- 		c.consultReport, -->
+<!-- 		r.commentid, -->
+<!-- 		r.consultingid, -->
+<!-- 		r.user_No, -->
+<!-- 		r.commentcontent, -->
+<!-- 		r.commentdate, -->
+<!-- 		r.commentlike, -->
+<!-- 		r.commentreport -->
+<!-- 		FROM CONSULT c -->
+<!-- 		LEFT OUTER JOIN CONSULTANSWER r -->
+<!-- 			ON c.consultingId=r.consultingId -->
+<!-- 			WHERE c.consultingId=${consultingId} -->
+<!-- 	</select> -->
+	
+	<select id="selectComment" parameterType="int"
+	resultType="com.mpc.consult.model.ConsultAnswerModel">
 		SELECT 
-		c.consultingId,
-		c.user_No,
-		c.pet_No,
-		c.menuId,
-		c.consultRegDate,
-		c.consultTitle,
-		c.consultContent,
-		c.consultClass,
-		c.consultReport
-		r.commentid,
-		r.consultingid,
-		r.user_No,
-		r.commentcontent,
-		r.commentdate,
-		r.commentlike,
-		r.commentreport
-		FROM consult c
-		LEFT OUTER JOIN CONSULTANSWER r
-			ON c.consultingId=r.consultingId
-			WHERE consultingId=${consultingId}
+		commentId,
+		consultingId,
+		user_no,
+		commentContent,
+		commentDate,
+		commentLike,
+		commentReport
+		FROM CONSULTANSWER
+		WHERE consultingId=#{consultingId}
 	</select>
 	
 	<insert id="insertConsult"
@@ -39,6 +80,118 @@
 	INSERT INTO CONSULT
 		(consultingId, user_no, pet_no, menuId, consultRegDate, consultTitle, consultContent, consultClass, consultReport)
 		VALUES
+			(#{consultingId}, 1, 1, 1, sysdate, #{consultTitle}, #{consultContent}, 1, 0)
 	</insert>
+	
+	<insert id="insertConsultData" parameterType="com.mpc.consult.model.ConsultUploadFileModel">
+		<![CDATA[
+			INSERT INTO consultfile
+				(fileId, consultingId, fileName, fileSize, fileType, fileData)
+			VALUES
+				(#{fileId}, #{consultingId}, #{fileName}, #{fileSize}, #{fileType}, #{fileData})
+		]]>
+	</insert>
+	
+	<select id="getFile" parameterType="int" resultType="com.mpc.consult.model.ConsultUploadFileModel">
+		<![CDATA[
+			SELECT
+				fileId,
+				consultingId,
+				fileName,
+				fileSize,
+				fileType,
+				fileData
+			FROM boardfile
+			WHERE fileId = #{fileId}
+		]]>
+	</select>
+	
+	<update id="updateConsult" parameterType="com.mpc.consult.model.ConsultModel">
+		<![CDATA[
+			UPDATE CONSULT
+			SET
+				menuId=#{menuId}, consultRegDate=#{consultRegDate}, pet_no=${
+				consultTitle=#{consultTitle}, consultContent=#{consultContent}, 
+				consultRegDate=SYSDATE
+			WHERE consultingId=#{consultingId}
+		]]>
+	</update>
+	
+	<update id="updateFileData" parameterType="com.mpc.consult.model.ConsultUploadFileModel">
+		<![CDATA[
+			UPDATE CONSULTFILE
+			SET
+				fileName=#{fileName}, fileSize=#{fileSize},
+				fileType=${fileType}, fileData=#{fileData}
+			WHERE fileId=#{fileId}
+		]]>
+	</update>
+	
+	<delete id="deleteConsultByConsultId" parameterType="int">
+		<![CDATA[
+			DELETE FROM CONSULT
+			WHERE consultingId=#{consultingId}
+		]]>
+	</delete>
+	
+	<select id="searchConsultByContentKeyword" parameterType="hashmap" resultType="com.mpc.consult.model.ConsultModel">
+		<![CDATA[
+			SELECT
+				consultingId,
+				user_no,
+				pet_no,
+				menuId,
+				consultRegDate,
+				consultTitle,
+				consultContent,
+				consultClass,
+				consultReport
+			FROM (
+				SELECT
+					consultingId, user_no, pet_no, menuId, consultRegDate, consultTitle,
+					consultContent, consultClass, consultReport, rownum AS crnum
+				FROM (
+					SELECT * FROM consult
+					WHERE consultTitle LIKE #{keyword} OR consultContent LIKE #{keyword}
+					ORDER BY consultingId DESC, consultRegDate
+					)
+				)
+			WHERE crnum BETWEEN #{start} AND #{end}
+		]]>
+	</select>
+	
+	<select id="selectTotalConsultCountByKeyword" parameterType="string" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*)
+			FROM consult
+			WHERE consultTitle LIKE #{keyword} OR consultContent LIKE #{keyword}
+		]]>
+	</select>
+	
+	<insert id="replyConsult" parameterType="com.mpc.consult.model.ConsultAnswerModel">
+		<![CDATA[
+			INSERT INTO
+			CONSULTANSWER
+				(commentId, consultingId, user_no, commentContent, commentDate, commentLike, commentReport)
+			VALUES
+				(#{commentId}, #{consultingId}, #{user_no}, #{commentContent}, SYSDATE, #{commentLike}, #{commentReport})
+		]]>
+	</insert>
+
+	<delete id="deleteConsult" parameterType="com.mpc.consult.model.ConsultAnswerModel">
+		<![CDATA[
+			DELETE FROM consultanswer
+			WHERE commentId=#{commentId}
+		]]>
+	</delete>
+
+	<select id="getName" parameterType="int" resultType="String">
+		<![CDATA[
+			SELECT userName
+			FROM mpc_user
+			WHERE user_no=#{user_no}
+		]]>
+	</select>
+	
 	
 </mapper>
