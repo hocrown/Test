@@ -15,6 +15,14 @@ public class UserModel {
 	private String userAddress;
 	private String userDetailAddress;
 	
+	public String getUserPw() {
+		return userPw;
+	}
+	public void setUserPw(String userPw) {
+		this.userPw = userPw;
+	}
+	
+	
 	public int getUser_no() {
 		return user_no;
 	}
@@ -27,12 +35,7 @@ public class UserModel {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getUserPw() {
-		return userPw;
-	}
-	public void setUserPw(String userPw) {
-		this.userPw = userPw;
-	}
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -75,5 +78,50 @@ public class UserModel {
 	public void setUserDetailAddress(String userDetailAddress) {
 		this.userDetailAddress = userDetailAddress;
 	}
+	
+	//로그인 손영석
+	 private String userid;
+	    private String name;
+	    private String password;
+	    private String password2;
+	    private String phone;
+	    private String email;
+	    
+		public String getUserid() {
+			return userid;
+		}
+		public void setUserid(String userid) {
+			this.userid = userid;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public String getPassword() {
+			return password;
+		}
+		public void setPassword(String password) {
+			this.password = password;
+		}
+		public String getPassword2() {
+			return password2;
+		}
+		public void setPassword2(String password2) {
+			this.password2 = password2;
+		}
+		public String getPhone() {
+			return phone;
+		}
+		public void setPhone(String phone) {
+			this.phone = phone;
+		}
+		public String getEmail() {
+			return email;
+		}
+		public void setEmail(String email) {
+			this.email = email;
+		}
 	
 }

@@ -2,7 +2,7 @@
 	%>
 
 
-<%@ include file="header.jsp" %> 
+<%@ include file="header.jsp"  %> 
  
 <style>
 .full{

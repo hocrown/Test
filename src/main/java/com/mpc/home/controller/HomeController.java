@@ -119,11 +119,22 @@ public class HomeController {
 		
 		return "login/main";
 	}
-	@RequestMapping(value="/img/maintest.png")
+	@RequestMapping(value="/member/login")
+	public String gologintest() {
+		
+		return "member/login";
+	}
+
+	@RequestMapping(value="/member/form")
+	public String goformtest() {
+		
+		return "member/form";
+	}
+/*	@RequestMapping(value="/img/maintest.png")
 	public String getimg() {
 		
 		return "../../img/maintest.png";
-	}
+	}*/
 //회원가입
 	@RequestMapping(value="/signUp/main")
 	public String gosignUp() {
@@ -153,6 +164,11 @@ public class HomeController {
 	public String gomypetInfo() {
 		
 		return "mypage/mypetInfo";
+	}
+	@RequestMapping(value="/mypage/mypetWrite")
+	public String gomypetWrite() {
+		
+		return "mypage/mypetWrite";
 	}
 	@RequestMapping(value="/mypage/myconsult")
 	public String gomyconsult() {

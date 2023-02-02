@@ -75,7 +75,7 @@ display: inline-block;
 			<%@ include file="mypageMenu.jsp"%>	
 		</div>
 		<div class="screen2"> 
-			<div><h1>반려동물정보</h1></div>
+			<div><h1>반려동물등록</h1></div>
 			<div class="colmenu">
 	     	
 			<div class="row g-3">
@@ -126,9 +126,9 @@ display: inline-block;
 	    	</div>
 	    	
 		</div>
-		 <div> <button type="submit" class="btn-admin" >등록하기</button></div>
 		
-			<div> <button type="button" class="btn-admin" onClick="location.href='/mypage/mypet'">반려동물정보 목록</button></div>
+			<div> <button type="button" class="btn-admin" onClick="location.href='/mypage/mypet'">등록</button></div>
+			 <div> <button type="button" class="btn-admin" >반려동물정보 목록</button></div>
 	</div>
 	<div class="screen3"> 
 	    <%@ include file="footer.jsp"%>
