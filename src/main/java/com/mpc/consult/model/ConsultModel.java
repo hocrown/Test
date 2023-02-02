@@ -9,15 +9,14 @@ import lombok.Data;
 @Data
 public class ConsultModel {
 	
-	private String consultingId;
-	private String userId;
-	private String petId;
+	private int consultingId;
+	private int userId;
+	private int petId;
 	private int menuId;
-	private Timestamp consDate;
-	private String consTitle;
-	private String consContents;
-	private int consCategory;
-	private MultipartFile consFile;
+	private Timestamp consultRegDate;
+	private String consultTitle;
+	private String consultContent;
+	private String consultClass;
+	private MultipartFile consultFile;
 	private int consReport;
-	private int replyNum;
 }

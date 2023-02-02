@@ -73,15 +73,18 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/board/write/{menuId}", method=RequestMethod.GET)
-	public String writeBaord(@PathVariable int menuId, Model model) {
+	public String writeBoard(@PathVariable int menuId, Model model) {
 		List<MenuModel> menuList = menuService.selectAllMenu();
 		model.addAttribute("menuList", menuList);
 		model.addAttribute("menuId", menuId);
+		
+		System.out.println("menuId1:" + menuId);
 		return "board/write";
 	}
 	
 	@RequestMapping(value="/board/write", method=RequestMethod.POST)
 	public String writeBoard(BoardModel board, BindingResult result, RedirectAttributes redirectAttrs) {
+		System.out.println("menuId2:" + board.getMenuId());
 		try {
 			board.setBoardContent(board.getBoardContent().replace("\r\n", "<br>"));
 			board.setBoardTitle(board.getBoardTitle());
