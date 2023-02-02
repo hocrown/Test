@@ -11,4 +11,5 @@ public interface IBoardMenuRepository {
 	void insertNewMenu(MenuModel menuModel);
 	void updateMenu(MenuModel menuModel);
 	void deleteMenu(int menuId);
+	List<MenuModel> selectMenu(int menuId);
 }

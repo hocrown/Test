@@ -10,7 +10,7 @@
     left:20%; 
     width:70%;
   }
-    </style>
+</style>
 
 
 <body>

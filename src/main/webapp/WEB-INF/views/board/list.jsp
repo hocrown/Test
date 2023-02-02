@@ -1,78 +1,90 @@
-<%@ page contentType="text/html; charset=UTF-8"
-    trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setBundle basename="i18n/board"/>
-<%@ taglib prefix="jk" tagdir="/WEB-INF/tags" %>
-<!DOCTYPE html>
-<html>
-	<jsp:include page="/WEB-INF/views/include/staticFiles.jsp"/>
-	<body>
-		<jsp:include page="/WEB-INF/views/include/bodyHeader.jsp"/>
-		<div class="container">
-			<div class="pg-opt">
-				<div class="row">
-					<div class="col-md-6 pc">
-						<h2><fmt:message key="BOARD_LIST"/>
-						<c:if test="${empty name}">
-						<small style="color:red;"><fmt:message key="LOGIN"/></small>
-						</c:if>
-						</h2>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="../header.jsp"%>
+
+<style>
+.full{
+    width: 1200px;
+   
+}
+.screen1{
+    width: 400px;
+    float: left;
+}
+.screen2{
+    width: 800px;
+    height:700px;
+    float: left;
+} 
+.screen3{
+    width: 100%;
+    height:100px;
+    float: left;
+}  
+</style>
+
+<body>
+	<div  class = "full">
+		<div class="screen1">
+			<%@ include file="../service/serviceMenu.jsp"%>	
+		</div>
+		
+		<div class="screen2">
+			<div class = "admininfo">
+				<div>
+					<div>
+						<c:forEach var="menu" items="${menuList}">
+							<h1>${menu.menuName}</h1>
+						</c:forEach>
 					</div>
-					<div class="col-md-6">
-						<ol class="breadcrumb">
-							<li><fmt:message key="BOARD"/></li>
-							<li class="active"><fmt:message key="BOARD_LIST"/></li>
-						</ol>
+					<div class="class2">
+						<form class="d-flex" action="<c:url value='/board/search/${menuId}/1'/>" role="search" method="get">
+							<input type="text" name="keyword" class="form-control me-2" placeholder="Search" aria-label="Search">
+							<input type="submit" class="btn btn-outline-success" value="Search">
+							<a href='<c:url value="/board/write/${menuId}"/>'><button type="button" class="btn btn-outline-success" style="width: 80px">작성</button></a>
+						</form>							
 					</div>
 				</div>
-			</div>
-			${message}
-			<div class="content">
-				<form action="<c:url value='/board/search/1'/>" method="get">
-					<div class="pull-right" style="margin-bottom: 5px;">
-					<div class="col-xs-9">
-						<input type="text" name="keyword" class="form-control">
-					</div>
-						<input type="submit" class="btn btn-warning" value="<fmt:message key="SEARCH"/>">
-					</div>
-				</form>
-				<table class="table table-hover table-bordered">
-				<thead>
-				<tr>
-					<td><fmt:message key="BOARD_ID"/></td>
-					<td class="pc"><fmt:message key="WRITER"/></td>
-					<td><fmt:message key="SUBJECT"/></td>
-					<td class="pc"><fmt:message key="WRITE_DATE"/></td>
-					<td class="pc"><fmt:message key="READ_COUNT"/></td>
-				</tr>
-				</thead>
-				<c:forEach var="board" items="${boardList}">
-				<tr>
-					<td>${board.boardId}<!-- (${board.menuId}) --></td>
-					<td class="pc">${board.userId}</td>
-					<td>
-					<jk:reply replynum="${board.replyNum}" />
-					<c:url var="viewLink" value="/board/${board.boardId}/${page}"/>
-					<a href="${viewLink}">${board.boardTitle}</a>
-					</td>
-					<td class="pc"><fmt:formatDate value="${board.boardDate}" pattern="YYYY-MM-dd"/></td>
-						<td class="pc">${board.readCount}</td>
-				</tr>
-				</c:forEach>
-				</table>
-				<table class="table">
-				<tr>
-					<td align="left">
-						<jk:paging menuId="${menuId}" nowPage="${page}" totalPageCount="${totalPageCount}"/>
-					</td>
-					<td align="right">
-						<a href='<c:url value="/board/write/${menuId}"/>'><button type="button" class="btn btn-info"><fmt:message key="WRITE_NEW_ARTICLE"/></button></a>
-					</td>
-				</tr>
-				</table>
+				<table class="table table-sm " >
+					<thead>
+					  <tr>
+					  	<c:if test="${menuId eq 1}">
+						  <td scope="col">no.</td>
+						</c:if>
+						  <td scope="col">title</td>
+						  <td scope="col">writer</td>
+						  <td scope="col">date</td>
+						  <td scope="col">readcount</td>
+					  </tr>
+					</thead>
+			 		<c:forEach var="board" items="${boardList}">
+				  		<tbody>
+						    <tr>
+						    	<c:if test="${menuId eq 1}">
+							    	<td scope="row">${board.boardId}<!-- (${board.menuId}) --></td>
+							    </c:if>
+							    <td>
+								<jk:reply replynum="${board.replyNum}" />
+								<c:url var="viewLink" value="/board/${board.boardId}/${page}"/>
+								<a href="${viewLink}">${board.boardTitle}</a>
+								</td>
+							    <td>${board.userId}</td>              
+							    <td><fmt:formatDate value="${board.boardDate}" pattern="YYYY-MM-dd"/></td>
+								<td>${board.readCount}</td>
+						    </tr>
+						 </tbody>
+					</c:forEach> 
+					<tr>
+						<td align="left">
+							<jk:paging menuId="${menuId}" nowPage="${page}" totalPageCount="${totalPageCount}"/>
+						</td>
+					</tr>	
+	 	 		</table>
 			</div>
 		</div>
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
-	</body>
-</html>
+	</div>
+</div>
+<div class="screen3"> 
+	<%@ include file="footer.jsp"%>
+</div>	
+</body>

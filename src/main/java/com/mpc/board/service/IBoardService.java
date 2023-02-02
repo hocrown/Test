@@ -29,6 +29,6 @@ public interface IBoardService {
 	int selectTotalBoardCount();
 	int selectTotalBoardCountByMenuId(int menuId);
 	
-	List<BoardModel> searchListByContentKeyword(String keyword, int page);
+	List<BoardModel> searchListByContentKeyword(String keyword, int menuId, int page);
 	int selectTotalBoardCountByKeyword(String keyword);
 }

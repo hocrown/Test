@@ -37,6 +37,6 @@ public interface IBoardRepository {
 	int selectTotalBoardCount();
 	int selectTotalBoardCountByMenuId(int menuId);
 	
-	List<BoardModel> searchListByContentKeyword(@Param("keyword") String keyword, @Param("start") int start, @Param("end") int end);
+	List<BoardModel> searchListByContentKeyword(@Param("keyword") String keyword, @Param("menuId") int menuId, @Param("start") int start, @Param("end") int end);
 	int selectTotalBoardCountByKeyword(String keyword);
 }
