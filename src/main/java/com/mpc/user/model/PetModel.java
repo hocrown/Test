@@ -6,12 +6,12 @@ public class PetModel {
 	
 	private int	pet_No;
 	private int	user_no;
-	private String petName;
-	private Date petFamilyDate;
-	private String petSpecies;
-	private String petSex;
-	private String petNEUT;
-	private String petCharacter;
+	private String petName; //이름
+	private Date petFamilyDate; // 생일 가족이 된 날
+	private String petSpecies; // 종
+	private String petSex; //성별
+	private String petNeut; // 중성화
+	private String petCharacter; //성격
 	
 	public int getPet_No() {
 		return pet_No;
@@ -49,11 +49,11 @@ public class PetModel {
 	public void setPetSex(String petSex) {
 		this.petSex = petSex;
 	}
-	public String getPetNEUT() {
-		return petNEUT;
+	public String getPetNeut() {
+		return petNeut;
 	}
-	public void setPetNEUT(String petNEUT) {
-		this.petNEUT = petNEUT;
+	public void setPetNeut(String petNeut) {
+		this.petNeut = petNeut;
 	}
 	public String getPetCharacter() {
 		return petCharacter;

@@ -3,7 +3,9 @@ package com.mpc.user.service;
 /*public class UserService implements IUserService {*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.mpc.user.dao.UserRepository;
+import com.mpc.user.model.PetModel;
 import com.mpc.user.model.UserModel;
 
 @Service
@@ -11,6 +13,7 @@ public class UserService implements UserServiceImpl {
 
 	@Autowired
 	UserRepository repositoryDao;
+
 //회원정보 입력
 	@Override
 	public void signup(UserModel user) {
@@ -25,31 +28,37 @@ public class UserService implements UserServiceImpl {
 		System.out.println("result: " + result);
 		return result;
 	}
+	
+// 펫정보 입력
+	@Override
+	public void petInsert(PetModel model) {
+		repositoryDao.petInsert(model);	
+	}
 
 	@Override
 	public int nickChk() {
-		// TODO Auto-generated method stub
+		
 		repositoryDao.nickChk();
 		return 0;
 	}
 
 	@Override
 	public int emailChk() {
-		// TODO Auto-generated method stub
+		
 		repositoryDao.emailChk();
 		return 0;
 	}
 
 	@Override
 	public int pwValChk() {
-		// TODO Auto-generated method stub
+		
 		repositoryDao.pwValChk();
 		return 0;
 	}
 
 	@Override
 	public void petUpdate() {
-		// TODO Auto-generated method stub
+			
 		repositoryDao.petUpdate();
 	}
 
@@ -87,7 +96,6 @@ public class UserService implements UserServiceImpl {
 	 * managerDAO.selectManagerInfo(managerId); }
 	 */
 
-
 	@Override
 	public void logout() {
 		// TODO Auto-generated method stub
@@ -105,6 +113,7 @@ public class UserService implements UserServiceImpl {
 		// TODO Auto-generated method stub
 		repositoryDao.myPageSearch();
 	}
+
 
 
 }

@@ -76,11 +76,11 @@ display: none;
 <script>
 
 function checkId(){
-        var id = $('#userid').val(); //id값이 "id"인 입력란의 값을 저장
+        var id = $('#userId').val(); //id값이 "id"인 입력란의 값을 저장
         $.ajax({
             url:'./idCheck', //Controller에서 요청 받을 주소
             type:'post', //POST 방식으로 전달
-            data:{"userid":id},
+            data:{"userId":id},
             success:function(result){ //컨트롤러에서 넘어온 cnt값을 받는다 
                 if(result == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
                     $('.id_ok').css("display","inline-block"); 
@@ -105,28 +105,28 @@ function checkId(){
 	 <body class="bg-light">
     
 <div class="container">
-
   <main>
-   <!--  
-    <div class="py-5 text-center">
+			  
+   <!-- <div class="py-5 text-center">
       <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt=""  height="57">
       <h2>SignUp</h2>
-      
     </div>
-      </div>
-    -->    
+      </div> -->
+    
+	<div>
+      <h4 class="mb-3">회원가입</h4>
       
-      <div>
-        <h4 class="mb-3">회원가입</h4>
-        <form action="<c:url value='/user/insert'/>" method="post"
-		id="joinForm" name="joinForm" class="form-horizontal">
+      <form action="<c:url value='/user/insert'/>" method="post" id="joinForm" name="joinForm" class="form-horizontal">
 		
-	<label for="address2">아이디</label> 
-	<input type="text" id="userid" name="userid" oninput = "checkId()" >
-							
-	<!-- id ajax 중복체크 -->
-	<span class="id_ok">사용 가능한 아이디입니다.</span>
-	<span class="id_already">누군가 이 아이디를 사용하고 있어요.</span>
+	<div class="row g-3">
+		<div class="col-sm-8">	
+			<label class="form-label" for="address2">아이디</label> 
+			<input type="text" id="userId" name="userId" value="${usermodel['userId']}" oninput = "checkId()" class="form-control">
+			<!-- id ajax 중복체크 -->
+			<span class="id_ok">사용 가능한 아이디입니다.</span>
+			<span class="id_already">누군가 이 아이디를 사용하고 있어요.</span>
+		</div>
+	</div>
 		
           <%--  <div class="row g-3">
             <div class="col-sm-8">
@@ -142,96 +142,84 @@ function checkId(){
             </div>
             </div>  --%>
             
-            <div class="row g-3">
-            <div class="col-sm-8">
-              <label for="userPw" class="form-label">Password</label>
-              <input type="password" name="userPw" id="userPw"
-		value="${usermodel.userPw}" class="form-control" title="<fmt:message
-		key='PASSWORD_TITLE'/>" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-		placeholder="사용자 비밀번호" required>
-                <div class="invalid-feedback">
+     <div class="row g-3">
+     	<div class="col-sm-8">
+        	<label for="userPw" class="form-label">Password</label>
+         	<input type="password" name="userPw" id="userPw"
+			value="${usermodel.userPw}" class="form-control" title="<fmt:message
+			key='PASSWORD_TITLE'/>" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" placeholder="사용자 비밀번호" required>
+            <div class="invalid-feedback">
                 Valid first Password is required.
-              </div>
             </div>
-            </div>
+     	</div>
+	 </div>
             
-            <div class="row g-3">
+         <div class="row g-3">
             <div class="col-sm-8">
               <label for="password_re" class="form-label">Password Check</label>
               <input type="password" name="password_re" id="password_re"
-			class="form-control" title="<fmt:message key='PASSWORD_RE_TITLE'/>"
-			pattern="(?=.*\d)(?=.*[a-z])(?=*[A-Z]).{6,}" placeholder="비밀번호 재확인" required>
-               <!--  Valid first Password is required. -->
-              </div>
-            </div>
-            </div>
-
-			<div class="row g-3">
-            <div class="col-sm-8">
-              <label for="username" class="form-label">UserName</label>
-              <div class="input-group has-validation">
-                <span class="input-group-text">#</span>
-               <input type="text" name="username" id="username" value="${usermodel.userName}"
-		class="form-control" placeholder="사용자 이름" required>
-              <div class="invalid-feedback">
-               <!--    Your Username is required. -->
-                </div>
-              </div>
-            </div>
-			</div>
-			
-			<div class="row g-3">	
-            <div class="col-sm-8">
-              <label for="userNickname" class="form-label">Nickname 
-              <span class="text-muted">(Optional)</span></label>
-             <input type="text" name="userNickname" id="userNickname" value="${usermodel.userName}"
-		class="form-control" placeholder="닉네임입력" required>
-             <!--    Please enter a valid email address for shipping updates. -->
-              </div>
-            </div>			 
-			 
-			 <div class="row g-3">
-            <div class="col-sm-8">
-              <label for="userPhone" class="form-label">Phone</label>
-              <input type="text" name="userPhone" id="userPhone" value="${usermodel.userPhone}"
-				class="form-control" placeholder="사용자 전화번호"  required>
-              <div class="invalid-feedback">
-                Valid first Phone is required.
-              </div>
-            </div>
-            </div>
-            
-           <div class="form-group">
-		<label class="control-label col-sm-2" for="userPostNum">PostNum</label>
-		<div class="col-sm-8">
-  		<input type="text" id="userPostNum" name="userPostNum" placeholder="우편주소"
-  		 value="${usermodel.userPostNum}" readonly onclick="findAddr()" class="form-control">
-	  	
-	  	<input id="userAddress" name="userAddress" type="text" placeholder="도로명주소"
-	  	value="${usermodel.userAddress}" readonly class="form-control"> <br>
-	  	</div>
-	  	</div>
-						 
-            <div class="col-sm-8">
-              <label for="address2" class="form-label">Address Detail <span class="text-muted">(Optional)</span></label>
-             <input type="text" id="userDetailAddress" name="userDetailAddress" placeholder="상세주소"
-	  	value="${usermodel.userDetailAddress}" class="form-control">
-            </div>
-
-            <div class="col-md-8">
-              <label for="country" class="form-label">의료인여부</label>
-              <select class="form-select" id="country" required>
-                <option value="">Choose...</option>
-                <option>의료인</option>
-              </select>
-              <div class="invalid-feedback">
-                Please select a valid country.
-              </div>
-            </div>
+				class="form-control" title="<fmt:message key='PASSWORD_RE_TITLE'/>"
+				pattern="(?=.*\d)(?=.*[a-z])(?=*[A-Z]).{6,}" placeholder="비밀번호 재확인" required>
+             </div>
+          </div>
+           
 
 		<div class="row g-3">
-          <div class="my-8">
-          <label for="country" class="form-label">의료인여부</label>
+        	<div class="col-sm-8">
+              <label for="userName" class="form-label">UserName</label>
+              <div class="input-group has-validation">
+              <span class="input-group-text">#</span>
+              <input type="text" name="userName" id="userName" value="${usermodel.userName}"
+			  class="form-control" placeholder="사용자 이름" required>
+              </div>
+            </div>
+		</div>
+			
+		<div class="row g-3">	
+            <div class="col-sm-8">
+            	<label for="userNickname" class="form-label">Nickname 
+            	<span class="text-muted">(Optional)</span></label>
+            	<input type="text" name="userNickname" id="userNickname" value="${usermodel.userName}"
+			 	class="form-control" placeholder="닉네임입력" required>
+            </div>
+       </div>			 
+			 
+		<div class="row g-3">
+        	<div class="col-sm-8">
+            	<label for="userPhone" class="form-label">Phone</label>
+              	<input type="text" name="userPhone" id="userPhone" value="${usermodel.userPhone}"
+				class="form-control" placeholder="사용자 전화번호"  required>
+            </div>
+        </div>
+            
+        <div class="form-group">
+			<label class="control-label col-sm-2" for="userPostNum">PostNum</label>
+			<div class="col-sm-8">
+  			<input type="text" id="userPostNum" name="userPostNum" placeholder="우편주소"
+  		 	value="${usermodel.userPostNum}" readonly onclick="findAddr()" class="form-control">
+	  	
+	  		<input id="userAddress" name="userAddress" type="text" placeholder="도로명주소"
+	  		value="${usermodel.userAddress}" readonly class="form-control"> <br>
+	  		</div>
+	  	</div>
+						 
+        <div class="col-sm-8">
+        	<label for="address2" class="form-label">Address Detail <span class="text-muted">(Optional)</span></label>
+        	<input type="text" id="userDetailAddress" name="userDetailAddress" placeholder="상세주소"
+	  		value="${usermodel.userDetailAddress}" class="form-control">
+        </div>
+
+        <div class="col-md-8">
+        	<label for="country" class="form-label">의료인여부</label>
+            <select class="form-select" id="country" required>
+            	<option value="">Choose...</option>
+            	<option>의료인</option>
+            </select>
+        </div>
+
+		<div class="row g-3">
+        	<div class="my-8">
+          	<label for="country" class="form-label">의료인여부</label>
             <div class="form-check">
               <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
               <label class="form-check-label" for="credit">일반회원</label>
@@ -264,8 +252,8 @@ function checkId(){
           <input class="btn btn-primary" type="submit"  style="margin: 2 0 2 0;" width=70%  value="가입">
           <button class="btn btn-primary" type="button" style="margin: 2 0 2 0;" onClick="location.href='../index'">Home</button>
       </div>
- 
-        </form>
+
+       </form>
     </div>
   </main>
 
@@ -274,7 +262,7 @@ function checkId(){
    
   </footer>
 </div>
-    
+   
   </body>
 
 </html>

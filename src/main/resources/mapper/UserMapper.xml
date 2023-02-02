@@ -31,6 +31,7 @@
 		 ]]>
 	</insert>
 	
+	
 <!-- id 중복 체크  -->
 	<select id="idChk" parameterType="String" resultType="int">
 	<![CDATA[
@@ -40,11 +41,37 @@
 	]]>
 	</select>
 	
+	
+	<!-- 펫 정보등록  -->
+ 	 <insert id="petInsert" parameterType="com.mpc.user.model.PetModel">
+	<![CDATA[      
+	INSERT INTO 
+				pet(pet_No
+				,user_No
+				,petName
+				,petFamilyDate 
+				,petSpecies
+				,petSex
+				,petNeut
+				,petCharacter)
+				
+		VALUES(pet_seq.NEXTVAL
+			  ,27
+			  ,#{petName}
+			  ,SYSDATE
+			  ,#{petSpecies}
+			  ,#{petSex}
+			  ,#{petNeut}
+			  ,#{petCharacter})
+		 ]]>
+	</insert>  
+	
+	
 	<!-- <select id="login" parameterType="string" resultType="com.mpc.user.model.UserModel"> 
 		<![CDATA[ SELECT * FROM mpc_user WHERE userId = #{userId} ]]> </select> -->
 
 
-<!-- 	<select id="login" parameterType="com.mpc.user.model.UserModel" resultType="Int">
+	<!-- <select id="login" parameterType="com.mpc.user.model.UserModel" resultType="Int">
 		<![CDATA[
         SELECT COUNT(*)
          FROM mpc_user
