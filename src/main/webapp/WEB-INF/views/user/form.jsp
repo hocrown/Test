@@ -116,12 +116,12 @@ function checkId(){
 	<div>
       <h4 class="mb-3">회원가입</h4>
       
-      <form action="<c:url value='/user/insert'/>" method="post" id="joinForm" name="joinForm" class="form-horizontal">
+     <%--  <form action="<c:url value='/user/insert'/>" method="post" id="joinForm" name="joinForm" class="form-horizontal"> --%>
 		
 	<div class="row g-3">
 		<div class="col-sm-8">	
 			<label class="form-label" for="address2">아이디</label> 
-			<input type="text" id="userId" name="userId" value="${usermodel['userId']}" oninput = "checkId()" class="form-control">
+			<input type="text" id="userId" name="userId" value="${usermodel['userId']}" oninput = "checkId()" class="form-control" placeholder="사용자 아이디">
 			<!-- id ajax 중복체크 -->
 			<span class="id_ok">사용 가능한 아이디입니다.</span>
 			<span class="id_already">누군가 이 아이디를 사용하고 있어요.</span>
@@ -163,7 +163,6 @@ function checkId(){
              </div>
           </div>
            
-
 		<div class="row g-3">
         	<div class="col-sm-8">
               <label for="userName" class="form-label">UserName</label>
@@ -249,7 +248,8 @@ function checkId(){
 
           <hr class="my-4"  width=70%>
 			
-          <input class="btn btn-primary" type="submit"  style="margin: 2 0 2 0;" width=70%  value="가입">
+		
+          <input onclick="signupCheck()" class="btn btn-primary" type="submit"  style="margin: 2 0 2 0;" width=70%  value="가입">
           <button class="btn btn-primary" type="button" style="margin: 2 0 2 0;" onClick="location.href='../index'">Home</button>
       </div>
 
@@ -262,6 +262,25 @@ function checkId(){
    
   </footer>
 </div>
+
+<script>
+
+function signupCheck() {
+  	alert("회원가입되었습니다");
+  
+  	answer=confirm("펮 정보를 추가하시겠습니까?");
+if(answer==true){
+  window.location.href = "http://localhost:8080/mypage/mypetWrite";
+	
+	
+}else{
+  window.location.href = "http://localhost:8080/index";
+	
+}
+
+}
+
+</script>
    
   </body>
 

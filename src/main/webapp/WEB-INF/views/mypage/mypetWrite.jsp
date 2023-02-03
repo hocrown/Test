@@ -154,7 +154,7 @@ display: inline-block;
 			 </div>			 
 		       
 	    	</div>
-			 <input class="btn btn-primary" type="submit"  style="margin: 2 0 2 0; width:70%"  value="가입">
+			 <input  onclick="signupCheak()" class="btn btn-primary" type="submit"  style="margin: 2 0 2 0; width:70%"  value="가입">
 				<div> <button type="button" class="btn-admin" onClick="location.href='/mypage/mypet'">등록</button></div>
 			 	<div> <button type="button" class="btn-admin" >반려동물정보 목록</button></div>
 	    	</form>
@@ -163,6 +163,18 @@ display: inline-block;
 	<%-- <div class="screen3"> 
 	    <%@ include file="footer.jsp"%>
 	    </div> --%>
+	    
+	    <script>
+
+function signupCheak() {
+
+  alert("펫 정보 등록완료");
+
+  window.location.href = "http://localhost:8080/user/insert";
+
+}
+
+</script>
 </body>
 
 

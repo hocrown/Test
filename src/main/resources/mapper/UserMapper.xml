@@ -56,9 +56,9 @@
 				,petCharacter)
 				
 		VALUES(pet_seq.NEXTVAL
-			  ,27
+			  ,42
 			  ,#{petName}
-			  ,SYSDATE
+			  ,#{petFamilyDate}
 			  ,#{petSpecies}
 			  ,#{petSex}
 			  ,#{petNeut}
