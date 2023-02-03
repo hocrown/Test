@@ -98,6 +98,6 @@ display: inline-block;
 		</div>
 	</div>
 <div class="screen3"> 
-	<%@ include file="footer.jsp"%>
+	<%@ include file="../footer.jsp"%>
 </div>
 </body>
