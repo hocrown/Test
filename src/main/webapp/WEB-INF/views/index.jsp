@@ -26,6 +26,50 @@
     height:100px;
     float: left;
 }  
+
+
+.screen2-1 {
+  padding: 1.5rem !important;
+  margin-bottom: 1rem !important;
+  background-color: #f8f9fa !important;
+  border-radius: 0.2rem !important;
+}
+.tbody{
+text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bt {
+    transition: none;
+  
+}
+}
+
+.tablebtn {
+  width:80px;
+  margin-bottom: 0 !important;
+  display: inline-block;
+  font-weight: 400;
+  color: #212529;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: #007bff;
+  border-color: #007bff;
+}
+
+
 </style>
 
 <div class="full"  >
@@ -63,34 +107,67 @@
 		    </div> 
 		</div> 
 	  <div class="screen2">
-		  <div class="p-4 mb-3 bg-light rounded">		         
-		  	<p class="mb-0"><input type=button class="btn btn-primary" onClick="location.href='./board/boardWrite'" value="문진글 작성하기"></p>		
-		    <div class="p-4">
-			    <h4 class="fst-italic">증상별</h4>
-				    <ol class="list-unstyled mb-0">
-					    <li><p class="mb-0"><input type=button class="btn btn-outline-primary me-2" value="피부염"></p></li>
-					    <li><p class="mb-0"><input type=button class="btn btn-outline-primary me-2" value="설사"></p></li>
-					    <li><p class="mb-0"><input type=button class="btn btn-outline-primary me-2" value="피부염"></p></li>
-					    <li><p class="mb-0"><input type=button class="btn btn-outline-primary me-2" value="구토"></p></li>
-					    <li><p class="mb-0"><input type=button class="btn btn-outline-primary me-2" value="피부염"></p></li>
-					    <li><p class="mb-0"><input type=button class="btn btn-outline-primary me-2" value="중성화"></p></li>
-					    <li><p class="mb-0"><input type=button class="btn btn-outline-primary me-2" value="외상"></p></li>
-					    <li><p class="mb-0"><input type=button class="btn btn-outline-primary me-2" value="기침"></p></li>
-					    <li><p class="mb-0"><input type=button class="btn btn-outline-primary me-2" value="건강검진"></p></li>
-					    <li><p class="mb-0"><input type=button class="btn btn-outline-primary me-2" value="결막염"></p></li>
-					    <li><p class="mb-0"><input type=button class="btn btn-outline-primary me-2" value="치주염"></p></li>
-					    <li><p class="mb-0"><input type=button class="btn btn-outline-primary me-2" value="외이염"></p></li>				           
-				    </ol>		          
+	  	<div class="Screen2-1">
+		  <div >		         
+		  		
+		    <div >			    
+				    <table >
+				    <tbody class="tbody">
+				    <tr>
+				   		<td colspan="2"><p class="mb-0"><input type=button class="btn btn-primary" onClick="location.href='./board/boardWrite'" value="문진글 작성하기"></p>	<td>
+					</tr>
+				    <tr>
+				   		<th>증상별</th>
+				   		<th>펫종류별</th>
+					</tr>
+					<tr>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="피부염"></p></td>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="강아지"></p></td>
+					</tr>
+					<tr>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="설사"></p></td>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="고양이"></p></td>
+					</tr>
+					<tr>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="외이염"></p></td>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="파충류"></p></td>
+					</tr>
+					<tr>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="구토"></p></td>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="설치류"></p></td>
+					</tr>
+					<tr>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="치주염"></p></td>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="조류"></p></td>
+					</tr>
+					<tr>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="중성화"></p></td>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="토끼"></p></td>
+					</tr>
+					<tr>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="외상"></p></td>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="어류"></p></td>
+					</tr>
+					<tr>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="기침"></p></td>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="고슴도치"></p></td>
+					</tr>
+					<tr>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="건강검진"></p></td>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="거미"></p></td>
+					</tr>
+					<tr>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="결막염"></p></td>
+					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="기타"></p></td>
+					</tr>
+					
+						
+					  </tbody>			           
+				    </table>		          
 		    </div>		
-		    <div class="p-4">
-			    <h4 class="fst-italic">Elsewhere</h4>
-				    <ol class="list-unstyled">
-					    <li><a href="#">GitHub</a></li>
-					    <li><a href="#">Twitter</a></li>
-					    <li><a href="#">Facebook</a></li>
-				    </ol>
-		    </div>
+		
 		   </div>
+		  </div>
 	   </div>	     	     
 	</div>           
 </div>     

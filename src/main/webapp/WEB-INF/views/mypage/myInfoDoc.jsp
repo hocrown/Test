@@ -62,7 +62,7 @@ display: inline-block;
 			<%@ include file="mypageMenu.jsp"%>	
 		</div>
 		<div class="screen2"> 
-		<div><h1>회원 정보</h1></div>
+		<div><h1>의료인 정보</h1></div>
 		<div class="colmenu">
 	     	<div class="row g-3">
             <div class="col-sm-8">
@@ -82,7 +82,7 @@ display: inline-block;
             <div class="col-sm-8">
               <label for="username" class="form-label">Nickname</label>
               <div class="input-group has-validation">
-               
+                
                 <input type="text" class="form-control" id="username" placeholder="{DB 기존 정보 출력해오기}" required>
               <div class="invalid-feedback">
                   Your Nickname is required.

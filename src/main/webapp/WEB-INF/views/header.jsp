@@ -35,15 +35,20 @@
 				        <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
 				      </ul>	
 			      	  <div class="col-md-3 text-end">
-			      	  <c:if test="${empty sessionScope.userId}">
-				          <button type="button" class="btn btn-outline-primary me-2" onClick="location.href='./login/main'" >Login</button>
-				          <button type="button" class="btn btn-primary" onClick="location.href='./signUp/main'">Sign-up</button>
-				      </c:if>
-				      <c:if test="${not empty sessionScope.userId}">
-				      		<button type="button" class="btn btn-primary" onClick="location.href='./mypage/main'"><a href="<c:url value='/main/logout'/>">[<fmt:message key="SIGN_OUT"/>]</a></button>
-				          <button type="button" class="btn btn-primary" onClick="location.href='./mypage/main'">Mypage</button>
-				      </c:if>
-				           
+			      	  <c:choose>
+			      	  <c:when test="${empty sessionScope.userId}">
+				          <button type="button" class="btn btn-outline-primary me-2" onClick="location.href='/login/main'" >Login</button>
+				          <button type="button" class="btn btn-primary" onClick="location.href='/signUp/main'">Sign-up</button>
+				      </c:when>
+				      <c:when test="${userId eq 'admin'}">
+				      		<button type="button" class="btn btn-primary" onClick="location.href='/main/logout'">Logout</button>
+				          
+				      </c:when>
+				      <c:when test="${not empty sessionScope.userId}">
+				      		<button type="button" class="btn btn-primary" onClick="location.href='/main/logout'">Logout</button>
+				          <button type="button" class="btn btn-primary" onClick="location.href='/mypage/main'">Mypage</button>
+				      </c:when>
+				       </c:choose>    
 			          </div>
 		    	</header>
 	  		</div>

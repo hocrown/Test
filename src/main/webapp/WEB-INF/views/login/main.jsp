@@ -76,16 +76,15 @@
 	</form>
 </c:if>
 
+<c:choose>
+<c:when test="${userId eq 'admin'}"  >
+<% response.sendRedirect("../admin/main");%>
+</c:when>
+<c:when test="${not empty sessionScope.userId}"  >
+<% response.sendRedirect("../index");%>
+</c:when>
+</c:choose>
 
-<c:if test="${not empty sessionScope.userId}"  >
-	<% response.sendRedirect("../index");%>
-<!--<h4>${userId}</h4>
-	<h4>${email}</h4>
-	<a href="<c:url value='/member/update'/>">[<fmt:message key="UPDATE_USER_INFO"/>]</a>
-	<a href="<c:url value='/main/logout'/>">[<fmt:message key="SIGN_OUT"/>]</a>
-	<a href="<c:url value='/member/delete'/>">[<fmt:message key="EXIT_MEMBER"/>]</a>  -->	
-	
-</c:if>
 
 <div class="container">
 	<div class="pg-opt">

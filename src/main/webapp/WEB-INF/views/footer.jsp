@@ -10,7 +10,7 @@
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted" onClick="location.href='./service/main'">고객센터</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted" onClick="location.href='/service/main'">고객센터</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
     </ul>
     <p class="text-center text-muted">&copy; 2023 Company, Inc
@@ -18,9 +18,7 @@
 			YOONMOONYOONSOON<br>
 			All contents Copyright 2023 <br>			
 			Inc. all rights reserved<br>	<br></p>
-			<div align="center">
-			<button align="center" onClick="location.href='./admin/main'">관리자페이지 test</button>
-			</div>
+			
   </footer>
 </div>
 	

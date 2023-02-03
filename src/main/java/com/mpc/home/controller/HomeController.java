@@ -149,12 +149,7 @@ public class HomeController {
 	public String gomypage() {
 		
 		return "mypage/main";
-	}
-	@RequestMapping(value="/mypage/myInfo")
-	public String gomyInfo() {
-		
-		return "mypage/myInfo";
-	}
+	}	
 	@RequestMapping(value="/mypage/mypet")
 	public String gomypet() {
 		
@@ -199,5 +194,31 @@ public class HomeController {
 	public String gomyscrapInfo() {
 		
 		return "mypage/myscrapInfo";
+	}
+	@RequestMapping(value="/mypage/myInfo")
+	public String gomyInfo() {
+		
+		return "mypage/myInfo";
+	}
+//마이페이지 의료인
+	@RequestMapping(value="/mypage/myconsultDoc")
+	public String gomyconsultDoc() {
+		
+		return "mypage/myconsultDoc";
+	}
+	@RequestMapping(value="/mypage/myconsultDocInfo")
+	public String gomyconsultDocInfo() {
+		
+		return "mypage/myconsultDocInfo";
+	}
+	@RequestMapping(value="/mypage/myInfoDoc")
+	public String gomyInfoDoc() {
+		
+		return "mypage/myInfoDoc";
+	}
+	@RequestMapping(value="/mypage/myhospital")
+	public String gomyhospital() {
+		
+		return "mypage/myhospital";
 	}
 }
