@@ -14,8 +14,8 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521/xepdb1" />
-		<property name="username" value="mpc" />
-		<property name="password" value="mpc" />
+		<property name="username" value="mpctest" />
+		<property name="password" value="mpctest" />
 	</bean>
 
 

@@ -10,11 +10,13 @@
     left:20%; 
     width:70%;
   }
+<<<<<<< HEAD:src/main/webapp/WEB-INF/views/admin/adminNotice.jsp
 .class2{
     width: 300px;
     float: right;
 }
   </style>
+>>>>>>> origin/feature_mypage:src/main/webapp/WEB-INF/views/admin/noticeInfo.jsp
 
 
 <body>

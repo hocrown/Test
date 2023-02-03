@@ -5,29 +5,54 @@
 <mapper namespace="com.mpc.board.dao.IBoardRepository">
 
 	<select id="selectBoardListByMenu" parameterType="map" resultType="com.mpc.board.model.BoardModel">
-		<![CDATA[
-			SELECT
-				boardId,
-				menuId,
-				userId,
-				boardTitle,
-				boardDate,
-				masterId,
-				replyNum,
-				readCount
-			FROM (
+		<choose>
+			<when test="menuId eq 1">
+				<![CDATA[
 				SELECT
-					boardId, menuId, userId, boardTitle, boardDate,
-					masterId, replyNum, readCount, 
-					rownum AS rnum
-				FROM (
-					SELECT * FROM board
-					WHERE menuId = #{menuId}
-					ORDER BY masterId DESC, replyNum
+					boardId,
+					boardTitle,
+					userId,
+					boardDate,
+					readCount
+				FROM(
+					SELECT
+						rownum AS rnum,
+						boardId,
+						boardTitle,
+						userId,
+						boardDate,
+						readCount
+					FROM notice2
 				)
-			)
-			WHERE rnum BETWEEN #{start} AND #{end}
-		]]>
+				WHERE rnum BETWEEN #{start} AND #{end}
+				]]>
+			</when>
+			<when test="menuId eq 2">
+				<![CDATA[
+		         SELECT
+		            boardId,
+		            menuId,
+		            userId,
+		            boardTitle,
+		            boardDate,
+		            masterId,
+		            replyNum,
+		            readCount
+		         FROM (
+		            SELECT
+		               boardId, menuId, userId, boardTitle, boardDate,
+		               masterId, replyNum, readCount, 
+		               rownum AS rnum
+		            FROM (
+		               SELECT * FROM board
+		               WHERE menuId = #{menuId}
+		               ORDER BY masterId DESC, replyNum
+		            )
+		         )
+		         WHERE rnum BETWEEN #{start} AND #{end}
+		      	]]>
+			</when>
+		</choose>
 	</select>
 
 	<select id="selectBoard" parameterType="int" resultType="com.mpc.board.model.BoardModel">
@@ -214,7 +239,7 @@
 		]]>
 	</select>
 	
-	<select id="selectTotalBoardCountByKeyword" parameterType="string" resultType="int">
+	<select id="selectTotalBoardCountByKeyword" parameterType="String" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*)
 			FROM board
@@ -223,28 +248,56 @@
 	</select>
 	
 	<select id="searchListByContentKeyword" parameterType="hashmap" resultType="com.mpc.board.model.BoardModel">
-		<![CDATA[
-			SELECT
-				boardId,
-				menuId,
-				userId,
-				boardTitle,
-				boardDate,
-				masterId,
-				replyNum,
-				readCount
-			FROM (
-				SELECT
-					boardId, menuId, userId, boardTitle, boardDate,
-					masterId, replyNum, readCount, rownum AS rnum
-				FROM (
-					SELECT * FROM board
-					WHERE boardTitle LIKE #{keyword} OR boardContent LIKE #{keyword}
-					ORDER BY masterId DESC, replyNum
+		<choose>
+			<when test="menuId eq 1">
+				<![CDATA[
+					SELECT
+						boardId,
+						boardTitle,
+						userId,
+						boardDate,
+						readCount
+					FROM(
+						SELECT
+							rownum AS rnum,
+							boardId,
+							boardTitle,
+							userId,
+							boardDate,
+							readCount
+						FROM (
+							SELECT * FROM notice2
+							WHERE boardTitle LIKE #{keyword} OR boardContent LIKE #{keyword}
+							 )
 					)
-				)
-			WHERE rnum BETWEEN #{start} AND #{end}
-		]]>
+					WHERE rnum BETWEEN #{start} AND #{end}
+				]]>
+			</when>
+			<when test="menuId eq 2">
+			<![CDATA[
+				SELECT
+					boardId,
+					menuId,
+					userId,
+					boardTitle,
+					boardDate,
+					masterId,
+					replyNum,
+					readCount
+				FROM (
+					SELECT
+						boardId, menuId, userId, boardTitle, boardDate,
+						masterId, replyNum, readCount, rownum AS rnum
+					FROM (
+						SELECT * FROM board
+						WHERE (boardTitle LIKE #{keyword} OR boardContent LIKE #{keyword}) AND menuId = #{menuId}
+						ORDER BY masterId DESC, replyNum
+						)
+					)
+				WHERE rnum BETWEEN #{start} AND #{end}
+			]]>
+			</when>
+		</choose>
 	</select>
 	
 </mapper>

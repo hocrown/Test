@@ -1,6 +1,8 @@
 package com.mpc.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -38,9 +40,11 @@ public class BoardController {
 	public String getListByMenu(@PathVariable int menuId, @PathVariable int page, HttpSession session, Model model) {
 		session.setAttribute("page", page);
 		model.addAttribute("menuId", menuId);
-		
 		List<BoardModel> boardList = boardService.selectBoardListByMenu(menuId, page);
+		List<MenuModel> menuList = menuService.selectMenu(menuId);
+		List<BoardModel> boardList = boardService.selectBoardListByMenu(menuId, page);	
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("menuList", menuList);
 		
 		//paging start
 		int bbsCount = boardService.selectTotalBoardCountByMenuId(menuId);
@@ -139,7 +143,7 @@ public class BoardController {
 			board.setBoardTitle(board.getBoardTitle());
 			board.setBoardContent(board.getBoardContent());
 			MultipartFile mfile = board.getBoardFile();
-			if(mfile != null && mfile.isEmpty()) {
+			if(mfile != null && !mfile.isEmpty()) {
 				BoardUploadFileModel file = new BoardUploadFileModel();
 				file.setFileName(mfile.getOriginalFilename());
 				file.setFileSize(mfile.getSize());
@@ -161,23 +165,26 @@ public class BoardController {
 		}
 	}
 	
-	@RequestMapping(value="/board/update/{boardId}", method=RequestMethod.GET)
-	public String updateBoard(@PathVariable int boardId, Model model) {
-		List<MenuModel> menuList = menuService.selectAllMenu();
+	@RequestMapping(value="/board/update/{menuId}/{boardId}", method=RequestMethod.GET)
+	public String updateBoard(@PathVariable int menuId, @PathVariable int boardId, Model model) {
+		List<MenuModel> menuList = menuService.selectMenu(menuId);
 		model.addAttribute("menuList", menuList);
 		BoardModel board = boardService.selectBoard(boardId);
-		model.addAttribute("categoryId", board.getMenuId());
+		model.addAttribute("menuId", board.getMenuId());
 		model.addAttribute("board", board);
 		return "board/update";
 	}
 	
 	@RequestMapping(value="/board/update", method=RequestMethod.POST)
 	public String updateBoard(BoardModel board, BindingResult result, RedirectAttributes redirectAttrs) {
+		System.out.println(board.getFileId());
+		System.out.println(board.getFileName());
+		
 		try {
 			board.setBoardTitle(board.getBoardTitle());
 			board.setBoardContent(board.getBoardContent());
 			MultipartFile mfile = board.getBoardFile();
-			if(mfile != null && mfile.isEmpty()) {
+			if(mfile != null && !mfile.isEmpty()) {
 				BoardUploadFileModel file = new BoardUploadFileModel();
 				file.setFileId(board.getFileId());
 				file.setFileName(mfile.getOriginalFilename());
@@ -216,10 +223,10 @@ public class BoardController {
 		}
 	}
 	
-	@RequestMapping("/board/search/{page}")
-	public String search(@RequestParam(required=false, defaultValue="") String keyword, @PathVariable int page, HttpSession session, Model model) {
+	@RequestMapping("/board/search/{menuId}/{page}")
+	public String search(@RequestParam(required=false, defaultValue="") String keyword, @PathVariable int menuId, @PathVariable int page, HttpSession session, Model model) {
 		try {
-			List<BoardModel> boardList = boardService.searchListByContentKeyword(keyword, page);
+			List<BoardModel> boardList = boardService.searchListByContentKeyword(keyword, menuId, page);
 			model.addAttribute("boardList", boardList);
 			
 			// 검색결과 페이징 처리

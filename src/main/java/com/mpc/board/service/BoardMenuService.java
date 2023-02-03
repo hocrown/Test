@@ -15,8 +15,8 @@ public class BoardMenuService implements IBoardMenuService {
 	IBoardMenuRepository boardMenuRepository;
 	
 	@Override
-	public List<MenuModel> selectAllMenu() {
-		return boardMenuRepository.selectAllMenu();
+	public List<MenuModel> selectMenu(int menuId) {
+		return boardMenuRepository.selectMenu(menuId);
 	}
 
 	@Override
@@ -34,6 +34,11 @@ public class BoardMenuService implements IBoardMenuService {
 	@Override
 	public void deleteMenu(int menuId) {
 		boardMenuRepository.deleteMenu(menuId);
+	}
+
+	@Override
+	public List<MenuModel> selectAllMenu() {
+		return boardMenuRepository.selectAllMenu();
 	}
 
 }

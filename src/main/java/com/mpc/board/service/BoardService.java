@@ -126,9 +126,9 @@ public class BoardService implements IBoardService {
 	}
 
 	@Override
-	public List<BoardModel> searchListByContentKeyword(String keyword, int page) {
+	public List<BoardModel> searchListByContentKeyword(String keyword, int menuId, int page) {
 		int start = (page-1)*10 + 1;
-		return boardRepository.searchListByContentKeyword("%"+keyword+"%", start, start+9);
+		return boardRepository.searchListByContentKeyword("%"+keyword+"%", menuId, start, start+9);
 	}
 
 	@Override

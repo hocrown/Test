@@ -4,6 +4,17 @@
 
 <mapper namespace="com.mpc.board.dao.IBoardMenuRepository">
 
+	<select id="selectMenu" resultType="com.mpc.board.model.MenuModel">
+		<![CDATA[
+			SELECT
+				menuId,
+				menuName,
+				menuDescript
+			FROM menu
+			WHERE menuId = #{menuId}
+		]]>
+	</select>
+
 	<select id="selectAllMenu" resultType="com.mpc.board.model.MenuModel">
 		<![CDATA[
 			SELECT
