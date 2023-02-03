@@ -11,9 +11,37 @@
 		  <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
 		  <span class="fs-5 fw-semibold">마이페이지</span>
 	  </a>
+	  
+<c:choose>
+<c:when test="${userId eq 'doctor' }">	  
+	<ul class="list-unstyled ps-0">    
+      <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#myact-collapse" aria-expanded="false">
+          나의 활동
+        </button>
+        <div class="collapse" id="myact-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          	<li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/mypage/myconsultDoc'">상담 내역</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="border-top my-3"></li>
+      <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#log-collapse" aria-expanded="false">
+         나의 정보
+        </button>
+        <div class="collapse" id="log-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/mypage/myInfoDoc'">의료인정보</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/mypage/myhospital'">소속병원정보</a></li>                   
+          </ul>
+        </div>
+      </li>  
+  	</ul>  
+	</c:when>
+	<c:otherwise>
+	
   <ul class="list-unstyled ps-0">
-	 
-     
       <li class="mb-1">
         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#mypet-collapse" aria-expanded="false">
           마이펫 정보
@@ -49,6 +77,8 @@
         </div>
       </li>  
   	</ul>
+  	</c:otherwise>
+  	</c:choose>
   </div>
   
 
