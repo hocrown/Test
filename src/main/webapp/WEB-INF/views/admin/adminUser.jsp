@@ -16,7 +16,6 @@
 }
   </style>
 
-
 <body>
 	
 	<div class = "admininfo">

@@ -15,6 +15,19 @@
 <c:choose>
 <c:when test="${userId eq 'doctor' }">	  
 	<ul class="list-unstyled ps-0">    
+	 
+     
+      <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#mypet-collapse" aria-expanded="false">
+          마이펫 정보
+        </button>
+        <div class="collapse" id="mypet-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/mypage/mypet'">반려동물정보</a></li>           
+          </ul>
+        </div>
+      </li>
+      <li class="border-top my-3"></li>
       <li class="mb-1">
         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#myact-collapse" aria-expanded="false">
           나의 활동
@@ -22,6 +35,8 @@
         <div class="collapse" id="myact-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
           	<li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/mypage/myconsultDoc'">상담 내역</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/mypage/myfollowH'">팔로우병원</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/mypage/myscrap'">스크랩 상담내역</a></li>
           </ul>
         </div>
       </li>
@@ -79,6 +94,11 @@
   	</ul>
   	</c:otherwise>
   	</c:choose>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/mypage/myInfo'">회원정보</a></li>           
+          </ul>
+        </div>
+      </li>  
+  	</ul>
   </div>
   
 
