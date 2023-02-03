@@ -5,15 +5,12 @@ package com.mpc.user.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-//추가한것들
-import org.springframework.dao.DuplicateKeyException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-//import org.mybatis.logging.LoggerFactory;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,15 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mpc.user.model.PetModel;
 import com.mpc.user.model.UserModel;
 import com.mpc.user.service.IMemberService;
-import com.mpc.user.service.IUserService;
-import com.mpc.user.service.UserServic;
-import com.mpc.user.service.UserServiceImpl;
 
 @Controller
 public class UserController {
 	static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	@Autowired
-	IUserService userServic;
+	IMemberService memberService;
 //	@RequestMapping(value ="/" )
 
 	@RequestMapping(value="/login/main", method=RequestMethod.GET)
@@ -40,7 +34,7 @@ public class UserController {
 	
 	@RequestMapping(value="/login/main", method=RequestMethod.POST)
 	public String login(String userId, String userPw, HttpSession session, Model model) {
-		UserModel userModel = userServic.selectUserModel(userId);
+		UserModel userModel = memberService.selectUserModel(userId);
 		if(userModel != null) {
 			String dbPassword = userModel.getUserPw();
 				if(dbPassword == null) {
@@ -80,14 +74,14 @@ public class UserController {
 	
 	@RequestMapping(value="/mypage/mypet", method=RequestMethod.POST)
 	public String petInsert(PetModel model,HttpSession session) {
-		userService.petInsert(model);
+		memberService.petInsert(model);
 		session.invalidate();
 		return "index";
 	}
 	
 	@RequestMapping(value="/user/insert", method=RequestMethod.POST)
 	public String memberInsert(UserModel user, HttpSession session) {
-		userService.signup(user);
+		memberService.signup(user);
 		session.invalidate();
 		return "index";
 	}
@@ -97,7 +91,7 @@ public class UserController {
 	public int idCheck(@RequestParam("userId") String userid) {
 		UserModel model=new UserModel();
 		model.setUserId(userid);
-		int result = userService.idChk(model);
+		int result = memberService.idChk(model);
 		return result;
 	}
 

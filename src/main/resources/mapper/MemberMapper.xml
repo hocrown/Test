@@ -4,6 +4,68 @@
 
 <mapper namespace="com.mpc.user.dao.UserRepository">
 
+<!-- (회원가입) 회원정보입력 insert문  -->
+	<insert id="signup" parameterType="com.mpc.user.model.UserModel">
+	<![CDATA[      
+	INSERT INTO 
+		mpc_user (userId
+				,userPw
+				,userName
+				,userRegDate 
+				,userNickname
+				,userPhone
+				,userPostNum
+				,userAddress
+				,userDetailAddress
+				,user_No)
+				
+		VALUES(#{userId}
+			  ,#{userPw}
+			  ,#{userName}
+			  ,SYSDATE
+			  ,#{userPhone}
+			  ,#{userPhone}
+			  ,#{userPostNum}
+			  ,#{userAddress}
+			  ,#{userDetailAddress}
+			  ,mpc_user_seq.NEXTVAL)
+		 ]]>
+	</insert>
+
+<!-- id 중복 체크  -->
+	<select id="idChk" parameterType="String" resultType="int">
+	<![CDATA[
+		select count(userId)
+		from mpc_user 
+		where  USERID = #{userId}
+	]]>
+	</select>
+
+<!-- 펫 정보등록  -->
+ 	 <insert id="petInsert" parameterType="com.mpc.user.model.PetModel">
+	<![CDATA[      
+	INSERT INTO 
+				pet(pet_No
+				,user_No
+				,petName
+				,petFamilyDate 
+				,petSpecies
+				,petSex
+				,petNeut
+				,petCharacter)
+				
+		VALUES(pet_seq.NEXTVAL
+			  ,42
+			  ,#{petName}
+			  ,#{petFamilyDate}
+			  ,#{petSpecies}
+			  ,#{petSex}
+			  ,#{petNeut}
+			  ,#{petCharacter})
+		 ]]>
+	</insert>  
+
+
 	<insert id="insertMember" parameterType="com.mpc.user.model.UserModel">
 	<![CDATA[
 		INSERT INTO 

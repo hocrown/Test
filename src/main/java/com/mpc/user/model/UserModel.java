@@ -21,8 +21,7 @@ public class UserModel {
 	public void setUserPw(String userPw) {
 		this.userPw = userPw;
 	}
-	
-	
+		
 	public int getUser_no() {
 		return user_no;
 	}

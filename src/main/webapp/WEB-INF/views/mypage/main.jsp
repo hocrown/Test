@@ -71,11 +71,8 @@
         
       </div>
     </div>
-    
-    
+       
 	    </div>
-	    
-	    
 	    
 	</div>
 	<div class="screen3"> 

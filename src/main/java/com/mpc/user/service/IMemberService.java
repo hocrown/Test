@@ -2,13 +2,22 @@ package com.mpc.user.service;
 
 import java.util.List;
 
+import com.mpc.user.model.PetModel;
+import com.mpc.user.model.UserModel;
+
 
 
 public interface IMemberService {
-	/*void insertMember(Member member) ;
-	Member selectMember(String userid);
-	List<Member> selectAllMembers();
-	void updateMember(Member member);
-	void deleteMember(Member member);
-	String getPassword(String userid);*/
+	public void signup(UserModel user);
+	public int idChk(UserModel userid); 
+	public void petInsert(PetModel model); // pet 정보입력
+	public UserModel login(String userId);
+	
+	void insertMember(UserModel user) ;
+	UserModel selectMember(String userid);
+	List<UserModel> selectAllMembers();
+	void updateMember(UserModel user);
+	void deleteMember(UserModel user);
+	String getPassword(String userid);
+	public UserModel selectUserModel(String userId);
 }
