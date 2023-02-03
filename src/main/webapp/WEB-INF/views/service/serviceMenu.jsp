@@ -22,10 +22,14 @@
         </button>
         <div class="collapse" id="customer-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-           <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/board/menu/1/1'">공지사항</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/board/menu/2/1'">Q&A</a></li>
+
+           		<li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/board/menu/1/${sessionScope.userNo}/1'">공지사항</a></li>
+            	
+            <c:if test="${not empty sessionScope.userId}">	
+            	<li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/board/menu/2/${sessionScope.userNo}/1'">Q&A</a></li>
+			</c:if>
           </ul>
         </div>
       </li>
     </ul>
-  </div>
+    </div>

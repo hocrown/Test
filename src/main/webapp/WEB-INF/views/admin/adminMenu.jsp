@@ -34,8 +34,8 @@
         </button>
         <div class="collapse" id="cus-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-             <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/admin/noticeInfo'">공지사항</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/admin/Q&AInfo'">Q&A</a></li>
+             <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/board/menu/1/1/1'">공지사항</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/board/menu/2/1/1'">Q&A</a></li>
             <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded" onClick="location.href='/admin/report'">신고</a></li>
           </ul>
         </div>

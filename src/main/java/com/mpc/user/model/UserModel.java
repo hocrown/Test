@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class UserModel { 
 
-	private int user_no;
+	private int userNo;
 	private String userId;
 	private String userPw;
 	private String userName;
@@ -15,11 +15,19 @@ public class UserModel {
 	private String userAddress;
 	private String userDetailAddress;
 	
-	public int getUser_no() {
-		return user_no;
+	public String getUserPw() {
+		return userPw;
 	}
-	public void setUser_no(int user_no) {
-		this.user_no = user_no;
+	public void setUserPw(String userPw) {
+		this.userPw = userPw;
+	}
+	
+	
+	public int getUserNo() {
+		return userNo;
+	}
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
 	}
 	public String getUserId() {
 		return userId;
@@ -27,12 +35,7 @@ public class UserModel {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getUserPw() {
-		return userPw;
-	}
-	public void setUserPw(String userPw) {
-		this.userPw = userPw;
-	}
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -75,5 +78,6 @@ public class UserModel {
 	public void setUserDetailAddress(String userDetailAddress) {
 		this.userDetailAddress = userDetailAddress;
 	}
+	
 	
 }

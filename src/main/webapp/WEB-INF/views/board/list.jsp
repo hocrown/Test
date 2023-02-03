@@ -26,7 +26,14 @@
 <body>
 	<div  class = "full">
 		<div class="screen1">
-			<%@ include file="../service/serviceMenu.jsp"%>	
+		<c:choose>
+			<c:when test="${sessionScope.userId eq 'adminId'}">
+				<%@ include file="../admin/adminMenu.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<%@ include file="../service/serviceMenu.jsp"%>	
+			</c:otherwise>
+		</c:choose>
 		</div>
 		
 		<div class="screen2">
@@ -39,9 +46,18 @@
 					</div>
 					<div class="class2">
 						<form class="d-flex" action="<c:url value='/board/search/${menuId}/1'/>" role="search" method="get">
-							<input type="text" name="keyword" class="form-control me-2" placeholder="Search" aria-label="Search">
-							<input type="submit" class="btn btn-outline-success" value="Search">
-							<a href='<c:url value="/board/write/${menuId}"/>'><button type="button" class="btn btn-outline-success" style="width: 80px">작성</button></a>
+							<c:if test="${menuId eq 1}">
+								<input type="text" name="keyword" class="form-control me-2" placeholder="Search" aria-label="Search">
+								<input type="submit" class="btn btn-outline-success" value="Search">
+							</c:if>
+							<c:choose>
+								<c:when test="${menuId eq 1 && sessionScope.userId eq 'adminId'}">
+									<a href='<c:url value="/board/write/${menuId}"/>'><button type="button" class="btn btn-outline-success" style="width: 80px">작성</button></a>
+								</c:when>
+								<c:when test="${menuId eq 2 && sessionScope.userId ne 'adminId' && not empty sessionScope.userId}">
+									<a href='<c:url value="/board/write/${menuId}"/>'><button type="button" class="btn btn-outline-success" style="width: 80px">작성</button></a>
+								</c:when>				
+							</c:choose>
 						</form>							
 					</div>
 				</div>
@@ -65,26 +81,35 @@
 							    </c:if>
 							    <td>
 								<jk:reply replynum="${board.replyNum}" />
-								<c:url var="viewLink" value="/board/${board.boardId}/${page}"/>
-								<a href="${viewLink}">${board.boardTitle}</a>
+										<c:url var="viewLink" value="/board/${board.boardId}/${page}"/>
+										<a href="${viewLink}">${board.boardTitle}</a>
 								</td>
-							    <td>${board.userId}</td>              
+								<c:choose>
+									<c:when test="${menuId eq 1}">
+							    		<td>관리자</td>  
+									</c:when>
+									<c:otherwise>
+										<td>${board.userId}</td> 
+									</c:otherwise>
+							    </c:choose>	
 							    <td><fmt:formatDate value="${board.boardDate}" pattern="YYYY-MM-dd"/></td>
 								<td>${board.readCount}</td>
 						    </tr>
 						 </tbody>
 					</c:forEach> 
-					<tr>
-						<td align="left">
-							<jk:paging menuId="${menuId}" nowPage="${page}" totalPageCount="${totalPageCount}"/>
-						</td>
-					</tr>	
+						
 	 	 		</table>
+	 	 		<table>
+	 	 		<tr>
+					<td align="left">
+						<jk:paging menuId="${menuId}" userNo="${sessionScope.userNo}" nowPage="${page}" totalPageCount="${totalPageCount}"/>
+					</td>
+				</tr>
+				</table>
 			</div>
 		</div>
 	</div>
-</div>
 <div class="screen3"> 
-	<%@ include file="footer.jsp"%>
+	<%@ include file="../footer.jsp"%>
 </div>	
 </body>

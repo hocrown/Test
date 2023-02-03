@@ -121,7 +121,7 @@
 	</div>
 	</div>
 	
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+	<jsp:include page="../footer.jsp"/>
 	
 	<script>
 	function findAddr(){
