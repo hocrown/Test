@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,7 +61,7 @@ public class UserController {
 				}
 			}
 		}else {
-			model.addAttribute("message", "USER_NOT_FOUND");
+			model.addAttribute("message", "userNoT_FOUND");
 		}
 		session.invalidate();	
 		return "login/main";
@@ -77,17 +78,17 @@ public class UserController {
 	public String login(String userId) {
 		return "user/login";		
 	}
-	
+	/*
 	@RequestMapping(value="/mypage/mypet", method=RequestMethod.POST)
 	public String petInsert(PetModel model,HttpSession session) {
-		userService.petInsert(model);
+		userServic.petInsert(model);
 		session.invalidate();
 		return "index";
 	}
 	
 	@RequestMapping(value="/user/insert", method=RequestMethod.POST)
 	public String memberInsert(UserModel user, HttpSession session) {
-		userService.signup(user);
+		userServic.signup(user);
 		session.invalidate();
 		return "index";
 	}
@@ -97,9 +98,9 @@ public class UserController {
 	public int idCheck(@RequestParam("userId") String userid) {
 		UserModel model=new UserModel();
 		model.setUserId(userid);
-		int result = userService.idChk(model);
+		int result = userServic.idChk(model);
 		return result;
 	}
-
+*/
 }
 

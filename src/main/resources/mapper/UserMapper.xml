@@ -17,7 +17,7 @@
 				,userPostNum
 				,userAddress
 				,userDetailAddress
-				,user_No)
+				,userNo)
 				
 		VALUES(#{userId}
 			  ,#{userPw}
@@ -47,8 +47,8 @@
  	 <insert id="petInsert" parameterType="com.mpc.user.model.PetModel">
 	<![CDATA[      
 	INSERT INTO 
-				pet(pet_No
-				,user_No
+				pet(petNo
+				,userNo
 				,petName
 				,petFamilyDate 
 				,petSpecies
@@ -66,13 +66,8 @@
 			  ,#{petCharacter})
 		 ]]>
 	</insert>  
-	
-	
-	<!-- <select id="login" parameterType="string" resultType="com.mpc.user.model.UserModel"> 
-		<![CDATA[ SELECT * FROM mpc_user WHERE userId = #{userId} ]]> </select> -->
 
-
-	<!-- <select id="login" parameterType="com.mpc.user.model.UserModel" resultType="Int">
+	<select id="login" parameterType="com.mpc.user.model.UserModel" resultType="Int">
 		<![CDATA[
         SELECT COUNT(*)
          FROM mpc_user
@@ -80,13 +75,59 @@
          AND userpw = #{userpw}
          ]]>
 	</select>
+
+	<select id="selectUserModel" parameterType="string" resultType="com.mpc.user.model.UserModel">
+	<![CDATA[
+		SELECT 
+			userId,
+			UserName,
+			userPw,
+			userphone
+			 
+		FROM 
+			mpc_user 
+		WHERE userId=#{userId}
+	]]>
+	</select>
 	
+	<select id="selectAllUserModel" resultType="com.mpc.user.model.UserModel">
+	<![CDATA[
+		SELECT 
+			userId, UserName, userPw, userphone, useraddress 
+		FROM
+			mpc_user 
+	]]>
+	</select>
 	
+	<update id="updateUserModel" parameterType="com.mpc.user.model.UserModel">
+	<![CDATA[
+		UPDATE mpc_user
+		SET 
+			UserName=#{UserName}, userPw=#{userPw}, userphone=#{userphone} 
+		WHERE 
+			userId=#{userId}
+	]]>
+	</update>
 	
+	<delete id="deleteUserModel" parameterType="com.mpc.user.model.UserModel">
+	<![CDATA[
+		DELETE FROM
+			mpc_user 
+		WHERE
+			userId=#{userId} AND userPw=#{userPw}
+	]]>
+	</delete>
 	
+	<select id="getPassword" parameterType="string" resultType="string">
+	<![CDATA[
+		SELECT
+			userPw
+		FROM
+			mpc_user
+		WHERE userId=#{userId}
+	]]>
+	</select>
 	
-	
-	</select> -->
 </mapper>
 
 

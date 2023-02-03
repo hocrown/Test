@@ -67,7 +67,7 @@ public class MemberController {
 				}
 			}
 		}else {
-			model.addAttribute("message", "USER_NOT_FOUND");
+			model.addAttribute("message", "userNoT_FOUND");
 		}
 		session.invalidate();	
 		return "login/main";

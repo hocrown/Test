@@ -34,86 +34,36 @@ public class UserService implements UserServiceImpl {
 	public void petInsert(PetModel model) {
 		repositoryDao.petInsert(model);	
 	}
-
-	@Override
-	public int nickChk() {
-		
-		repositoryDao.nickChk();
-		return 0;
-	}
-
-	@Override
-	public int emailChk() {
-		
-		repositoryDao.emailChk();
-		return 0;
-	}
-
-	@Override
-	public int pwValChk() {
-		
-		repositoryDao.pwValChk();
-		return 0;
-	}
-
-	@Override
-	public void petUpdate() {
-			
-		repositoryDao.petUpdate();
-	}
-
-	@Override
-	public void petAdd() {
-		// TODO Auto-generated method stub
-		repositoryDao.petAdd();
-	}
-
-	@Override
-	public void likeList() {
-		// TODO Auto-generated method stub
-		repositoryDao.likeList();
-	}
-
-	@Override
-	public void scrapList() {
-		// TODO Auto-generated method stub
-		repositoryDao.scrapList();
-	}
-
-	@Override
-	public void followList() {
-		// TODO Auto-generated method stub
-		repositoryDao.followList();
-	}
-
-	@Override
-	public UserModel login(String userId) {
-		return repositoryDao.login(userId);
-	}
 	
-	/*
-	 * @Override public ManagerVO selectManagerInfo(String managerId) { return
-	 * managerDAO.selectManagerInfo(managerId); }
-	 */
-
 	@Override
-	public void logout() {
-		// TODO Auto-generated method stub
-		repositoryDao.logout();
+	public void insertUserModel(UserModel userModel) {
+		userDao.insertUserModel(userModel);
 	}
 
 	@Override
-	public void myPageSearch() {
-		// TODO Auto-generated method stub
-		repositoryDao.myPageSearch();
+	public UserModel selectUserModel(String userId) {
+		return userDao.selectUserModel(userId);
 	}
 
 	@Override
-	public void myPageUpdate() {
-		// TODO Auto-generated method stub
-		repositoryDao.myPageSearch();
+	public List<UserModel> selectAllUserModel() {
+		return userDao.selectAllUserModel();
 	}
 
+	@Override
+	public void updateUserModel(UserModel userModel) {
+		userDao.updateUserModel(userModel);
+	}
+
+	@Override
+	public void deleteUserModel(UserModel userModel) {
+		userDao.deleteUserModel(userModel);
+	}
+
+	@Override
+	public String getUserPw(String userId) {
+		return userDao.getUserPw(userId);
+	}
 
 
 }

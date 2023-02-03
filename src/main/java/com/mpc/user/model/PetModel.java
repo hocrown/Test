@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public class PetModel {
 	
-	private int	pet_No;
-	private int	user_no;
+	private int	petNo;
+	private int	userNo;
 	private String petName; //이름
 	private Date petFamilyDate; // 생일 가족이 된 날
 	private String petSpecies; // 종
@@ -13,17 +13,17 @@ public class PetModel {
 	private String petNeut; // 중성화
 	private String petCharacter; //성격
 	
-	public int getPet_No() {
-		return pet_No;
+	public int getpetNo() {
+		return petNo;
 	}
-	public void setPet_No(int pet_No) {
-		this.pet_No = pet_No;
+	public void setpetNo(int petNo) {
+		this.petNo = petNo;
 	}
-	public int getUser_no() {
-		return user_no;
+	public int getuserNo() {
+		return userNo;
 	}
-	public void setUser_no(int user_no) {
-		this.user_no = user_no;
+	public void setuserNo(int userNo) {
+		this.userNo = userNo;
 	}
 	public String getPetName() {
 		return petName;

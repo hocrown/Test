@@ -42,7 +42,7 @@ public class BoardController {
 		model.addAttribute("menuId", menuId);
 		List<BoardModel> boardList = boardService.selectBoardListByMenu(menuId, page);
 		List<MenuModel> menuList = menuService.selectMenu(menuId);
-		List<BoardModel> boardList = boardService.selectBoardListByMenu(menuId, page);	
+		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("menuList", menuList);
 		

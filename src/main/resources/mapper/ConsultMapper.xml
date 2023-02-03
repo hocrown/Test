@@ -40,8 +40,8 @@
 <!-- 	resultType="com.mpc.consult.model.ConsultModel"> -->
 <!-- 		SELECT  -->
 <!-- 		c.consultingId, -->
-<!-- 		c.user_No, -->
-<!-- 		c.pet_No, -->
+<!-- 		c.userNo, -->
+<!-- 		c.petNo, -->
 <!-- 		c.menuId, -->
 <!-- 		c.consultRegDate, -->
 <!-- 		c.consultTitle, -->
@@ -50,7 +50,7 @@
 <!-- 		c.consultReport, -->
 <!-- 		r.commentid, -->
 <!-- 		r.consultingid, -->
-<!-- 		r.user_No, -->
+<!-- 		r.userNo, -->
 <!-- 		r.commentcontent, -->
 <!-- 		r.commentdate, -->
 <!-- 		r.commentlike, -->
@@ -66,7 +66,7 @@
 		SELECT 
 		commentId,
 		consultingId,
-		user_no,
+		userNo,
 		commentContent,
 		commentDate,
 		commentLike,
@@ -78,7 +78,7 @@
 	<insert id="insertConsult"
 	parameterType="com.mpc.consult.model.ConsultModel">
 	INSERT INTO CONSULT
-		(consultingId, user_no, pet_no, menuId, consultRegDate, consultTitle, consultContent, consultClass, consultReport)
+		(consultingId, userNo, petNo, menuId, consultRegDate, consultTitle, consultContent, consultClass, consultReport)
 		VALUES
 			(#{consultingId}, 1, 1, 1, sysdate, #{consultTitle}, #{consultContent}, 1, 0)
 	</insert>
@@ -110,7 +110,7 @@
 		<![CDATA[
 			UPDATE CONSULT
 			SET
-				menuId=#{menuId}, consultRegDate=#{consultRegDate}, pet_no=${
+				menuId=#{menuId}, consultRegDate=#{consultRegDate}, petNo=${
 				consultTitle=#{consultTitle}, consultContent=#{consultContent}, 
 				consultRegDate=SYSDATE
 			WHERE consultingId=#{consultingId}
@@ -138,8 +138,8 @@
 		<![CDATA[
 			SELECT
 				consultingId,
-				user_no,
-				pet_no,
+				userNo,
+				petNo,
 				menuId,
 				consultRegDate,
 				consultTitle,
@@ -148,7 +148,7 @@
 				consultReport
 			FROM (
 				SELECT
-					consultingId, user_no, pet_no, menuId, consultRegDate, consultTitle,
+					consultingId, userNo, petNo, menuId, consultRegDate, consultTitle,
 					consultContent, consultClass, consultReport, rownum AS crnum
 				FROM (
 					SELECT * FROM consult
@@ -172,9 +172,9 @@
 		<![CDATA[
 			INSERT INTO
 			CONSULTANSWER
-				(commentId, consultingId, user_no, commentContent, commentDate, commentLike, commentReport)
+				(commentId, consultingId, userNo, commentContent, commentDate, commentLike, commentReport)
 			VALUES
-				(#{commentId}, #{consultingId}, #{user_no}, #{commentContent}, SYSDATE, #{commentLike}, #{commentReport})
+				(#{commentId}, #{consultingId}, #{userNo}, #{commentContent}, SYSDATE, #{commentLike}, #{commentReport})
 		]]>
 	</insert>
 
@@ -189,7 +189,7 @@
 		<![CDATA[
 			SELECT userName
 			FROM mpc_user
-			WHERE user_no=#{user_no}
+			WHERE userNo=#{userNo}
 		]]>
 	</select>
 	
