@@ -69,14 +69,30 @@ display: inline-block;
 <body>
 	<div class="full">
 		<div class="screen1">
-			<%@ include file="../service/serviceMenu.jsp"%>
+		<c:choose>
+			<c:when test="${sessionScope.userId eq 'adminId'}">
+				<%@ include file="../admin/adminMenu.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<%@ include file="../service/serviceMenu.jsp"%>	
+			</c:otherwise>
+		</c:choose>
 		</div>
 		<div class="screen2">
 			<div class="colmenu">
 				<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 					<div class="col p-4 d-flex flex-column position-static">
 						<div class="mb-1 text-muted">제목: ${board.boardTitle}</div> 
-						<div class="mb-1 text-muted">작성자: ${board.userId}</div> 
+						<div class="mb-1 text-muted">
+							<c:choose>
+								<c:when test="${board.userId eq 'adminId'}">
+						    		<td>작성자: 관리자</td>  
+								</c:when>
+								<c:otherwise>
+									<td>작성자: ${board.userId}</td> 
+								</c:otherwise>
+							</c:choose>
+						</div> 
 			        	<div class="mb-1 text-muted">작성일: <fmt:formatDate value="${board.boardDate}" pattern="YYYY-MM-dd HH:mm:ss" /></div>
 						<br>
 						<p class="card-text mb-auto">${board.boardContent}</p>
@@ -97,25 +113,27 @@ display: inline-block;
 			</div>
 			<tr>
 				<td colspan=2 align="right">
-					<a href='<c:url value="/board/menu/${menuId}/${page}"/>'><button type="button" class="btn btn-primary">목록</button></a>
-<%-- 						<a href='<c:url value="/board/write/${menuId}"/>'><button type="button" class="btn btn-primary"><fmt:message key="WRITE_NEW_BOARD"/></button></a> --%>
-					
 					<c:choose>
 						<c:when test="${menuId eq 1}">
-							<c:if test="${userId eq 'adminId'}">
-								<a href='<c:url value="/board/update/${menuId}/${board.boardId}"/>'><button type="button" class="btn btn-primary">수정</button></a>
-								<a href='<c:url value="/board/delete/${board.boardId}"/>'><button type="button" class="btn btn-primary">삭제</button></a>			
-							</c:if>
+							<a href='<c:url value="/board/menu/1/${sessionScope.userNo}/1"/>'><button type="button" class="btn btn-primary">목록</button></a>
 						</c:when>
 						<c:when test="${menuId eq 2}">
+							<a href='<c:url value="/board/menu/2/${sessionScope.userNo}/1"/>'><button type="button" class="btn btn-primary">목록</button></a>
+<%-- 						<a href='<c:url value="/board/write/${menuId}"/>'><button type="button" class="btn btn-primary"><fmt:message key="WRITE_NEW_BOARD"/></button></a> --%>
+						</c:when>
+					</c:choose>
+					<c:choose>
+						<c:when test="${menuId eq 1 && sessionScope.userId eq 'adminId'}">
+								<a href='<c:url value="/board/update/${menuId}/${board.boardId}"/>'><button type="button" class="btn btn-primary">수정</button></a>
+								<a href='<c:url value="/board/delete/${board.boardId}"/>'><button type="button" class="btn btn-primary">삭제</button></a>			
+						</c:when>
+						<c:when test="${menuId eq 2 && not empty sessionScope.userId}">
 							<c:choose>
-								<c:when test="${userId eq 'adminId'}">
+								<c:when test="${sessionScope.userId eq 'adminId'}">
 									<a href='<c:url value="/board/reply/${board.boardId}"/>'><button type="button" class="btn btn-primary">답글</button></a>
 								</c:when>
-								<c:when test="${userId eq sessionScope.userId}">
+								<c:when test="${sessionScope.userId eq board.userId}">
 									<a href='<c:url value="/board/update/${menuId}/${board.boardId}"/>'><button type="button" class="btn btn-primary">수정</button></a>
-								</c:when>
-									<c:when test="${userId eq sessionScope.userId && userId ne 'adminId'}">
 									<a href='<c:url value="/board/delete/${board.boardId}"/>'><button type="button" class="btn btn-primary">삭제</button></a>			
 								</c:when>
 							</c:choose>

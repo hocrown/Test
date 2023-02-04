@@ -6,30 +6,9 @@
 
 	<select id="selectBoardListByMenu" parameterType="map" resultType="com.mpc.board.model.BoardModel">
 		<choose>
-			<when test="menuId eq 1">
+			<when test="menuId == 1 or userNo == 1">
 				<![CDATA[
-				SELECT
-					boardId,
-					boardTitle,
-					userId,
-					boardDate,
-					readCount
-				FROM(
-					SELECT
-						rownum AS rnum,
-						boardId,
-						boardTitle,
-						userId,
-						boardDate,
-						readCount
-					FROM notice2
-				)
-				WHERE rnum BETWEEN #{start} AND #{end}
-				]]>
-			</when>
-			<when test="menuId eq 2">
-				<![CDATA[
-		         SELECT
+				 SELECT
 		            boardId,
 		            menuId,
 		            userId,
@@ -50,32 +29,49 @@
 		            )
 		         )
 		         WHERE rnum BETWEEN #{start} AND #{end}
+				]]>
+			</when>
+			<when test="menuId == 2 and userNo != 1">
+				<![CDATA[
+		         SELECT
+		               	boardId,
+						menuId,
+						board.userId,
+						masterId,
+						boardTitle,
+						boardContent,
+						boardDate,
+						replyNum,
+						readCount, rownum 
+	               FROM board INNER JOIN mpc_user ON board.userId = mpc_user.userId
+	               WHERE masterId IN (SELECT masterId FROM board INNER JOIN mpc_user ON board.userId = mpc_user.userId WHERE userNo = #{userNo}) AND rownum  between #{start}  and #{end}
+	               ORDER BY masterId DESC, replyNum
 		      	]]>
 			</when>
 		</choose>
 	</select>
 
 	<select id="selectBoard" parameterType="int" resultType="com.mpc.board.model.BoardModel">
-		<![CDATA[
-			SELECT
-				board.boardId,
-				menuId,
-				userId,
-				boardTitle,
-				boardContent,
-				readCount,
-				boardDate,
-				masterId,
-				replyNum,
-				boardfile.fileId AS "fileId",
-				boardfile.fileName AS "fileName",
-				boardfile.fileSize AS "fileSize",
-				boardfile.fileType AS "fileType"
-			FROM board
-			LEFT OUTER JOIN boardfile
-				ON board.boardId = boardfile.boardId
-			WHERE board.boardId = #{boardId}
-		]]>
+				<![CDATA[
+					SELECT
+						board.boardId,
+						menuId,
+						userId,
+						boardTitle,
+						boardContent,
+						readCount,
+						boardDate,
+						masterId,
+						replyNum,
+						boardfile.fileId AS "fileId",
+						boardfile.fileName AS "fileName",
+						boardfile.fileSize AS "fileSize",
+						boardfile.fileType AS "fileType"
+					FROM board
+					LEFT OUTER JOIN boardfile
+						ON board.boardId = boardfile.boardId
+					WHERE board.boardId = #{boardId}
+				]]>
 	</select>
 	
 	<update id="updateReadCount" parameterType="int">

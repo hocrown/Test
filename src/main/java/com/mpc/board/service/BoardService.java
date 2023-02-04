@@ -34,15 +34,15 @@ public class BoardService implements IBoardService {
 	}
 
 	@Override
-	public List<BoardModel> selectBoardListByMenu(int menuId, int page) {
+	public List<BoardModel> selectBoardListByMenu(int menuId, int userNo, int page) {
 		int start = (page-1)*10 + 1;
-		return boardRepository.selectBoardListByMenu(menuId, start, start+9);
+		return boardRepository.selectBoardListByMenu(menuId, userNo, start, start+9);
 		// 오라클은 BETWEEN a AND b 에서 a와 b 모두 포함하므로 9를 더함
 	}
 
 	@Override
-	public List<BoardModel> selectBoardListByMenu(int menuId) {
-		return boardRepository.selectBoardListByMenu(menuId, 0, 100);
+	public List<BoardModel> selectBoardListByMenu(int menuId, int userNo) {
+		return boardRepository.selectBoardListByMenu(menuId, userNo, 0, 100);
 	}
 
 	@Transactional
@@ -92,6 +92,7 @@ public class BoardService implements IBoardService {
 			if(file.getFileId()>0) {
 				boardRepository.updateFileData(file);
 			} else {
+				file.setFileId(boardRepository.selectMaxFileId()+1);
 				boardRepository.insertFileData(file);
 			}
 		}

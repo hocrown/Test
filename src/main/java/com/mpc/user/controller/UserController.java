@@ -42,7 +42,7 @@ public class UserController {
 				if(dbPassword.equals(userPw)) {
 					//비밀번호 일치
 					session.setAttribute("userId", userId);
-				
+					session.setAttribute("userNo", userModel.getuserNo());
 					
 					return "login/main";
 				}else {
@@ -63,13 +63,27 @@ public class UserController {
 		return "index";
 	}
 	
+	@RequestMapping(value="/user/signup", method=RequestMethod.GET)
+	public String signUp(UserModel user) {
+		return "user/form";
+	}
 	
 	@RequestMapping(value="/user/login", method=RequestMethod.GET)
 	public String login(String userId) {
 		return "user/login";		
 	}
 
-	@RequestMapping(value="/mypage/mypet", method=RequestMethod.POST)
+	@RequestMapping(value="/mypage/mypet", method=RequestMethod.GET)
+	public String showMyPet(String userId) {
+		return "mypage/mypet";		
+	}
+	
+	@RequestMapping(value="/mypage/mypetWriteForm", method=RequestMethod.GET)
+	public String registerMyPet(String userId) {
+		return "mypage/mypetWrite";		
+	}
+	
+	@RequestMapping(value="/mypage/mypetWrite", method=RequestMethod.POST)
 	public String petInsert(PetModel model,HttpSession session) {
 		userService.petInsert(model);
 		session.invalidate();

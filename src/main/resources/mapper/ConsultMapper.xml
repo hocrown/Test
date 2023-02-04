@@ -80,7 +80,7 @@
 	INSERT INTO CONSULT
 		(consultingId, userNo, petNo, menuId, consultRegDate, consultTitle, consultContent, consultClass, consultReport)
 		VALUES
-			(#{consultingId}, 1, 1, 1, sysdate, #{consultTitle}, #{consultContent}, 1, 0)
+			(consultingId_seq.nextVal, #{userNo}, 1, 1, sysdate, #{consultTitle}, #{consultContent}, 1, 0)
 	</insert>
 	
 	<insert id="insertConsultData" parameterType="com.mpc.consult.model.ConsultUploadFileModel">

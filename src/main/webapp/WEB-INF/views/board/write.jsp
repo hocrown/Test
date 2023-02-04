@@ -26,25 +26,20 @@
 <body>
 	<div  class = "full">
 		<div class="screen1">
-			<%@ include file="../service/serviceMenu.jsp"%>
+		<c:choose>
+			<c:when test="${sessionScope.userId eq 'adminId'}">
+				<%@ include file="../admin/adminMenu.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<%@ include file="../service/serviceMenu.jsp"%>	
+			</c:otherwise>
+		</c:choose>
 		</div>
 		
 		<div class="screen2"> 
 		<div class="boardWriteForm" style= "align: center; text-align: center; boarder: 1px solid #dddddd">
 			<h1>글 작성</h1>
 			<form action="<c:url value='/board/write'/>" method="post" enctype="multipart/form-data" class="form-horizontal">
-<%-- 				<c:if test="${!empty menuId}"> --%>
-<!-- 					<div class="form-group"> -->
-<%-- 						<label class="control-label col-sm-2" for="name"><fmt:message key="MENU"/></label> --%>
-<!-- 						<div class="col-sm-4"> -->
-<!-- 							<select name="menuId" id="menuId" class="form-control" required> -->
-<%-- 								<c:forEach var="menu" items="${menuList}"> --%>
-<%-- 									<option value="${menu.menuId}" ${menu.menuId eq requestScope.menuId ? "selected" : ""}>${menu.menuName}</option> --%>
-<%-- 								</c:forEach> --%>
-<!-- 							</select> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<%-- 				</c:if> --%>
 				
 				<div class="form-group">
 					<label for="menuId">카테고리</label>
@@ -65,7 +60,7 @@
 				<div class="form-group">
 					<label for="userId">작성자</label>
 					<div class="col-sm-2">
-						<input type="text" name="userId" id="userId" value="${sessionScope.userId}" ${!empty sessionScope.userId ? "readonly" : ""} maxlength="50" style= "width:700px " class="form-control">
+						<input type="text" name="userId" id="userId" value="${sessionScope.userId}" maxlength="50" style= "width:700px " class="form-control" readonly>
 					</div>
 				</div>
 				
@@ -106,9 +101,9 @@
 		</div>
 	</div>
 </div>
-<!-- <div class="screen3">  -->
-<%-- 	    <%@ include file="footer.jsp"%> --%>
-<!-- </div> -->
+<div class="screen3"> 
+	    <%@ include file="../footer.jsp"%>
+</div>
 </body>
 
 

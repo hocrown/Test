@@ -36,13 +36,13 @@ public class BoardController {
 	@Autowired
 	IBoardMenuService menuService;
 	
-	@RequestMapping("/board/menu/{menuId}/{page}")
-	public String getListByMenu(@PathVariable int menuId, @PathVariable int page, HttpSession session, Model model) {
+	@RequestMapping("/board/menu/{menuId}/{userNo}/{page}")
+	public String getListByMenu(@PathVariable int menuId, @PathVariable int userNo, @PathVariable int page, HttpSession session, Model model) {
 		session.setAttribute("page", page);
 		model.addAttribute("menuId", menuId);
-		List<BoardModel> boardList = boardService.selectBoardListByMenu(menuId, page);
+		model.addAttribute("userNo", userNo);
 		List<MenuModel> menuList = menuService.selectMenu(menuId);
-		
+		List<BoardModel> boardList = boardService.selectBoardListByMenu(menuId, userNo, page);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("menuList", menuList);
 		
@@ -57,9 +57,9 @@ public class BoardController {
 		return "board/list";
 	}
 	
-	@RequestMapping("/board/menu/{menuId}")
-	public String getListByMenu(@PathVariable int menuId, HttpSession session, Model model) {
-		return getListByMenu(menuId, 1, session, model);
+	@RequestMapping("/board/menu/{menuId}/{userNo}")
+	public String getListByMenu(@PathVariable int menuId, @PathVariable int userNo, HttpSession session, Model model) {
+		return getListByMenu(menuId, userNo, 1, session, model);
 	}
 	
 	@RequestMapping("/board/{boardId}/{page}")
@@ -81,14 +81,12 @@ public class BoardController {
 		List<MenuModel> menuList = menuService.selectAllMenu();
 		model.addAttribute("menuList", menuList);
 		model.addAttribute("menuId", menuId);
-		
-		System.out.println("menuId1:" + menuId);
 		return "board/write";
 	}
 	
 	@RequestMapping(value="/board/write", method=RequestMethod.POST)
-	public String writeBoard(BoardModel board, BindingResult result, RedirectAttributes redirectAttrs) {
-		System.out.println("menuId2:" + board.getMenuId());
+	public String writeBoard(BoardModel board, BindingResult result, HttpSession session, RedirectAttributes redirectAttrs) {
+		
 		try {
 			board.setBoardContent(board.getBoardContent().replace("\r\n", "<br>"));
 			board.setBoardTitle(board.getBoardTitle());
@@ -108,7 +106,7 @@ public class BoardController {
 			e.printStackTrace();
 			redirectAttrs.addFlashAttribute("message", e.getMessage());
 		}
-		return "redirect:/board/menu/"+board.getMenuId();
+		return "redirect:/board/menu/"+board.getMenuId() +"/" + session.getAttribute("userNo");
 	}
 	
 	@RequestMapping("/file/{fileId}")
@@ -226,8 +224,13 @@ public class BoardController {
 	@RequestMapping("/board/search/{menuId}/{page}")
 	public String search(@RequestParam(required=false, defaultValue="") String keyword, @PathVariable int menuId, @PathVariable int page, HttpSession session, Model model) {
 		try {
+			System.out.println(page);
+			System.out.println(keyword);
 			List<BoardModel> boardList = boardService.searchListByContentKeyword(keyword, menuId, page);
 			model.addAttribute("boardList", boardList);
+//			HashMap<String, Object> map = new HashMap<String,Object>();
+//			map.put("keyword", keyword);
+//			map.put("menuId", menuId);
 			
 			// 검색결과 페이징 처리
 			int bbsCount = boardService.selectTotalBoardCountByKeyword(keyword);

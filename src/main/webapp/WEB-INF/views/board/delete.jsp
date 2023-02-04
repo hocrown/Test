@@ -69,7 +69,14 @@ display: inline-block;
 <body>
 	<div class="full">
 		<div class="screen1">
-			<%@ include file="../service/serviceMenu.jsp"%>
+		<c:choose>
+			<c:when test="${sessionScope.userId eq 'adminId'}">
+				<%@ include file="../admin/adminMenu.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<%@ include file="../service/serviceMenu.jsp"%>	
+			</c:otherwise>
+		</c:choose>
 		</div>
 		<div class="screen2">
 			<div class="colmenu">

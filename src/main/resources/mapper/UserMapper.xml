@@ -79,11 +79,7 @@
 	<select id="selectUserModel" parameterType="string" resultType="com.mpc.user.model.UserModel">
 	<![CDATA[
 		SELECT 
-			userId,
-			UserName,
-			userPw,
-			userphone
-			 
+			*
 		FROM 
 			mpc_user 
 		WHERE userId=#{userId}

@@ -10,8 +10,8 @@ import lombok.Data;
 public class ConsultModel {
 	
 	private int consultingId;
-	private int userId;
-	private int petId;
+	private int userNo;
+	private int petNo;
 	private int menuId;
 	private Timestamp consultRegDate;
 	private String consultTitle;

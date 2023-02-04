@@ -26,7 +26,14 @@
 <body>
 	<div  class = "full">
 		<div class="screen1">
-			<%@ include file="../service/serviceMenu.jsp"%>	
+		<c:choose>
+			<c:when test="${sessionScope.userId eq 'adminId'}">
+				<%@ include file="../admin/adminMenu.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<%@ include file="../service/serviceMenu.jsp"%>	
+			</c:otherwise>
+		</c:choose>
 		</div>
 		
 		<div class="screen2">
@@ -74,7 +81,7 @@
 					</c:forEach> 
 					<tr>
 						<td align="left">
-							<jk:paging menuId="${menuId}" nowPage="${page}" totalPageCount="${totalPageCount}"/>
+							<jk:paging menuId="${menuId}" userNo="${sessionScope.userNo}" nowPage="${page}" totalPageCount="${totalPageCount}"/>
 						</td>
 					</tr>	
 	 	 		</table>

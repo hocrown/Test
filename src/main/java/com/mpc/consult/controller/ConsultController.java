@@ -39,8 +39,12 @@ public class ConsultController {
 	}
 	
 	@RequestMapping(value="/consult/write", method=RequestMethod.POST)
-	public String consultWrite(ConsultModel consult, BindingResult result, RedirectAttributes redirectAttrs) {
+	public String consultWrite(ConsultModel consult, BindingResult result, Model model, HttpSession session, RedirectAttributes redirectAttrs) {
+		
+		int userNo = (int) session.getAttribute("userNo");
 		try {
+			
+			consult.setUserNo(userNo);
 			consult.setConsultTitle(consult.getConsultTitle());
 			consult.setConsultContent(consult.getConsultContent());
 //			consult.setPetId(consult.getPetId());		유저 로그인 시 해당 유저의 petId 가져오기. view 단에서 선택시 petId 선택 가능
@@ -57,7 +61,10 @@ public class ConsultController {
 			e.printStackTrace();
 			redirectAttrs.addFlashAttribute("message", e.getMessage());
 		}
-		return "/consult/index";
+		List<ConsultModel> consultList = consultService.consultList();
+		model.addAttribute("consultList", consultList);
+		
+		return "index";
 	}
 	
 	@RequestMapping(value="/consult/view/{consultingId}", method=RequestMethod.GET)

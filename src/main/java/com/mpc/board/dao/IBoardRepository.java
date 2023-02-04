@@ -15,7 +15,7 @@ public interface IBoardRepository {
 	void insertBoard(BoardModel board);
 	void insertFileData(BoardUploadFileModel file);
 	
-	List<BoardModel> selectBoardListByMenu(@Param("menuId") int menuId, @Param("start") int start, @Param("end") int end);
+	List<BoardModel> selectBoardListByMenu(@Param("menuId") int menuId, @Param("userNo") int userNo, @Param("start") int start, @Param("end") int end);
 	
 	BoardModel selectBoard(int boardId);
 	BoardUploadFileModel getFile(int fileId);

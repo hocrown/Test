@@ -116,7 +116,7 @@ function checkId(){
 	<div>
       <h4 class="mb-3">회원가입</h4>
       
-     <%--  <form action="<c:url value='/user/insert'/>" method="post" id="joinForm" name="joinForm" class="form-horizontal"> --%>
+     <form action="<c:url value='/user/insert'/>" method="post" id="joinForm" name="joinForm" class="form-horizontal"> 
 		
 	<div class="row g-3">
 		<div class="col-sm-8">	
@@ -249,7 +249,8 @@ function checkId(){
           <hr class="my-4"  width=70%>
 			
 		
-          <input onclick="signupCheck()" class="btn btn-primary" type="submit"  style="margin: 2 0 2 0;" width=70%  value="가입">
+           <!-- onclick="signupCheck()" --> 
+           <input class="btn btn-primary" type="submit"  style="margin: 2 0 2 0;" width=70%  value="가입" onclick="signupCheck()">
           <button class="btn btn-primary" type="button" style="margin: 2 0 2 0;" onClick="location.href='../index'">Home</button>
       </div>
 
@@ -263,20 +264,20 @@ function checkId(){
   </footer>
 </div>
 
-<script>
+ <script>
 
-function signupCheck() {
+function test() {
   	alert("회원가입되었습니다");
   
   	answer=confirm("펮 정보를 추가하시겠습니까?");
-if(answer==true){
-  window.location.href = "http://localhost:8080/mypage/mypetWrite";
-	
-	
-}else{
-  window.location.href = "http://localhost:8080/index";
-	
-}
+		if(answer==true){
+		  window.location.href = "http://localhost:8080/mypage/mypetWrite";
+			
+			
+		}else{
+		  window.location.href = "http://localhost:8080/index";
+			
+		}
 
 }
 

@@ -38,7 +38,7 @@
 			      	  <c:choose>
 			      	  <c:when test="${empty sessionScope.userId}">
 				          <button type="button" class="btn btn-outline-primary me-2" onClick="location.href='/login/main'" >Login</button>
-				          <button type="button" class="btn btn-primary" onClick="location.href='/signUp/main'">Sign-up</button>
+				          <button type="button" class="btn btn-primary" onClick="location.href='./user/signup'">Sign-up</button>
 				      </c:when>
 				      <c:when test="${userId eq 'admin'}">
 				      		<button type="button" class="btn btn-primary" onClick="location.href='/main/logout'">Logout</button>

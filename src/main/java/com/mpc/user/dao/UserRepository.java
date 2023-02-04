@@ -23,5 +23,4 @@ public interface UserRepository {
 	void updateUserModel(UserModel userModel);
 	void deleteUserModel(UserModel userModel);
 	String getUserPw(String userId);
-
 }

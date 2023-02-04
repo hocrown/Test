@@ -11,8 +11,8 @@ public interface IBoardService {
 	void insertBoard(BoardModel boardId);
 	void insertBoard(BoardModel boardId, BoardUploadFileModel file);
 	
-	List<BoardModel> selectBoardListByMenu(int menuId, int page);
-	List<BoardModel> selectBoardListByMenu(int menuId);
+	List<BoardModel> selectBoardListByMenu(int menuId, int userNo, int page);
+	List<BoardModel> selectBoardListByMenu(int menuId, int userNo);
 	
 	BoardModel selectBoard(int boardId);
 	BoardUploadFileModel getFile(int fileId);

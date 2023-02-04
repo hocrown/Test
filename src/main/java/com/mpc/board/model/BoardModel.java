@@ -8,7 +8,8 @@ import lombok.Data;
 
 @Data
 public class BoardModel {
-
+	
+	private int userNo;
 	private int boardId;
 	private int menuId;
 	private String userId;

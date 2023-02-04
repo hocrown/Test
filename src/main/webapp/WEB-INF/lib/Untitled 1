@@ -1,0 +1,21 @@
+--mpc_user 시퀀스사용
+ CREATE SEQUENCE mpc_user_seq
+       INCREMENT BY 1
+       START WITH 1
+       MINVALUE 1
+       MAXVALUE 9999
+       NOCYCLE
+       NOCACHE
+       NOORDER;
+       
+       
+--consultingId 시퀀스 생성
+	CREATE SEQUENCE consult_seq
+		INCREMENT BY 1
+		START WITH 1
+		MINVALUE 1
+		MAXVALUE 99999999
+		NOCYCLE
+		CACHE
+		ORDER;
+		
