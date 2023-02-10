@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.btn-follow {
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  cursor: pointer;
+  margin-left:50px;
+}
+
+.btn-follow.followed {
+  background-image: url(/img/followed.png);
+}
+
+.btn-follow:not(.followed) {
+  background-image: url(/img/follow.png);
+}

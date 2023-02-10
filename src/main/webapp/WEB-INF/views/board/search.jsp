@@ -8,19 +8,33 @@
    
 }
 .screen1{
-    width: 400px;
-    float: left;
+     position:absolute; 
+  top:15%; 
+  left:16%; 
+  width:20%;
+     
+}
+.screen1-1{
+    width: 200px;
+   
 }
 .screen2{
     width: 800px;
+    height:700px;  
+     margin-left:500px;
+   
+} 
+.screen2-1{
+    width: 700px;
     height:700px;
     float: left;
-} 
+   
+}   
 .screen3{
     width: 100%;
     height:100px;
     float: left;
-}  
+}    
 </style>
 
 <body>

@@ -16,11 +16,11 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
-	<!-- 게시판 -->
+	<!-- resource mapping -->
 	<resources mapping="/**" location="/WEB-INF/resources/" />
 	<resources mapping="/js/**" location="/WEB-INF/resources/js/" />
 	<resources mapping="/css/**" location="/WEB-INF/resources/css/" />
-	<resources mapping="/images/**" location="/WEB-INF/resources/images/" />
+	<resources mapping="/img/**" location="/WEB-INF/resources/images/" />
 	<resources mapping="/font-awesome/**" location="/WEB-INF/resources/font-awesome/" />
 	<resources mapping="/assets/**" location="/WEB-INF/resources/assets/" />
 
@@ -42,7 +42,7 @@
 	<context:component-scan base-package="com.mpc.consult.controller" />
 	<context:component-scan base-package="com.mpc.home.controller" />
 	
-	<view-controller path="/" view-name="index" />
+	<view-controller path="/" view-name="home" />
 	
 	
 	

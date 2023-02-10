@@ -3,6 +3,7 @@
 <%@ attribute name="menuId" type="java.lang.Integer" required="true" %>
 <%@ attribute name="totalPageCount" type="java.lang.Integer" required="true" %>
 <%@ attribute name="nowPage" type="java.lang.Integer" required="true" %>
+<%@ attribute name="userNo" type="java.lang.Integer" required="true" %>
 <%
 int totalPageBlock = (int)(Math.ceil(totalPageCount/10.0));
 int nowPageBlock = (int)Math.ceil(nowPage/10.0);
@@ -25,7 +26,7 @@ out.println("<ul class=\"pagination\">");
 
 if(nowPageBlock > 1) {
 	out.print("<li>");
-	out.print("<a href=\""+contextPath+"/board/menu/"+menuId+"/"+(startPage-1)+"\" aria-label=\"Previous\">");
+	out.print("<a href=\""+contextPath+"/board/menu/"+menuId+"/"+userNo+"/"+(startPage-1)+"\" aria-label=\"Previous\">");
 	out.print("◀</a>");
 	out.print("</li>");
 }
@@ -37,7 +38,7 @@ for(int i=startPage; i<=endPage; i++) {
 	} else {
 		out.print("<li>");
 	}
-	out.print("<a href=\""+contextPath+"/board/menu/"+menuId+"/"+(i)+"\">");
+	out.print("<a href=\""+contextPath+"/board/menu/"+menuId+"/"+userNo+"/"+(i)+"\">");
 	out.print(i);
 	out.print("</a>");
 	out.print("</li>");
@@ -45,7 +46,7 @@ for(int i=startPage; i<=endPage; i++) {
 
 if(nowPageBlock < totalPageBlock) {
 	out.print("<li>");
-	out.print("<a href=\""+contextPath+"/board/menu/"+menuId+"/"+(endPage+1)+"\" aria-label=\"Next\">");
+	out.print("<a href=\""+contextPath+"/board/menu/"+menuId+"/"+userNo+"/"+(endPage+1)+"\" aria-label=\"Next\">");
 	out.print("▶</a>");
 	out.print("</li>");
 }

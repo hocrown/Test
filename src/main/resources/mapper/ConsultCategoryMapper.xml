@@ -4,7 +4,7 @@
 	
 <mapper namespace="com.mpc.consult.dao.IConsultRepository">
 	<select id="selectAllCategory"
-	resultType="com.mpc.consult.model.ConsultCategoryModel">
+	resultType="com.mpc.consult.model.ConsultCategory">
 	<![CDATA[
 		SELECT
 			category_id		AS categoryId,

@@ -63,50 +63,42 @@ display: inline-block;
 			<%@ include file="mypageMenu.jsp"%>	
 		</div>
 		<div class="screen2"> 
-		<div><h1>소속 병원정보</h1></div>
-		<div class="colmenu">
-	     	<div class="row g-3">
-            <div class="col-sm-8">
-              <label for="firstName" class="form-label">병원이름</label><br>
-              <label for="firstName" class="form-label">DB에서 ID가져옴</label>
-            </div>
-             </div>                    
-            
-            <div class="row g-3">
-            <div class="col-sm-8">
-              <label for="firstName" class="form-label">병원주소</label><br>
-              <label for="firstName" class="form-label">DB에서 이름가져옴</label>            
-            </div>
-            </div>
+			<div><h1>소속 병원정보</h1></div>
+			<div class="colmenu">
+		     	<div class="row g-3">
+		            <div class="col-sm-8">
+		              <label for="hospitalName" class="form-label">병원이름</label><br>
+		              <label for="hospitalName" class="form-label">${hospital.hospitalName}</label>
+		            </div>
+	            </div>                    
+	            
+	            <div class="row g-3">
+		            <div class="col-sm-8">
+		              <label for="hospitalAddress" class="form-label">병원주소</label><br>
+		              <label for="hospitalAddress" class="form-label">${hospital.hospitalAddress}</label>            
+		            </div>
+	            </div>
+	
+				<div class="row g-3">
+		            <div class="col-sm-8">
+			            <label for="hospitalTime" class="form-label">진료시간</label><br>
+		    	        <label for="hospitalTime" class="form-label">${hospital.hospitalTime}</label>
+					</div>
+				</div>
+	           			<div class="row g-3">
+	            			<div class="col-sm-8">
+								<label for="hospitalPhone" class="form-label">번호</label><br>
+								<label for="hospitalPhone" class="form-label">${hospital.hospitalPhone}</label>
+								<div> <button type="button" class="btn-admin" >변경요청</button></div>
+							</div>
+						</div>
 
-			<div class="row g-3">
-            <div class="col-sm-8">
-              <label for="username" class="form-label">상세주소</label><br>
-               <label for="firstName" class="form-label">DB에서 ID가져옴</label>
-           
-              
-              <div class="row g-3">
-            <div class="col-sm-8">
-              <label for="username" class="form-label">번호</label><br>
-               <label for="firstName" class="form-label">DB에서 번호 가져옴</label>
-              
-               
-                
-
-		
-			       <div> <button type="button" class="btn-admin" >변경요청</button></div>
-				
-				 
-		
-		
-				 
-		       
+				</div>
 	    	</div>
 	    </div>
-	</div>
-	<div class="screen3"> 
-	    <%@ include file="footer.jsp"%>
-	    </div>
+<div class="screen3"> 
+    <%@ include file="../footer.jsp"%>
+</div>
 </body>
 
 

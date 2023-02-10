@@ -17,6 +17,14 @@ public class ConsultModel {
 	private String consultTitle;
 	private String consultContent;
 	private String consultClass;
+	
 	private MultipartFile consultFile;
+	
 	private int consReport;
+	
+	private int fileId; // 파일 아이디
+	private String fileName; // 파일 이름
+	private long fileSize; // 파일 크기
+	private String fileType; // 파일 타입(MIME Type)
+	
 }

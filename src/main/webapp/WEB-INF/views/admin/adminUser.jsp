@@ -1,76 +1,87 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
-<%@ include file="adminMenu.jsp"%>
+
 
 <style>
   .admininfo{
     position:absolute; 
-    top:10%; 
-    left:20%; 
-    width:70%;
+  top:15%; 
+  left:30%; 
+  width:50%;
   }
 .class2{
     width: 300px;
     float: right;
 }
+.screen1{
+     position:absolute; 
+  top:15%; 
+  left:16%; 
+  width:20%;
+     
+}
+.screen1-1{
+    width: 200px;
+   
+}
+.screen2{
+    width: 800px;
+    height:700px;  
+    margin-left:600px;
+   
+} 
+.screen2-1{
+    width: 700px;
+    height:700px;
+    float: left;
+   
+}  
   </style>
 
-<body>
-	
-	<div class = "admininfo">
-	<div>
-	<div><h1>회원정보</h1></div>
-	<div class="class2">
-	 <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-        </div>
-        </div>
-	<table class="table table-sm " >
-	 
-  <thead>
-
-    <tr>
-      <th scope="col">no.</th>
-      <th scope="col">Id</th>
-      <th scope="col">Name</th>
-      <th scope="col">Nickname</th>
-      <th scope="col">phone</th>
-      <th scope="col">PostNum</th>
-      <th scope="col">Address</th>
-      <th scope="col">RegDate</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-     <td><a href="/admin/adminUserInfo"> ID테스트.</a></td>
-     <td>홍길동</td>
-     <td>홍</td>              
-     <td>010-1234-1234</td>
-      <td>1111</td>
-      <td>서울시 서초구 반포2동</td>
-        <td>YYYY-MM-DD</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>test</td>
-     <td>홍길동</td>
-     <td>홍</td>              
-     <td>010-1234-1234</td>
-      <td>1111</td>
-      <td>서울시 서초구 반포2동</td>
-        <td>YYYY-MM-DD</td>
-    </tr>
-  
-  </tbody>
-</table>
-	
-	</div>
-
-	</div>
-</body>
+	<body>
+		<div class="full">
+		<div class="screen1">
+			<%@ include file="adminMenu.jsp"%>
+		</div>
+		<div class="screen2">
+			<div class = "admininfo">
+				<div>
+					<div><h1>회원정보</h1></div>
+					<div class="class2">					 
+				    </div>
+		        </div>
+				<table class="table table-sm " >				 
+				    <thead>				
+					    <tr>
+					      <th scope="col">no.</th>
+					      <th scope="col">Id</th>
+					      <th scope="col">Name</th>
+					      <th scope="col">Nickname</th>
+					      <th scope="col">phone</th>
+					      <th scope="col">PostNum</th>
+					      <th scope="col">Address</th>
+					      <th scope="col">RegDate</th>
+					    </tr>
+				    </thead>
+			    	<c:forEach var="user" items="${userList}">
+					 	<tbody>
+						    <tr>
+							     <th scope="row"><a href="/admin/adminUserInfo/${user.userNo}">${user.userNo}</a></th>
+							     <td>${user.userId}</td>
+							     <td>${user.userName}</td>
+							     <td>${user.userNickname}</td>              
+							     <td>0${user.userPhone}</td>
+							     <td>${user.userPostNum}</td>
+							     <td>${user.userAddress}</td>
+							     <td>${user.userDetailAddress}</td>
+						    </tr>
+					  	</tbody>
+					</c:forEach>
+			    </table>
+			</div>
+		</div>
+		</div>
+	</body>
 
 

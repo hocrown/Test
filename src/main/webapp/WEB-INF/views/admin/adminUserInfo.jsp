@@ -3,30 +3,45 @@
 <%@ include file="../header.jsp"%>
 
 <style>
-  .admininfo{
+ .admininfo{
     position:absolute; 
-    top:10%; 
-    left:20%; 
-    width:70%;
+  top:15%; 
+  left:30%; 
+  width:50%;
   }
 .class2{
     width: 300px;
     float: right;
 }
 .full{
-    width: 1100px;
+    width: 1200px;
    
 }
 .screen1{
+     position:absolute; 
+  top:15%; 
+  left:16%; 
+  width:20%;
+     
+}
+.screen1-1{
     width: 200px;
-    float: left;
+   
 }
 .screen2{
-    width: 500px;
-    float: right;
-}
+    width: 800px;
+    height:700px;  
+    margin-left:600px;
+   
+} 
+.screen2-1{
+    width: 700px;
+    height:700px;
+    float: left;
+   
+}   
 .btn-admin {
-float: right;
+
 display: inline-block;
   font-weight: 400;
   color: #212529;
@@ -62,55 +77,46 @@ display: inline-block;
 <body>
 	<div class="full">
 		<div class="screen1">
-			<%@ include file="adminMenu.jsp"%>	
-		</div>
+				<%@ include file="adminMenu.jsp"%>	
+			</div>
 		<div class="screen2"> 
+		
 			<div><h1>회원정보</h1></div>
 			<table class="table table-sm " >
 			  <tbody>
 			    <tr>
 			     <th>Id</th>
-			     <td>DB에서 ID가져옴</td>    
+			     <td>${user.userId}</td>    
 			    </tr>
 			    <tr>      
 			     <th>Name</th>
-			     <td>DB에서 Name가져옴</td>    
+			     <td>${user.userName}</td>    
 			    </tr>
 			    <tr>      
 			     <th>Nickname</th>
-			     <td>DB에서 Nickname가져옴</td>    
-			    </tr>
-			    <tr>      
-			     <th>Email</th>
-			     <td>DB에서 Email가져옴</td>    
-			    </tr>
+			     <td>${user.userNickname}</td>    
+			    </tr>			    
 			    <tr>      
 			     <th>phone</th>
-			     <td>DB에서 phone가져옴</td>    
+			     <td>${user.userPhone}</td>    
 			    </tr>
 			    <tr>      
 			     <th>Address</th>
-			     <td>DB에서 Address가져옴</td>    
+			     <td>${user.userAddress}</td>    
 			    </tr>
 			    <tr>      
 			     <th>PostNum</th>
-			     <td>DB에서 PostNum가져옴</td>    
+			     <td>${user.userPostNum}</td>    
 			    </tr>
 			    <tr>      
-			     <th>Address Detail(Optiona2)</th>
-			     <td>DB에서 Address Detail(Optiona2)가져옴</td>    
+			     <th>DetailAddress</th>
+			     <td>${user.userDetailAddress}</td>    
 			    </tr>
-			    <tr>      
-			     <th>의료인여부</th>
-			     <td>DB에서 의료인여부가져옴</td>    
-			    </tr>
-			    <tr>      
-			     <th>RegDate</th>
-			     <td>DB에서 RegDate가져옴</td>    
-			    </tr>
+			    
 			  
 			  </tbody>
 			</table>
+			
 			<div> <button type="button" class="btn-admin" onClick="location.href='/admin/adminUser'">회원관리 목록</button></div>
 		</div>
 	</div>

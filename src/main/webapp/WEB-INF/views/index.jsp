@@ -70,112 +70,103 @@ text-align: center;
 }
 
 
+
+
 </style>
 
 
 	
 
-<div class="full"  >
+<div class="full">
 	<div class="screen1">				
 		<div class="screen1-1">
-			<c:forEach var="consult" items="${consultList}">
-		    	<div class="colmenu">
-		    		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-		        		<div class="col p-4 d-flex flex-column position-static" style=" cursor: pointer;" onclick="location.href='/consult/view/${consult.consultingId}';">
-		        			<strong class="d-inline-block mb-2 text-primary">강아지</strong>
+			<c:choose>
+				<c:when test="${empty sessionScope.userId}">
+					<c:forEach var="consult" items="${consultList}">
+			    	<div class="colmenu">
+			    		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+		        			<div class="col p-4 d-flex flex-column position-static"  style=" cursor: pointer;" onclick="location.href='/login/main';">
+		        			<strong class="d-inline-block mb-2 text-primary">상담글</strong>
 		         			<h3 class="mb-0">${consult.consultTitle}</h3>
 		           			<div class="mb-1 text-muted">${consult.consultRegDate}</div> 
 		        			<p class="card-text mb-auto">${consult.consultContent}</p>
-		        		</div>
-		      		</div>
-		    	</div>
-   			</c:forEach>
+		        			</div>
+		      			</div>
+		    		</div>
+   					</c:forEach>
+  				</c:when>
+  				<c:otherwise>
+  					<c:forEach var="consult" items="${consultList}">
+			    	<div class="colmenu">
+			    		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+		        			<div class="col p-4 d-flex flex-column position-static" style=" cursor: pointer;" onclick="location.href='/consult/view/${consult.consultingId}';">
+		        			<strong class="d-inline-block mb-2 text-primary">상담글</strong>
+		         			<h3 class="mb-0">${consult.consultTitle}</h3>
+		           			<div class="mb-1 text-muted">${consult.consultRegDate}</div> 
+		        			<p class="card-text mb-auto">${consult.consultContent}</p>
+		        			</div>
+		      			</div>
+		    		</div>
+   					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	  <div class="screen2">
 	  	<div class="Screen2-1">
-		  <div >		         
-		  		
-		    <div >			    
-				    <table >
-				    <tbody class="tbody">
-				    <tr>
-				   		<td colspan="2"><p class="mb-0"><input type=button class="btn btn-primary" onClick="location.href='./consult/writeform'" value="문진글 작성하기"></p>	<td>
-					</tr>
-				    <tr>
-				   		<th>증상별</th>
-				   		<th>펫종류별</th>
-					</tr>
-					<tr>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="피부염"></p></td>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="강아지"></p></td>
-					</tr>
-					<tr>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="설사"></p></td>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="고양이"></p></td>
-					</tr>
-					<tr>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="외이염"></p></td>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="파충류"></p></td>
-					</tr>
-					<tr>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="구토"></p></td>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="설치류"></p></td>
-					</tr>
-					<tr>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="치주염"></p></td>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="조류"></p></td>
-					</tr>
-					<tr>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="중성화"></p></td>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="토끼"></p></td>
-					</tr>
-					<tr>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="외상"></p></td>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="어류"></p></td>
-					</tr>
-					<tr>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="기침"></p></td>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="고슴도치"></p></td>
-					</tr>
-					<tr>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="건강검진"></p></td>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="거미"></p></td>
-					</tr>
-					<tr>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="결막염"></p></td>
-					    <td><p class="mb-0"><input type=button class="btn btn-outline-primary" value="기타"></p></td>
-					</tr>
-					
-						
-					  </tbody>			           
-				    </table>		          
-		    </div>		
+		  <div>		         
+		  	<form action="<c:url value='/consult/search'/>" method="post" id="searchForm" name="searchForm" class="form-horizontal">		         
+		  	<div class="choose">
+		  		<div>
+	                <label  class="form-label">증상 분류</label>
+	                         <select class="form-select" id="keyword1" name="keyword1" required>
+				            	<option value="피부과" selected="selected">피부과</option>
+				            	<option value="내과">내과</option>
+				            	<option value="외과">외과</option>
+				            	<option value="이비인후과">이비인후과</option>
+				            	<option value="치과">치과</option>
+				            	<option value="중성화관련">중성화관련</option>
+				            	<option value="안과">안과</option>
+				            	<option value="건강검진">건강검진</option>
+			            	</select>
+             	</div>
+             	<br>
+		  		<div>
+	                <label  class="form-label">종 분류</label>
+	                         <select class="form-select" id="keyword2" name="keyword2" required>
+				            	<option value="강아지" selected="selected">강아지</option>
+				            	<option value="고양이">고양이</option>
+				            	<option value="토끼">토끼</option>
+				            	<option value="파충류">파충류</option>
+				            	<option value="설치류">설치류</option>
+				            	<option value="조류">조류</option>
+				            	<option value="어류">어류</option>
+				            	<option value="기타">기타</option>
+			            	</select>
+             	</div>
+             	<br>
+             	<input type="submit" class="btn btn-outline-primary" value="조회">             	
+             </div>    
+		  	</form>
 		
-		   </div>
-		  </div>
+			</div>
+		  	</div>
+		  	<div class="Screen2-2">
+		  		<c:choose>
+		  		<c:when test="${empty sessionScope.userId}">
+		  		<p class="mb-0"><input type=button class="btn btn-primary" onClick="location.href='/login/main'" value="문진글 작성하기"></p>
+		  		</c:when>
+		  		<c:when test="${not empty sessionScope.userId}">
+		  		<p class="mb-0"><input type=button class="btn btn-primary" onClick="location.href='/consult/writeform'" value="문진글 작성하기"></p>
+		  		</c:when>
+		  		</c:choose>
+	   </div>
 	   </div>	     	     
-	</div>  
+	</div>
 	</div>         
+
+	
+	
 <div class="screen3">
 	<%@ include file="footer.jsp" %>   
 </div>
   
-  
-
-  
-
-			
-			
-			
-		
-			
-			
-				
-							
-		
-	
-	
-	
-	
-
- 

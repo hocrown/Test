@@ -22,7 +22,11 @@ public class HomeController {
 			model.addAttribute("consultList", consultList);
 			return "index";
 		}
-		
+		@RequestMapping(value="/features")
+		public String gofeatures() {
+			
+			return "/features";
+		}
 	//문진글작성
 		@RequestMapping(value="/board/boardWrite")
 		public String goboardWrite() {
@@ -69,21 +73,11 @@ public class HomeController {
 			
 			return "admin/main";
 		}
-		@RequestMapping(value="/admin/adminUser")
-		public String goadminUser() {
-			
-			return "admin/adminUser";
-		}
 		
 		@RequestMapping(value="/admin/adminUserInfo")
 		public String goadminUserInfo() {
 			
 			return "admin/adminUserInfo";
-		}
-		@RequestMapping(value="/admin/adminHospital")
-		public String goadminHospital() {
-			
-			return "admin/adminHospital";
 		}
 		@RequestMapping(value="/admin/adminHospitalInfo")
 		public String goadminHospitalInfo() {
@@ -139,10 +133,10 @@ public class HomeController {
 			return "../../img/maintest.png";
 		}
 	//회원가입
-		@RequestMapping(value="/signUp/main")
+		@RequestMapping(value="/user/form")
 		public String gosignUp() {
 			
-			return "signUp/main";
+			return "user/form";
 		}
 		
 	//마이페이지	
@@ -156,25 +150,4 @@ public class HomeController {
 			
 			return "mypage/myInfo";
 		}
-//마이페이지 의료인
-	@RequestMapping(value="/mypage/myconsultDoc")
-	public String gomyconsultDoc() {
-		
-		return "mypage/myconsultDoc";
-	}
-	@RequestMapping(value="/mypage/myconsultDocInfo")
-	public String gomyconsultDocInfo() {
-		
-		return "mypage/myconsultDocInfo";
-	}
-	@RequestMapping(value="/mypage/myInfoDoc")
-	public String gomyInfoDoc() {
-		
-		return "mypage/myInfoDoc";
-	}
-	@RequestMapping(value="/mypage/myhospital")
-	public String gomyhospital() {
-		
-		return "mypage/myhospital";
-	}
 }

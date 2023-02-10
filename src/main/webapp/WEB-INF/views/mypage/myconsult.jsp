@@ -34,60 +34,41 @@
 		</div>
 		<div class="screen2"> 
 		
-		<div class = "admininfo">
-	<div>
-	<div><h1>상담내역</h1></div>
-	<div class="class2">
-	 <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-          <button class="btn btn-outline-success" type="submit" style="width: 135px">등록하기</button>
-        </form>
-        </div>
-        </div>
-	<table class="table table-sm " >
-	
-    <tr>
-      <th scope="col">제목</th>
-      <th scope="col">내용</th>
-      <th scope="col">등록일</th>
-      <th scope="col">답변여부</th>
-      
-  
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-     
-      <td><a href="/mypage/myconsultInfo"> 제목이 들어가는 곳입니다.</a></td>     
-      <td>니용이들어가는 곳입니다.니용이들어가는 곳입니다.니용이들어가는 곳입니다.</td>
-      <td>2023-02-09 </td>  
-      <td>X</td>            
-     
-    
-    </tr>
-    <tr>
-      <td>제목이 들어가는 곳입니다.</td>     
-      <td>니용이들어가는 곳입니다.니용이들어가는 곳입니다.니용이들어가는 곳입니다.</td>
-      <td>2023-02-09 </td>  
-      <td>X</td>                   
-    
-    
-    </tr>
-  
-  </tbody>
-</table>
-	
-	</div>
-    
-    
+			<div class = "admininfo">
+				<div>
+					<div><h1>상담내역</h1></div>
+					<div class="class2">
+						<button class="btn btn-outline-success" type="submit" style="width: 135px" onClick="location.href='/consult/writeform'">등록하기</button>
+			        </div>
+		        </div>
+				<table class="table table-sm " >
+				<thead>
+				    <tr>
+						<th scope="col">글번호</th>
+						<th scope="col">제목</th>
+						<th scope="col">등록일</th>
+						<th scope="col">분야</th>
+				    </tr>
+			    </thead>
+			    <c:forEach var="consult" items="${consultList}">
+			  		<tbody>
+					    <tr>
+				    		<td scope="row">${consult.consultingId}</td>
+						    <td>
+								<c:url var="viewLink" value="/consult/view/mypage/${consult.consultingId}"/>
+													<a href="${viewLink}">${consult.consultTitle}</a>
+							</td>
+						    <td><fmt:formatDate value="${consult.consultRegDate}" pattern="YYYY-MM-dd"/></td>
+							<td>${consult.consultClass}</td>
+					    </tr>
+					 </tbody>
+				</c:forEach> 
+				</table>
+			</div>
 	    </div>
-	    
-	    
-	    
 	</div>
 	<div class="screen3"> 
-	    <%@ include file="footer.jsp"%>
+	    <%@ include file="../footer.jsp"%>
 	    </div>
 	
 </body>

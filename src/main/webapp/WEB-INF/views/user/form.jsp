@@ -2,25 +2,29 @@
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="form.js"></script>
-<link rel="apple-touch-icon" href="/docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="manifest" href="/docs/5.2/assets/img/favicons/manifest.json">
-<link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
-<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
-
-<link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/checkout/">
+<link href="<c:url value="/css/modal.css"/>" rel='stylesheet' />
 <link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
 
-<style>
+<script src="https://code.jquery.com/jquery-latest.js"></script> 
 
+<c:set var="path" value="${pageContext.request.contextPath}" />
+
+
+
+<style>
+.screen1{
+position:absolute;
+margin-left:50px;
+top:2%; 
+width:400px;
+}
 .id_ok{
 color:#008000;
 display: none;
@@ -47,8 +51,8 @@ display: none;
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-<script src="form-validation.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	function findAddr(){
 	new daum.Postcode({
@@ -98,20 +102,15 @@ function checkId(){
         };
 
 </script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 
 </head>
 
-	 <body class="bg-light">
+<body class="bg-light">
     
 <div class="container">
   <main>
 			  
-   <!-- <div class="py-5 text-center">
-      <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt=""  height="57">
-      <h2>SignUp</h2>
-    </div>
-      </div> -->
     
 	<div>
       <h4 class="mb-3">회원가입</h4>
@@ -128,20 +127,6 @@ function checkId(){
 		</div>
 	</div>
 		
-          <%--  <div class="row g-3">
-            <div class="col-sm-8">
-              <label for="userId" class="form-label">UserId</label>
-              <span class="text-muted">(Optional)</span></label>
-              <input type="text" name="userId" id="userId"
-		value="${usermodel['userId']}" ${empty usermodel.userId ? "" : "readonly"}
-		title="사용자 아이디" pattern="\w+" class="form-control"
-		placeholder="아이디 입력 " required>
-                <div class="invalid-feedback">
-                Valid first UserId is required.
-              </div>
-            </div>
-            </div>  --%>
-            
      <div class="row g-3">
      	<div class="col-sm-8">
         	<label for="userPw" class="form-label">Password</label>
@@ -167,7 +152,6 @@ function checkId(){
         	<div class="col-sm-8">
               <label for="userName" class="form-label">UserName</label>
               <div class="input-group has-validation">
-              <span class="input-group-text">#</span>
               <input type="text" name="userName" id="userName" value="${usermodel.userName}"
 			  class="form-control" placeholder="사용자 이름" required>
               </div>
@@ -178,7 +162,7 @@ function checkId(){
             <div class="col-sm-8">
             	<label for="userNickname" class="form-label">Nickname 
             	<span class="text-muted">(Optional)</span></label>
-            	<input type="text" name="userNickname" id="userNickname" value="${usermodel.userName}"
+            	<input type="text" name="userNickname" id="userNickname" value="${usermodel.userNickname}"
 			 	class="form-control" placeholder="닉네임입력" required>
             </div>
        </div>			 
@@ -212,74 +196,157 @@ function checkId(){
         	<label for="country" class="form-label">의료인여부</label>
             <select class="form-select" id="country" required>
             	<option value="">Choose...</option>
+            	<option>일반인</option>
             	<option>의료인</option>
             </select>
         </div>
-
-		<div class="row g-3">
-        	<div class="my-8">
-          	<label for="country" class="form-label">의료인여부</label>
-            <div class="form-check">
-              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
-              <label class="form-check-label" for="credit">일반회원</label>
-            </div>
-            <div class="form-check">
-              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
-              <label class="form-check-label" for="debit">의료인</label>
-            </div>
-            <div class="form-check">
-              <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
-              <label class="form-check-label" for="paypal">간호사</label>
-            </div>
-          </div>
-		</div>	
 
           <hr class="my-4" width=70%>
 
           <div class="form-check">
             <input type="checkbox" class="form-check-input" id="same-address">
-            <label class="form-check-label" for="same-address">회원가입 동의합니다.</label>
+            <label class="form-check-label" for="same-address">정보기입에 동의합니다.</label>
           </div>
 
           <div class="form-check">
             <input type="checkbox" class="form-check-input" id="save-info">
-            <label class="form-check-label" for="save-info">진짜로 동의합니다.</label>
+            <label class="form-check-label" for="save-info">정보보호 안내사항에 동의합니다.</label>
           </div>
 
           <hr class="my-4"  width=70%>
 			
 		
-           <!-- onclick="signupCheck()" --> 
-           <input class="btn btn-primary" type="submit"  style="margin: 2 0 2 0;" width=70%  value="가입" onclick="signupCheck()">
-          <button class="btn btn-primary" type="button" style="margin: 2 0 2 0;" onClick="location.href='../index'">Home</button>
-      </div>
+			<!-- onclick="signupCheck()" --> 
+			<input class="btn btn-primary" type="submit"  style="margin: 2 0 2 0;" width=70%  value="가입" onclick="signupCheck()">
+			<button class="btn btn-primary" type="button" style="margin: 2 0 2 0;" onClick="location.href='../index'">Home</button>
+			<button class="btn btn-primary" type="button" style="margin: 2 0 2 0;" id="add-btn">의료인 정보입력</button>
+	      
+	      	<div class="form-check">
+	      		<input type="text" class="form-check-input" id="hospitalId" name="hospitalId" value="">
+	      	</div>
+		</form>
+	</div>
 
-       </form>
-    </div>
-  </main>
+
+			<!-- The Modal -->
+			<div class="modal" id="modal" role="document">
+			  <div class="modal_body">
+			    <div class="m_head">
+			      <div class="modal_title">병원 정보</div>
+			      <div class="close_btn" id="close_btn">X</div>
+			    </div>
+			    <div class="m_body" style="overflow:auto;">
+				    <div class="col-sm-8">
+						<table id="resTb" class="table table-striped table-bordered text-center">
+							    <colgroup>
+							        <col width="5%" />
+							        <col width="30%" />
+							        <col width="15%"/>
+							        <col width="25%"/>
+							        <col width="20%"/>
+							        <col width="5%"/>
+							    </colgroup>
+							<thead>
+							    <tr>
+							    	<th></th>
+							        <th scope="col">Address</th>
+							        <th scope="col">Time</th>
+							        <th scope="col">Name</th>
+							        <th scope="col">Phone</th>
+							        <th scope="col">Num</th>
+							    </tr>
+							</thead>
+							<tbody>
+							    <c:forEach var="hospital" items="${hospitalList}" varStatus="status">
+							        <tr id="tr_${hospital.hospitalId}">
+							        	<input type="hidden" name="rf_idx" value="${hospital.hospitalId}">
+							        	<input type="hidden" name="r_hospitalId" value="${hospital.hospitalId}">
+							            <input type="hidden" name="r_hospitalName" value="${hospital.hospitalName}">
+							          
+							          
+							            <td><input type="checkbox" name="hospitalId" value="${hospital.hospitalId}" /></td>
+							            <td class="hospitalAddress"><c:out value="${hospital.hospitalAddress}"/></td>
+							            <td class="hospitalTime"><c:out value="${hospital.hospitalTime}"/></td>
+							            <td class="hospitalName"><c:out value="${hospital.hospitalName}"/></td>
+							            <td class="hospitalPhone"><c:out value="${hospital.hospitalPhone}"/></td>
+							            <td class="hospitalId"><c:out value="${hospital.hospitalId}"/></td>
+							        </tr>
+							    </c:forEach>
+							    <c:if test="${fn:length(hospitalList) == 0}">
+							        <tr>
+							            <td colspan="5"><spring:message code="list.noResult" text="조회결과가 없습니다." /></td>
+							        </tr>
+							    </c:if>
+							    </tbody>
+							</table>
+							</div>
+							<div class="d-flex justify-content-between">>
+							</div>
+							<a href="#" id="modal_close" onclick="selectItem();" class="btn btn-dark btn-lg">병원 선택</a>
+							</div>
+							</div>
+							</div>
+			<!--End Modal-->
+
 
   <footer class="my-5 pt-5 text-muted text-center text-small">
     <p class="mb-1">&copy; MyPetCare2023</p>
    
   </footer>
-</div>
 
- <script>
+<script>
 
-function test() {
+function signupCheck() {
   	alert("회원가입되었습니다");
   
-  	answer=confirm("펮 정보를 추가하시겠습니까?");
-		if(answer==true){
-		  window.location.href = "http://localhost:8080/mypage/mypetWrite";
-			
-			
-		}else{
-		  window.location.href = "http://localhost:8080/index";
-			
-		}
-
+//   	answer=confirm("펫 정보를 추가하시겠습니까?");
+// 		if(answer==true){
+// 		  window.location.href = "http://localhost:8080/mypage/mypetWrite";
+// 		}else{
+// 		  window.location.href = "http://localhost:8080/index";
+// 		}
 }
+
+
+//click on 라벨 추가 모달 열기
+$(document).on('click', '#add-btn', function (e) {
+  console.log("click event");
+  $('#modal').addClass('show');
+});
+
+// 모달 닫기
+$(document).on('click', '#close_btn', function (e) {
+  console.log("click event");
+  $('#modal').removeClass('show');
+});
+
+$(document).on('click', '#modal_close', function (e) {
+	  console.log("click event");
+	  $('#modal').removeClass('show');
+});
+
+var path = "${pageContext.request.contextPath }";
+
+function selectItem(){
+	 
+	console.log(hospitalId);
+	window.close();
+}
+
+$("#resTb tr").click(function(){
+	var td1 ="";
+	var td2 ="";
+	$(this).find("td").each(function(i,item){
+		if(i==1){
+			td1=$(item).text();
+		}
+		else if(i==5){
+			td2=$(item).text();
+		}
+	});
+	console.log("td1:"+ td1 + ",td2: "+ td2);
+	document.getElementById("hospitalId").value=td2;
+});
 
 </script>
    

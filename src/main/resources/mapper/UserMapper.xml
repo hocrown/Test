@@ -57,7 +57,7 @@
 				,petCharacter)
 				
 		VALUES(pet_seq.NEXTVAL
-			  ,42
+			  ,#{userNo}
 			  ,#{petName}
 			  ,#{petFamilyDate}
 			  ,#{petSpecies}
@@ -89,21 +89,12 @@
 	<select id="selectAllUserModel" resultType="com.mpc.user.model.UserModel">
 	<![CDATA[
 		SELECT 
-			userId, UserName, userPw, userphone, useraddress 
+			*
 		FROM
 			mpc_user 
+		WHERE userNo != 1
 	]]>
 	</select>
-	
-	<update id="updateUserModel" parameterType="com.mpc.user.model.UserModel">
-	<![CDATA[
-		UPDATE mpc_user
-		SET 
-			UserName=#{UserName}, userPw=#{userPw}, userphone=#{userphone} 
-		WHERE 
-			userId=#{userId}
-	]]>
-	</update>
 	
 	<delete id="deleteUserModel" parameterType="com.mpc.user.model.UserModel">
 	<![CDATA[
@@ -123,6 +114,184 @@
 		WHERE userId=#{userId}
 	]]>
 	</select>
+	
+	<!-- 펫 list 불러오기 (문수지 작성)-->
+	<select id="selectPetListByUser" parameterType="int" resultType="com.mpc.user.model.PetModel">
+		<![CDATA[
+			SELECT
+				petNo, 
+				userNo, 
+				petName, 
+				petFamilyDate, 
+				petSpecies, 
+				petSex,
+				rownum AS "rnum"
+			FROM pet
+			WHERE userNo = #{userNo}
+			ORDER BY petNo
+		]]>
+	</select>
+	
+	<select id="selectUserById" parameterType="string" resultType="int">
+		<![CDATA[
+			SELECT userNo
+			FROM mpc_user
+			WHERE userId=#{userId}
+		]]>
+	</select>
+	
+	<!-- 병원 list 불러오기-->
+	<select id="selectAllHospitalModel" resultType="com.mpc.user.model.HospitalModel">
+	<![CDATA[
+		SELECT 
+			*
+		FROM
+			hospital
+	]]>
+	</select>
+	
+	<select id="selectHospitalModel" parameterType="map" resultType="com.mpc.user.model.HospitalModel">
+	<![CDATA[
+		SELECT H.HOSPITALNAME,
+	    H.HOSPITALTIME,
+	    H.HOSPITALADDRESS,
+	    H.HOSPITALPHONE
+	    FROM HOSPITAL H
+	    WHERE H.HOSPITALID=(SELECT HOSPITALID
+	    FROM CERTIFICATE
+	    WHERE userNo = #{userNo})
+	]]>
+	</select>
+	
+	<insert id="insertCertificateModel" parameterType="int">
+	<![CDATA[
+		INSERT INTO CERTIFICATE
+		(hospitalId, userNo, vetCareer, vetDetail, vetField)
+		VALUES
+		(#{hospitalId}, #{userNo}, null, null, null)
+	]]>
+	</insert>
+	
+
+	
+	<select id="userAuthChk" parameterType="int" resultType="int">
+		<![CDATA[
+			SELECT count(*)
+			FROM auth_user
+			WHERE userNo=${userNo} and atId='vet'
+		]]>
+	</select>
+	
+	<!-- 회원 info 불러오기-->
+	<select id="selectUserInfo" parameterType="int" resultType="com.mpc.user.model.UserModel">
+	<![CDATA[
+		SELECT 
+			userId,
+			userName,
+			userNickname,
+			userPhone,
+			userAddress
+		FROM 
+			mpc_user 
+		WHERE userNo=#{userNo}
+	]]>
+	</select>
+	
+	<select id="selectPet" parameterType="int" resultType="com.mpc.user.model.PetModel">
+		<![CDATA[
+			SELECT *
+			FROM pet
+			WHERE petNo = #{petNo}
+		]]>
+	</select>
+	
+	<!-- pet info 불러오기-->
+	<select id="selectPetInfo" parameterType="int" resultType="com.mpc.user.model.PetModel">
+	<![CDATA[
+		SELECT 
+			*
+		FROM 
+			pet
+		WHERE userNo=#{userNo} AND petNo=#{petNo}
+	]]>
+	</select>
+	
+
+	<update id="updateUserModel" parameterType="com.mpc.user.model.UserModel">
+	<![CDATA[
+		UPDATE mpc_user
+		SET 
+			
+			userNickname=#{userNickname}, 
+			userPhone=#{userPhone}, 
+			userAddress=#{userAddress},
+			userPostNum=#{userPostNum},
+			userDetailAddress=#{userDetailAddress}
+			
+		WHERE 
+			userNo=#{userNo}
+	]]>
+	</update>
+	
+	<update id="updatePetModel" parameterType="com.mpc.user.model.PetModel">
+	<![CDATA[
+		UPDATE pet
+		SET 
+			
+			petName=#{petName}, 
+			petSpecies=#{petSpecies}, 
+			petFamilyDate=#{petFamilyDate},
+			petSex=#{petSex}
+			
+		WHERE 
+			userNo=#{userNo} AND petNo=#{petNo}
+	]]>
+	</update>
+
+
+	<!--관리자 병원 info 불러오기 (손영석 작성)-->
+	<select id="selectHInfo"  resultType="com.mpc.user.model.HospitalModel">
+		<![CDATA[
+			SELECT
+				
+				
+				hospitalName, 
+				hospitalAddress, 
+				hospitalPhone, 
+				hospitalTime
+				
+			FROM hospital
+			WHERE hospitalId = #{hospitalId} 
+		]]>
+	</select>
+	<!--관리자 유저 info 불러오기 (손영석 작성)-->
+	<select id="selectAdminUserInfo"  resultType="com.mpc.user.model.UserModel">
+		<![CDATA[
+			SELECT
+				
+				
+				userId, 
+				userName, 
+				userNickname, 
+				userPhone,
+				userAddress,
+				userPostNum,
+				userDetailAddress
+				
+			FROM mpc_user
+			WHERE userNo = #{userNo} 
+		]]>
+	</select>
+	
+	<insert id="grantAuthUser" parameterType="map">
+		<![CDATA[
+			INSERT INTO AUTH_USER
+			(userNo, atId)
+			VALUES(#{userNo}, #{atId})
+		]]>
+	</insert>
+	
+	
 	
 </mapper>
 

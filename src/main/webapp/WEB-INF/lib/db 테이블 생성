@@ -138,7 +138,7 @@ CONSTRAINT fk_consult_menu foreign key(menuId) REFERENCES menu(menuId)
 )
 
 --원격 상담 답변 ConsultAnswer
-CREATE TABLE consultanswer(
+CREATE TABLE consultAnswer(
 commentId NUMBER(10) primary key,
 consultingId NUMBER(10),
 userNo NUMBER(10),
@@ -148,6 +148,17 @@ commentLike NUMBER(10),
 commentReport NUMBER(10),
 CONSTRAINT fk_consultanswer foreign key(consultingId) REFERENCES consult(consultingId),
 CONSTRAINT fk_comment_vet foreign key(userNo) REFERENCES mpc_user(userNo)
+)
+
+--질문글 파일 consultFile
+CREATE TABLE consultFile(
+consultFileId NUMBER(10) primary key,
+consultingId NUMBER,
+fileName VARCHAR2(300),
+fileSize VARCHAR2(45),
+fileType VARCHAR2(500),
+fileData BLOB,
+CONSTRAINT fk_consult_file foreign key(consultingId) REFERENCES consult(consultingId)
 )
 
 --좋아요 Liked

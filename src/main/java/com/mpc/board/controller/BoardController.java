@@ -224,13 +224,8 @@ public class BoardController {
 	@RequestMapping("/board/search/{menuId}/{page}")
 	public String search(@RequestParam(required=false, defaultValue="") String keyword, @PathVariable int menuId, @PathVariable int page, HttpSession session, Model model) {
 		try {
-			System.out.println(page);
-			System.out.println(keyword);
 			List<BoardModel> boardList = boardService.searchListByContentKeyword(keyword, menuId, page);
 			model.addAttribute("boardList", boardList);
-//			HashMap<String, Object> map = new HashMap<String,Object>();
-//			map.put("keyword", keyword);
-//			map.put("menuId", menuId);
 			
 			// 검색결과 페이징 처리
 			int bbsCount = boardService.selectTotalBoardCountByKeyword(keyword);

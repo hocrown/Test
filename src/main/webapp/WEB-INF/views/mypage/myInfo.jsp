@@ -3,36 +3,30 @@
 <%@ include file="../header.jsp"%>
 
 <style>
-  .admininfo{
-    position:absolute; 
-    top:10%; 
-    left:20%; 
-    width:70%;
-  }
-.class2{
-    width: 300px;
-    float: right;
-}
-.full{
-     width: 1200px;
-   
+   .full{
+    width: 1200px;  
 }
 .screen1{
-    width: 400px;
-    float: left;
+    position:absolute; 
+  top:15%; 
+  left:16%; 
+  width:20%;  
 }
+
 .screen2{
-    width: 800px;
-    height:700px;
-    float: left;
+     position:absolute; 
+  top:15%; 
+  left:30%; 
+  width:60%;
 } 
 .screen3{
-    width: 100%;
-    height:100px;
-    float: left;
+   position:absolute; 
+  top:100%; 
+   
+  width:100%;
 }  
 .btn-admin {
-float: right;
+
 display: inline-block;
   font-weight: 400;
   color: #212529;
@@ -62,95 +56,74 @@ display: inline-block;
 			<%@ include file="mypageMenu.jsp"%>	
 		</div>
 		<div class="screen2"> 
-		<div><h1>회원 정보</h1></div>
-		<div class="colmenu">
-	     	<div class="row g-3">
-            <div class="col-sm-8">
-              <label for="firstName" class="form-label">UserId</label><br>
-              <label for="firstName" class="form-label">DB에서 ID가져옴</label>
-            </div>
-             </div>                    
-            
-            <div class="row g-3">
-            <div class="col-sm-8">
-              <label for="firstName" class="form-label">Name</label><br>
-              <label for="firstName" class="form-label">DB에서 이름가져옴</label>            
-            </div>
-            </div>
-
-			<div class="row g-3">
-            <div class="col-sm-8">
-              <label for="username" class="form-label">Nickname</label>
-              <div class="input-group has-validation">
-               
-                <input type="text" class="form-control" id="username" placeholder="{DB 기존 정보 출력해오기}" required>
-              <div class="invalid-feedback">
-                  Your Nickname is required.
-                </div>
-              </div>
-            </div>
-			</div>
-			
-			<div class="row g-3">	
-            <div class="col-sm-8">
-              <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
-              <input type="email" class="form-control" id="email" placeholder="{DB 기존 정보 출력해오기}">
-              <div class="invalid-feedback">
-                Please enter a valid email address for shipping updates.
-              </div>
-            </div>
-			 </div>
-			 
-			 <div class="row g-3">
-            <div class="col-sm-8">
-              <label for="firstName" class="form-label">Phone</label>
-              <input type="text" class="form-control" id="firstName" placeholder="{DB 기존 정보 출력해오기}" value="" required>
-              <div class="invalid-feedback">
-                Valid first Phone is required.
-              </div>
-            </div>
-            </div>
-			 
-			 <div class="row g-3">	
-            <div class="col-sm-8">
-              <label for="address" class="form-label">Address</label>
-              <input type="text" class="form-control" id="address" placeholder="{DB 기존 정보 출력해오기}" required>
-              <div class="invalid-feedback">
-                Please enter your  address.
-              </div>
-            </div>
-			 </div>
-			 
-			 <div class="col-sm-8">
-              <label for="address2" class="form-label">postnum <span class="text-muted">(Optional)</span></label>
-              <input type="text" class="form-control" id="address2" placeholder="새{DB 기존 정보 출력해오기}">
-            </div>
-			 
-            <div class="col-sm-8">
-              <label for="address2" class="form-label">Address Detail <span class="text-muted">(Optional)</span></label>
-              <input type="text" class="form-control" id="address2" placeholder="{DB 기존 정보 출력해오기}">
-            </div>
-
-            <div class="col-md-8">
-              <label for="country" class="form-label">의료인여부</label><br>
-              <label for="country" class="form-label">DB에서 의료인여부 가져오기</label>
-              
-             
-            </div>
-
-		
-			       <div> <button type="button" class="btn-admin" >탈퇴하기</button></div>
-				 <div> <button type="button" class="btn-admin" >변경</button></div>
+			<form action="<c:url value='/mypage/myinfo'/>" method="post" id="userUpdateForm" class="form-horizontal">
+			<div><h1>회원 정보</h1></div>
+			<div class="colmenu">
+		     	<div class="row g-3">
+	            <div class="col-sm-8">
+	              <b><label for="firstName" class="form-label">UserId</label></b><br>
+	              <label for="firstName" class="form-label">${userId}</label>
+	            </div>
+	             </div>                    
+	            
+	            <div class="row g-3">
+	            <div class="col-sm-8">
+	              <b><label for="firstName" class="form-label">Name</label></b><br>
+	              <label for="firstName" class="form-label">${userName}</label>            
+	            </div>
+	            </div>
+	
+				<div class="row g-3">
+	            <div class="col-sm-8">
+	              <label for="username" class="form-label">userNickname</label>
+	              <div class="input-group has-validation">
+	               
+	                <input type="text" class="form-control" name="userNickname" id="userNickName"  value="${user.userNickname}" required>
+	              <div class="invalid-feedback">
+	                  Your Nickname is required.
+	                </div>
+	              </div>
+	            </div>
+				</div>
+				
+				<div class="row g-3">	
+	            <div class="col-sm-8">
+	              <label for="Phone" class="form-label">Phone <span class="text-muted">(Optional)</span></label>
+	              <input type="Phone" class="form-control" name="userPhone" id="email"  value="0${user.userPhone}">
+	              <div class="invalid-feedback">
+	                Please enter a valid Phone for shipping updates.
+	              </div>
+	            </div>
+				 </div>						
 				 
-		
-		
-				 
-		       
-	    	</div>
-	    </div>
+				 <div class="row g-3">	
+	            <div class="col-sm-8">
+	              <label for="address" class="form-label">Address</label>
+	              <input type="text" class="form-control" name="userAddress" id="address" value="${user.userAddress}" required>
+	              <div class="invalid-feedback">
+	                Please enter your  address.
+	              </div>
+	            </div>
+				 </div>
+				 <div class="row g-3">	
+				 <div class="col-sm-8">
+	              <label for="address2" class="form-label">postnum <span class="text-muted">(Optional)</span></label>
+	              <input type="text" class="form-control" name="userPostNum"  id="address2"  value="${user.userPostNum}">
+	            </div>
+				</div> 
+				<div class="row g-3">	
+	            <div class="col-sm-8">
+	              <label for="address2" class="form-label">Address Detail <span class="text-muted">(Optional)</span></label>
+	              <input type="text" class="form-control" name="userDetailAddress"  id="address2" value="${user.userDetailAddress}">
+	            </div>
+	             <div> <input type="submit" class="btn-admin" value="변경"></div>
+				</div>       
+		    	</div>
+   			 </form>	   
+    	</div>
 	</div>
 	<div class="screen3"> 
-	    <%@ include file="footer.jsp"%>
+	    <%@ include file="../footer.jsp"%>
 	    </div>
 </body>
 

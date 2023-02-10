@@ -8,19 +8,33 @@
    
 }
 .screen1{
-    width: 400px;
-    float: left;
+     position:absolute; 
+  top:15%; 
+  left:16%; 
+  width:20%;
+     
+}
+.screen1-1{
+    width: 200px;
+   
 }
 .screen2{
     width: 800px;
+    height:700px;  
+     margin-left:500px;
+   
+} 
+.screen2-1{
+    width: 700px;
     height:700px;
     float: left;
-} 
+   
+}   
 .screen3{
     width: 100%;
     height:100px;
     float: left;
-}  
+}   
 </style>
 
 <body>
@@ -71,13 +85,13 @@
 				<div>
 					<label for="boardTitle">제목</label>
 					<div>
-						<input type="text" placeholder="글 제목" name="boardTitle" id="boardTitle" maxlength="50" style= "width:700px" id="boardTitle" class="form-control" value="${board.boardTitle}" required>
+						<input type="text" placeholder="글 제목" name="boardTitle" id="boardTitle" maxlength="50" style= "width:700px" class="form-control" value="${board.boardTitle}" required>
 					</div>
 				</div>
 				<div>
 					<label for="boardContent">내용</label>
 					<div>
-						<textarea placeholder="글 내용" name="boardContent" rows="10" cols="100" maxlength="500" style= "height:350px; width:700px" class="form-control" style="height:350px; width:700px">${board.boardContent}</textarea>							
+						<textarea placeholder="글 내용" name="boardContent" rows="10" cols="100" maxlength="500" style= "height:350px; width:700px" class="form-control" >${board.boardContent}</textarea>							
 					</div>
 				</div>
 				<div>

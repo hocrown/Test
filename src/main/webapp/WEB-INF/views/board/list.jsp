@@ -8,19 +8,33 @@
    
 }
 .screen1{
-    width: 400px;
-    float: left;
+     position:absolute; 
+  top:15%; 
+  left:16%; 
+  width:20%;
+     
+}
+.screen1-1{
+    width: 200px;
+   
 }
 .screen2{
     width: 800px;
+    height:700px;  
+     margin-left:500px;
+   
+} 
+.screen2-1{
+    width: 700px;
     height:700px;
     float: left;
-} 
+   
+}   
 .screen3{
     width: 100%;
     height:100px;
     float: left;
-}  
+}   
 </style>
 
 <body>
@@ -50,16 +64,18 @@
 								<input type="text" name="keyword" class="form-control me-2" placeholder="Search" aria-label="Search">
 								<input type="submit" class="btn btn-outline-success" value="Search">
 							</c:if>
-							<c:choose>
+						</form>							
+					</div>
+				</div>
+				<div style="float : right">
+					<c:choose>
 								<c:when test="${menuId eq 1 && sessionScope.userId eq 'adminId'}">
 									<a href='<c:url value="/board/write/${menuId}"/>'><button type="button" class="btn btn-outline-success" style="width: 80px">작성</button></a>
 								</c:when>
 								<c:when test="${menuId eq 2 && sessionScope.userId ne 'adminId' && not empty sessionScope.userId}">
 									<a href='<c:url value="/board/write/${menuId}"/>'><button type="button" class="btn btn-outline-success" style="width: 80px">작성</button></a>
 								</c:when>				
-							</c:choose>
-						</form>							
-					</div>
+					</c:choose>
 				</div>
 				<table class="table table-sm " >
 					<thead>

@@ -13,4 +13,6 @@ public class ConsultAnswerModel {
 	private Timestamp commentDate;
 	private int commentLike;
 	private int commentReport;
+	private String userName;
+	private String hospitalName;
 }

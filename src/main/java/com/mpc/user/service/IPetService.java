@@ -9,4 +9,5 @@ public interface IPetService {
 	public void petInsert(PetModel model); // pet 정보입력
 	
 	
+	
 }

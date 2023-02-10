@@ -4,40 +4,30 @@
 <%@ include file="../header.jsp"%>
 
 <style>
-  .admininfo{
-    position:absolute; 
-    top:10%; 
-    left:20%; 
-    width:70%;
-  }
-.class2{
-    width: 300px;
-    float: right;
-}
-.full{
-    width: 1100px;
-   
-}
-.full{
-     width: 1200px;
-   
+ .full{
+    width: 1200px;  
 }
 .screen1{
-    width: 400px;
-    float: left;
+    position:absolute; 
+  top:15%; 
+  left:16%; 
+  width:20%;  
 }
+
 .screen2{
-    width: 800px;
-    height:400px;
-    float: left;
+     position:absolute; 
+  top:15%; 
+  left:30%; 
+  width:40%;
 } 
 .screen3{
-    width: 100%;
-    height:100px;
-    float: left;
+   position:absolute; 
+  top:130%; 
+   
+  width:100%;
 }  
 .btn-admin {
-float: right;
+
 display: inline-block;
   font-weight: 400;
   color: #212529;
@@ -69,7 +59,6 @@ display: inline-block;
 }
   </style>
 
-
 <body>
 	<div class="full">
 		<div class="screen1">
@@ -78,125 +67,97 @@ display: inline-block;
 		<div class="screen2"> 
 			<div><h1>반려동물등록</h1></div>
 			<div class="colmenu">
-	     	
-				<form action="<c:url value='/mypage/mypet'/>" method="post" id="joinForm" name="joinForm" class="form-horizontal">
-			<div class="colmenu">
+				<form action="<c:url value='/mypage/mypet/insert'/>" method="post" id="petjoinForm" name="joinForm" class="form-horizontal">
+			
 			<!--이름입력-->	     	
 			<div class="row g-3">
             <div class="col-sm-8">
               <label for="username" class="form-label">이름(애칭)</label>
-              <div class="input-group has-validation">
-                
-                <input type="text" class="form-control" id="username" placeholder="{DB 기존 정보 출력해오기}" required>
+              <div class="input-group has-validation">                
                <input type="text" class="form-control" name="petName" id="petName" value="${petmodel.petName}"
 			  	class="form-control" placeholder="반려동물 이름입력" required>                
-              <div class="invalid-feedback">
-                  Your 이름 is required.
-                </div>
               </div>
             </div>
-			</div>
-			
-			<div class="row g-3">	
-            <div class="col-sm-8">
-              <label for="email" class="form-label">견종,묘종 <span class="text-muted">(기타)</span></label>
-              <input type="email" class="form-control" id="email" placeholder="{DB 기존 정보 출력해오기}">
+			</div>			
+		
 			<!--견종,묘종 입력  -->
 			<div class="row g-3">	
             <div class="col-sm-8">
-              <label for="email" class="form-label">견종,묘종 <span class="text-muted">(기타)</span></label>
-              <input type="text" class="form-control" name="petSpecies" id="petSpecies" value="${petmodel.petSpecies}"
-			  	class="form-control" placeholder="견종,묘종 입력" required>                
-              <div class="invalid-feedback">
-                Please enter a valid 견종,묘종 address for shipping updates.
-              </div>
+               <label  class="form-label">종 분류</label>
+               <select class="form-select" id="petSpecies" name="petSpecies" value="${petmodel.petSpecies}" required>
+	            	<option value="강아지" selected="selected">강아지</option>
+	            	<option value="고양이">고양이</option>
+	            	<option value="토끼">토끼</option>
+	            	<option value="파충류">파충류</option>
+	            	<option value="설치류">설치류</option>
+	            	<option value="조류">조류</option>
+	            	<option value="어류">어류</option>
+	            	<option value="기타">기타</option>
+   			   	</select>
             </div>
-			 </div>
+			</div>
 			 
+			 <!-- 생일 입력 -->
 			 <div class="row g-3">
             <div class="col-sm-8">
               <label for="firstName" class="form-label">생일</label>
-              <input type="text" class="form-control" id="firstName" placeholder="{DB 기존 정보 출력해오기}" value="" required>
               <input type="date" class="form-control" id="date" name="petFamilyDate" max="2077-06-20" min="1990-01-01"
          		value="${petmodel.petFamilyDate}" required>
-              <%-- <input type="text" class="form-control" id="firstName" placeholder="생일입력" 
-              value="${petmodel.petFamilyDate}" required> --%>
-              <div class="invalid-feedback">
-                Valid first 생일 is required.
-              </div>
             </div>
             </div>
-			 
-			 <div class="row g-3">	
-            <div class="col-sm-8">
-              <label for="address" class="form-label">성별</label>
-              <input type="text" class="form-control" id="address" placeholder="{DB 기존 정보 출력해오기}" required>
             
 			<!--성별입력 --> 
-			 <div class="row g-3">	
+			<div class="row g-3">	
             <div class="col-sm-8">
-              <label for="address" class="form-label">성별</label>
-			<input type="text" class="form-control" name="petSex" id="petSex" value="${petmodel.petSex}"
-			  	class="form-control" placeholder="성별입력" required>
-              <div class="invalid-feedback">
-                Please enter your  성별.
-              </div>
-            </div>
-			 </div>
-
-				 
+            <label for="address" class="form-label">성별</label>
+	            <select class="form-control" id="petSex" name="petSex" value="${petmodel.petSex}" required>
+	   		       	<option value="male" selected="selected">남아</option>
+	            	<option value="female">여아</option>
+	           	</select>
+	            </div>
+			</div>
 		       
-	    	</div>
-	    	
-		</div>
-		
-			<div> <button type="button" class="btn-admin" onClick="location.href='/mypage/mypet'">등록</button></div>
-			 <div> <button type="button" class="btn-admin" >반려동물정보 목록</button></div>
-	</div>
-	<div class="screen3"> 
-	    <%@ include file="footer.jsp"%>
-	    </div>
-		
-			 <!-- 중성화 여부  -->
+			<!-- 중성화 여부  -->
+			<div class="row g-3">	
 			<div class="col-md-8">
         	<label for="petNEUT" class="form-label">중성화 여부</label>
-            <input type="hidden" class="form-select" id="petNeut" name="petNeut" value="${petmodel.petNeut}">
             <select class="form-select" id="petNeut" name="petNeut" required>
             	<option value="Y" selected="selected">했음</option>
             	<option value="N">안했음</option>
             </select>
             </div>
-        				 
+            </div>
+	    	
 			<!--pet 성격  --> 
-			 <div class="row g-3">	
+		 	 <div class="row g-3">	
             <div class="col-sm-8">
               <label for="address" class="form-label">성격</label>
 			<input type="text" class="form-control" name="petCharacter" id="petCharacter" value="${petmodel.petCharacter}"
-			  	class="form-control" placeholder="성별입력" required>
-              <div class="invalid-feedback">
-                Please enter your  성별.
-              </div>
+			  	class="form-control" placeholder="성격입력" required>
             </div>
-			 </div>			 
+            
+			 	<div> <input onclick="petChk()" class="btn btn-primary" type="submit" value="등록">
+			 	<button type="button" class="btn-admin"  onClick="location.href='/mypage/mypet'">반려동물정보 목록</button></div>
+			 </div>			 			
+	
+	<!-- <div class="screen3"> 
+	    </div> -->
 		       
-	    	</div>
-			 <input  onclick="signupCheak()" class="btn btn-primary" type="submit"  style="margin: 2 0 2 0; width:70%"  value="가입">
-				<div> <button type="button" class="btn-admin" onClick="location.href='/mypage/mypet'">등록</button></div>
-			 	<div> <button type="button" class="btn-admin" >반려동물정보 목록</button></div>
+			 	
 	    	</form>
+	    	</div>
+	    	<div class="screen3">
+	    <%@ include file="../footer.jsp"%>
+		</div>
 		</div>
 	</div>
-	<%-- <div class="screen3"> 
-	    <%@ include file="footer.jsp"%>
-	    </div> --%>
-	    
-	    <script>
+<script>
 
-function signupCheak() {
+function petChk() {
 
   alert("펫 정보 등록완료");
 
-  window.location.href = "http://localhost:8080/user/insert";
+
 
 }
 

@@ -25,54 +25,46 @@
 		ORDER BY consultRegDate
 	</select>
 	
+	<select id="myConsultList" parameterType="int" resultType="com.mpc.consult.model.ConsultModel">
+		SELECT * FROM CONSULT
+		WHERE userNo=#{userNo}
+		ORDER BY consultRegDate
+	</select>
+	
 	<select id="selectConsult" parameterType="int" resultType="com.mpc.consult.model.ConsultModel">
-		SELECT * FROM CONSULT 
-		WHERE consultingId=#{consultingId}
+		SELECT 
+			c.consultingId,
+			c.userNo,
+			c.petNo,
+			c.menuId,
+			c.consultRegDate,
+			c.consultTitle,
+			c.consultContent,
+			c.consultClass,
+			c.consultReport,
+			cf.consultfileId AS "fileId",
+			cf.fileName AS "fileName",
+			cf.fileSize AS "fileSize",
+			cf.fileType AS "fileType"
+		FROM CONSULT c
+		LEFT OUTER JOIN consultFile cf
+			ON c.consultingId = cf.consultingId
+		WHERE c.consultingId = #{consultingId}
 	</select>
 	
 	<select id="selectCommentList" parameterType="map"
 	resultType="com.mpc.consult.model.ConsultAnswerModel">
-		SELECT * FROM CONSULTANSWER 
+		SELECT * FROM commentData
 		WHERE consultingId=#{consultingId}
+		ORDER BY commentDate
 	</select>
 	
-<!-- 	<select id="selectConsult" parameterType="int" -->
-<!-- 	resultType="com.mpc.consult.model.ConsultModel"> -->
-<!-- 		SELECT  -->
-<!-- 		c.consultingId, -->
-<!-- 		c.userNo, -->
-<!-- 		c.petNo, -->
-<!-- 		c.menuId, -->
-<!-- 		c.consultRegDate, -->
-<!-- 		c.consultTitle, -->
-<!-- 		c.consultContent, -->
-<!-- 		c.consultClass, -->
-<!-- 		c.consultReport, -->
-<!-- 		r.commentid, -->
-<!-- 		r.consultingid, -->
-<!-- 		r.userNo, -->
-<!-- 		r.commentcontent, -->
-<!-- 		r.commentdate, -->
-<!-- 		r.commentlike, -->
-<!-- 		r.commentreport -->
-<!-- 		FROM CONSULT c -->
-<!-- 		LEFT OUTER JOIN CONSULTANSWER r -->
-<!-- 			ON c.consultingId=r.consultingId -->
-<!-- 			WHERE c.consultingId=${consultingId} -->
-<!-- 	</select> -->
-	
-	<select id="selectComment" parameterType="int"
-	resultType="com.mpc.consult.model.ConsultAnswerModel">
-		SELECT 
-		commentId,
-		consultingId,
-		userNo,
-		commentContent,
-		commentDate,
-		commentLike,
-		commentReport
-		FROM CONSULTANSWER
-		WHERE consultingId=#{consultingId}
+	<select id="selectConsultMaxFileId" parameterType="int" resultType="int">
+		<![CDATA[
+			SELECT
+				NVL(MAX(consultingId), 0) AS "fileId"
+			FROM consultfile
+		]]>
 	</select>
 	
 	<insert id="insertConsult"
@@ -80,29 +72,37 @@
 	INSERT INTO CONSULT
 		(consultingId, userNo, petNo, menuId, consultRegDate, consultTitle, consultContent, consultClass, consultReport)
 		VALUES
-			(consultingId_seq.nextVal, #{userNo}, 1, 1, sysdate, #{consultTitle}, #{consultContent}, 1, 0)
+			(#{consultingId}, #{userNo}, #{petNo}, 10, sysdate, #{consultTitle}, #{consultContent}, #{consultClass}, 0)
 	</insert>
+	
+	<select id="selectMaxConsultNo" parameterType="int" resultType="int">
+      <![CDATA[
+         SELECT
+            NVL(MAX(consultingId), 0)
+         FROM CONSULT
+      ]]>
+   </select>
 	
 	<insert id="insertConsultData" parameterType="com.mpc.consult.model.ConsultUploadFileModel">
 		<![CDATA[
 			INSERT INTO consultfile
-				(fileId, consultingId, fileName, fileSize, fileType, fileData)
+				(consultFileId, consultingId, fileName, fileSize, fileType, fileData)
 			VALUES
-				(#{fileId}, #{consultingId}, #{fileName}, #{fileSize}, #{fileType}, #{fileData})
+				(#{consultingId}, #{consultingId}, #{fileName}, #{fileSize}, #{fileType}, #{fileData})
 		]]>
 	</insert>
 	
-	<select id="getFile" parameterType="int" resultType="com.mpc.consult.model.ConsultUploadFileModel">
+	<select id="getConsultFile" parameterType="int" resultType="com.mpc.consult.model.ConsultUploadFileModel">
 		<![CDATA[
 			SELECT
-				fileId,
+				consultFileId,
 				consultingId,
 				fileName,
 				fileSize,
 				fileType,
 				fileData
-			FROM boardfile
-			WHERE fileId = #{fileId}
+			FROM consultfile
+			WHERE consultFileId = #{fileId}
 		]]>
 	</select>
 	
@@ -174,7 +174,7 @@
 			CONSULTANSWER
 				(commentId, consultingId, userNo, commentContent, commentDate, commentLike, commentReport)
 			VALUES
-				(#{commentId}, #{consultingId}, #{userNo}, #{commentContent}, SYSDATE, #{commentLike}, #{commentReport})
+				(commentId_seq.nextVal, #{consultingId}, #{userNo}, #{commentContent}, SYSDATE, 0, 0)
 		]]>
 	</insert>
 
@@ -193,5 +193,92 @@
 		]]>
 	</select>
 	
+	
+	
+	<select id="countLikes" parameterType="map" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM LIKED WHERE userNo=#{userNo} AND commentId=#{commentId}
+		]]>
+	</select>
+	
+	<select id="selectLikes" parameterType="int" resultType="int">
+		<![CDATA[
+			SELECT commentlike FROM CONSULTANSWER WHERE commentId=#{commentId}
+		]]>
+	</select>
+	
+	<update id="undoLike" parameterType="int">
+		<![CDATA[
+			UPDATE consultAnswer set commentLike = commentLike-1 WHERE commentId=#{commentId}
+		]]>
+	</update>
+	
+	<delete id="deleteLike" parameterType="map">
+		<![CDATA[
+			DELETE FROM LIKED WHERE userNo = #{userNo} AND commentId = #{commentId}
+		]]>
+	</delete>
+	
+	<update id="doLike" parameterType="int">
+		<![CDATA[
+			UPDATE consultAnswer set commentLike = commentLike+1 WHERE commentId=#{commentId}
+		]]>
+	</update>
+	
+	<insert id="insertLike" parameterType="map">
+		<![CDATA[
+			INSERT INTO LIKED (likeId, userNo, commentId) VALUES (likeId_seq.nextVal, #{userNo}, #{commentId})
+		]]>
+	</insert>
+	
+	<select id="getHospitalName" parameterType="int">
+		<![CDATA[
+			SELECT HOSPITALNAME
+			FROM HOSPITAL
+			WHERE HOSPITALID IN (select HOSPITALID FROM CERTIFICATE WHERE userNo = ${userNo}
+		]]>
+	</select>
+	
+	<select id="myCommentList" parameterType="int" resultType="com.mpc.consult.model.ConsultAnswerModel">
+		SELECT *
+		FROM commentData
+		WHERE userNo = #{userNo}
+	</select>
+	
+	<select id="searchListByKeyword" parameterType="string" resultType="com.mpc.consult.model.ConsultModel">
+      <![CDATA[
+         SELECT *
+         FROM consult a
+         FULL OUTER JOIN pet b
+         ON a.petNo = b.petNo
+         WHERE
+            consultClass=#{keyword1}
+            OR petSpecies=#{keyword2}
+         ORDER BY consultRegDate
+         ]]>
+   </select>
+	
+	<select id="selectFollow" parameterType="map" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) 
+			FROM FOLLOW
+			WHERE followerId=#{follower} and followeeId=#{followee}
+		]]>
+	</select>
+	
+	<insert id="insertFollow" parameterType="map">
+		<![CDATA[
+			INSERT INTO FOLLOW
+			(followId, followerId, followeeId)
+			VALUES
+			(followId_seq.nextVal, #{follower}, #{followee})
+		]]>
+	</insert>
+	
+	<delete id="deleteFollow" parameterType="map">
+		<![CDATA[
+			DELETE FROM FOLLOW WHERE followerId=#{follower} and followeeId=#{followee}
+		]]>
+	</delete>
 	
 </mapper>
